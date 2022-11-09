@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:12:18 by gkwon             #+#    #+#             */
-/*   Updated: 2022/08/31 01:28:36 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/09 16:22:04 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+#include <stdlib.h>
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	if (n == 0)
 		return (0);
@@ -35,18 +37,3 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 		return (-1);
 	return (0);
 }
-
-/*
-	#include <stdio.h>
-	#include <string.h>
-	int main()
-	{
-		char s1[] = "BlockDMask";
-		char s2[] = "Block";
-		char s3[] = "BlockAAAAA";
-		s1[5] = -10;
-		s2[5] = 10;
-		printf("%d\n",ft_strncmp(s1, s2, 6));
-		printf("%d",strncmp(s1, s2, 6));	
-	}
-*/
