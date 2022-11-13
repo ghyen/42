@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:28:40 by gkwon             #+#    #+#             */
-/*   Updated: 2022/08/30 22:36:09 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/13 15:34:10 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strstr(char *str, char *to_find)
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (to_find[i] == 0)
-		return (str);
-	while (str[i])
+	if (needle[i] == 0)
+		return ((char *)haystack);
+	while (haystack[i] && len--)
 	{
 		j = 0;
-		while (str[i + j] == to_find[j])
+		while (haystack[i + j] == needle[j])
 		{
-			if (to_find[j + 1] == '\0')
-				return (&str[i]);
+			if (needle[j + 1] == '\0')
+				return ((char *)&haystack[i]);
 			j++;
 		}
 		i++;
 	}
 	return (0);
 }
-
-/*
-#include <unistd.h>
-#include <stdio.h>
-int main ()
-{
-		char a[] = "my name is edwin";
-		char b[] = "my name is edwin";
-		char *ret = ft_strstr(a,b);
-		printf("%s",ret);
-		return 1;
-}
-*/

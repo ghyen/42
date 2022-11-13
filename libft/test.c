@@ -1,13 +1,33 @@
-#include <ctype.h>
-#include <stdio.h>
-#include "ft_isalpha.c"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strrchr(const char *s, int c)
 {
-	int ret1,ret2;
-	int input = (int)argv[1][0];
-	ret1 = isalpha(input);
-	ret2 = ft_isalpha(input);
-	printf("%d",ret1);
-	printf("%d",ret2);
+	char	*tmp;
+
+	tmp = 0;
+	if (c == 0)
+	{
+		while (*s)
+			s++;
+		return ((char *)s);
+	}
+	while (*s)
+	{
+		if (c == *s)
+			tmp = (char *)s;
+		s++;
+	}
+	return (tmp);
+}
+
+
+#include <unistd.h>
+#include <string.h>
+#include <stdio.h>
+
+int main() {
+	char *mem = "test";
+
+  printf("%p",ft_strrchr(mem, '\0'));
+  return 0;
 }

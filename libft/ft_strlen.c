@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:49:55 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/07 15:02:12 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/13 14:48:32 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-size_t	strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 

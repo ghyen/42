@@ -6,24 +6,22 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:30:41 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/07 19:41:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/13 21:07:03 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	const char *p;
+	char	*p;
 
-	p = s;
-	while (*p)
+	p = (char *)s;
+	while (*p || c == 0)
 	{
 		if (*p == c)
-		{
-			return (p);
-		}
+			return ((char *)p);
 		p++;
 	}
-	return (NULL);
+	return (0);
 }

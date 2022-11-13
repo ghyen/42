@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 03:58:30 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/13 18:24:33 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/13 12:07:14 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/13 17:49:58 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	len;
-	char	*ret;
+	unsigned char	*p;
 
-	len = 0;
-	while (s1[len])
-		len++;
-	if (!(ret = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
-	*ret = 0;
-	while (*s1)
+	p = (unsigned char *)s;
+	while (n--)
 	{
-		*ret = (char)*s1;
-		ret++;
-		s1++;
+		if (c == *p)
+		{
+			return (p);
+		}
+		s++;
 	}
-	*ret = 0;
-	return (ret - len);
+	return (0);
 }
