@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:28:40 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/13 15:34:10 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/15 22:27:08 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	i = 0;
 	if (needle[i] == 0)
 		return ((char *)haystack);
-	while (haystack[i] && len--)
+	while (haystack[i] && len)
 	{
 		j = 0;
 		while (haystack[i + j] == needle[j])
@@ -30,6 +30,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			j++;
 		}
 		i++;
+		len--;
 	}
 	return (0);
 }

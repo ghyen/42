@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:30:41 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/13 21:07:03 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/15 22:06:41 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*p;
+	unsigned char	*p;
 
-	p = (char *)s;
-	while (*p || c == 0)
+	p = (unsigned char *)s;
+	while (*p || (char)c == 0)
 	{
-		if (*p == c)
+		if (*p == (char)c)
 			return ((char *)p);
 		p++;
 	}

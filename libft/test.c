@@ -1,33 +1,30 @@
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
-{
-	char	*tmp;
-
-	tmp = 0;
-	if (c == 0)
-	{
-		while (*s)
-			s++;
-		return ((char *)s);
-	}
-	while (*s)
-	{
-		if (c == *s)
-			tmp = (char *)s;
-		s++;
-	}
-	return (tmp);
-}
 
 
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*p;
+
+	p = (unsigned char *)s;
+	while (n)
+	{
+		if ((char)c == *p)
+			return ((void *)p);
+		p++;
+		n--;
+	}
+	return (0);
+}
 
 int main() {
-	char *mem = "test";
+	//char *mem = "teste";
 
-  printf("%p",ft_strrchr(mem, '\0'));
+  	//printf("%p",ft_strchr(mem, '\0'));
+	char *str = ft_memchr("bonjour", 'j', 6);
+	printf("%s",str);
   return 0;
 }
