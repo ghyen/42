@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 03:58:30 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/13 18:24:33 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:06:17 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strdup(const char *s1)
 	len = 0;
 	while (s1[len])
 		len++;
-	if (!(ret = (char *)malloc(sizeof(char) * (len + 1))))
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
 		return (0);
 	*ret = 0;
 	while (*s1)

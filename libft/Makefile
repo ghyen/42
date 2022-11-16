@@ -20,13 +20,24 @@ SRCS	=	ft_isalpha.c\
 			ft_memcmp.c\
 			ft_strnstr.c\
 			ft_strdup.c\
-			#ft_atoi.c\
+			ft_atoi.c\
 			ft_calloc.c\
+			ft_substr\
+			ft_strjoin\
+			ft_strtrim\
+			ft_split\
+			ft_itoa\
+			ft_strmapi\
+			ft_striteri\
+			ft_putchar_fd\
+			ft_putstr_fd\
+			ft_putendl_fd\
+			ft_putnbr_fd
 
 OBJS	=	${SRCS:.c=.o}
 CC	=	cc
 RM	=	rm -f
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror  -std=c99
 
 %.o:%.c
 		${CC}	${CFLAGS} -c $<
