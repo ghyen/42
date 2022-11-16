@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 12:02:19 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 18:34:52 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/16 22:00:32 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen(s) - start;
 	ret = (char *)malloc(len + 1);
 	if (!ret)
-		return (ft_strdup(""));
+		return (0);
 	ft_memmove(ret, s + start, len);
 	ret[len] = '\0';
 	return (ret);

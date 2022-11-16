@@ -5,26 +5,43 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
-void	*ft_memchr(const void *s, int c, size_t n)
-{
-	unsigned char	*p;
 
-	p = (unsigned char *)s;
-	while (n)
+int	ft_atoi(const char *str)
+{
+	long long ret;
+	int		flag;
+
+	ret = 0;
+	flag = 1;
+	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
+		|| *str == '\r' || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if ((char)c == *p)
-			return ((void *)p);
-		p++;
-		n--;
+		if (*str == '-')
+			flag = -1;
+		str++;
 	}
-	return (0);
+	while (*str >= '0' && *str <= '9')
+	{
+		if (*str >= '0' && *str <= '9')
+		{
+			ret *= 10;
+			ret += (*str - '0');
+		}
+		str++;
+	}
+	//if (ret * flag <= -4294967295)
+	//	return (0);
+	//if (ret >= 4294967295)
+	//	return (-1);
+	return (ret * flag);
 }
 
-int main() {
-	//char *mem = "teste";
 
-  	//printf("%p",ft_strchr(mem, '\0'));
-	char *str = ft_memchr("bonjour", 'j', 6);
-	printf("%s",str);
-  return 0;
+int main()
+{
+	printf("my = %ld\n",ft_atoi("-9223372036854775809"));
+	printf("or = %ld",atoi("-9223372036854775809"));
+	return 0;
 }

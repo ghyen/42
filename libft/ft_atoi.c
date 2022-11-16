@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:06:27 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 11:32:47 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/16 23:01:15 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	int	ret;
-	int	flag;
+	int		ret;
+	int		flag;
 
 	ret = 0;
 	flag = 1;
