@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 16:32:10 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 12:25:07 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/16 19:49:10 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/16 20:29:17 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char **ft_split(char const *s, char c)
 {
-	unsigned char	*dest;
-	unsigned char	*soruce;
-
-	dest = dst;
-	soruce = (unsigned char *)src;
-	if (dest == soruce || len == 0)
-		return (dest);
-	if (dest > soruce && len)
-	{
-		dest += len - 1;
-		soruce += len - 1;
-		while (len--)
-			*dest-- = *soruce--;
-	}
-	if (dest < soruce && len)
-		while (len--)
-			*dest++ = *soruce++;
-	return (dst);
+	
 }

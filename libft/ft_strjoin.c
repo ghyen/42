@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 16:32:10 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 12:25:07 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/16 16:44:56 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/16 18:34:14 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	*dest;
-	unsigned char	*soruce;
+	char			*p;
+	unsigned int	s1l;
+	unsigned int	s2l;
 
-	dest = dst;
-	soruce = (unsigned char *)src;
-	if (dest == soruce || len == 0)
-		return (dest);
-	if (dest > soruce && len)
-	{
-		dest += len - 1;
-		soruce += len - 1;
-		while (len--)
-			*dest-- = *soruce--;
-	}
-	if (dest < soruce && len)
-		while (len--)
-			*dest++ = *soruce++;
-	return (dst);
+	s1l = ft_strlen(s1);
+	s2l = ft_strlen(s2);
+	p = (char *)malloc(s1l + s2l + 1);
+	if (!p)
+		return (NULL);
+	ft_memmove(p, s1, s1l);
+	ft_memmove(p + s1l, s2, s2l);
+	p[s1l + s2l] = 0;
+	return (p);
 }

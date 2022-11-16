@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 16:32:10 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 12:25:07 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/16 12:02:19 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/16 18:34:52 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char	*dest;
-	unsigned char	*soruce;
+	char	*ret;
 
-	dest = dst;
-	soruce = (unsigned char *)src;
-	if (dest == soruce || len == 0)
-		return (dest);
-	if (dest > soruce && len)
-	{
-		dest += len - 1;
-		soruce += len - 1;
-		while (len--)
-			*dest-- = *soruce--;
-	}
-	if (dest < soruce && len)
-		while (len--)
-			*dest++ = *soruce++;
-	return (dst);
+	if (len == 0 || *s == 0 || ft_strlen(s) <= start)
+		return (ft_strdup(""));
+	if (ft_strlen(s) <= len + start)
+		len = ft_strlen(s) - start;
+	ret = (char *)malloc(len + 1);
+	if (!ret)
+		return (ft_strdup(""));
+	ft_memmove(ret, s + start, len);
+	ret[len] = '\0';
+	return (ret);
 }
