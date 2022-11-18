@@ -1,6 +1,11 @@
 {
 	"files.associations": {
 		"__locale": "cpp",
-		"libft.h": "c"
+		"libft.h": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"unordered_map": "c"
 	}
 }

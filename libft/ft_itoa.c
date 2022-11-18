@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 11:06:27 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/18 21:03:35 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/18 23:08:28 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/18 23:18:41 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_itoa(int n)
 {
-	int		ret;
-	int		flag;
-
-	ret = 0;
-	flag = 1;
-	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
-		|| *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
+	char	*ret;
+	int		tmp;
+	int		cnt;
+	int		neg;
+	
+	neg = 0;
+	cnt = 0;
+	tmp = n;
+	if (n < 0)
+		neg = 1;
+	while (tmp)
 	{
-		if (*str == '-')
-			flag = -1;
-		str++;
+		tmp /= 10;
+		cnt++;
 	}
-	while (*str >= '0' && *str <= '9')
+	ret = (char *)malloc(cnt + 1 + neg);
+	if (neg)
 	{
-		if (*str >= '0' && *str <= '9')
-		{
-			ret *= 10;
-			ret += (*str - '0');
-		}
-		str++;
+		ret[0] = '-';
+		ret++;
+		n *= -1;
 	}
-	return (ret * flag);
+	while (n)
+	{
+		
+	}
 }

@@ -6,44 +6,92 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:49:10 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 23:36:54 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/18 23:50:12 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_split(char const *s, char c)
+int	total_len(char const *str, char c)
 {
-	char	**ret;
-	int		i;
-	int		cnt;
-	int		j;
-	int		t_len;
+	int	i;
+	int	count;
 
-	cnt = 0;
+	count = 0;
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		if (*s == c)
-			cnt++;
+		while (str[i] && str[i] == c)
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && str[i] != c)
+			i++;
+	}
+	return (count);
+}
+
+char	*get_word(char const *str, int len)
+{
+	char	*ret;
+	int		i;
+
+	i = 0;
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (NULL);
+	while (i < len)
+	{
+		ret[i] = str[i];
 		i++;
 	}
-	t_len = cnt;
-	ret = (char **)malloc(sizeof(char *) * (cnt + 1));
+	ret[i] = 0;
+	return (ret);
+}
+
+int	word_count(char const *str, char c)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] != c && str[len])
+		len++;
+	return (len);
+}
+
+char	**ft_free(char **ret, int i)
+{
+	while (i)
+		free(ret[--i]);
+	free(ret);
+	return (0);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		t_len;
+	char	**ret;
+	int		i;
+	int		count;
+
+	i = 0;
+	t_len = total_len(s, c);
+	ret = (char **)malloc(sizeof(char *) * (t_len + 1));
 	if (!ret)
 		return (0);
-	i = 0;
-	j = 0;
-	while (*s)
-	{
-		cnt = 0;
-		while (s[cnt] != c && s[cnt])
-			cnt++;
-		ret[j] = (char *)malloc(sizeof(char) * (cnt + 1));
-		ft_memmove(ret[j], s, cnt);
-		ret[cnt] = 0;
-		s += cnt + 1;
-	}
 	ret[t_len] = 0;
+	while (*s && i < t_len)
+	{
+		while (*s && *s == c)
+			s++;
+		if (*s)
+		{
+			count = word_count(s, c);
+			ret[i] = get_word(s, count);
+			if (!ret[i++])
+				return (ft_free(ret, i));
+			s += count;
+		}
+	}
 	return (ret);
 }
