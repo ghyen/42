@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 03:58:30 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 11:06:17 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 18:10:29 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ char	*ft_strdup(const char *s1)
 		return (0);
 	*ret = 0;
 	while (*s1)
-	{
-		*ret = (char)*s1;
-		ret++;
-		s1++;
-	}
+		*ret++ = (char)*s1++;
 	*ret = 0;
 	return (ret - len);
 }

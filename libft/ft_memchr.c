@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 12:07:14 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/15 22:08:03 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 18:06:54 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	*p;
 
 	p = (unsigned char *)s;
-	while (n)
+	while (n--)
 	{
 		if ((unsigned char)c == *p)
 			return ((void *)p);
 		p++;
-		n--;
 	}
 	return (0);
 }

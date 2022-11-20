@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:34:19 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/16 11:56:40 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 17:45:24 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ void	*ft_calloc(size_t count, size_t size)
 	if (!ret)
 		return (NULL);
 	tmp = (unsigned char *)ret;
-	while (len)
-	{
-		*tmp = 0;
-		tmp++;
-		len--;
-	}
+	while (len--)
+		*tmp++ = 0;
 	return (ret);
 }

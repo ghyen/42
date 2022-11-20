@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:49:55 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/13 14:48:32 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 18:10:57 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (*s)
-	{
+	while (*s++)
 		len++;
-		s++;
-	}
 	return (len);
 }

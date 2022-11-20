@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:56:01 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/20 15:31:23 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 17:46:40 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		len;
 	char	*result_str;
 
-	i = 0;
+	i = -1;
 	len = ft_strlen(s);
 	result_str = malloc(len + 1);
 	if (!result_str)
 		return (0);
-	while (s[i])
-	{
+	while (s[++i])
 		result_str[i] = f(i, s[i]);
-		i++;
-	}
 	result_str[i] = 0;
 	return (result_str);
 }

@@ -6,16 +6,24 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:06:27 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/18 21:03:35 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 18:02:20 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+int	long_long_return(int flag)
+{
+	if (flag == -1)
+		return (0);
+	return (-1);
+}
+
 int	ft_atoi(const char *str)
 {
-	int		ret;
-	int		flag;
+	long long	ret;
+	long long	tmp;
+	int			flag;
 
 	ret = 0;
 	flag = 1;
@@ -30,12 +38,12 @@ int	ft_atoi(const char *str)
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		if (*str >= '0' && *str <= '9')
-		{
-			ret *= 10;
-			ret += (*str - '0');
-		}
+		tmp = ret;
+		ret *= 10;
+		ret += (*str - '0');
 		str++;
+		if (tmp > ret)
+			return (long_long_return(flag));
 	}
 	return (ret * flag);
 }
