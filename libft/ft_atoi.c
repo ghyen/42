@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:06:27 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/20 18:02:20 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 21:50:35 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	long_long_return(int flag)
+static int	long_long_return(int flag)
 {
 	if (flag == -1)
 		return (0);
@@ -40,8 +40,7 @@ int	ft_atoi(const char *str)
 	{
 		tmp = ret;
 		ret *= 10;
-		ret += (*str - '0');
-		str++;
+		ret += (*str++ - '0');
 		if (tmp > ret)
 			return (long_long_return(flag));
 	}

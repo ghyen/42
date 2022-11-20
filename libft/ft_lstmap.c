@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:48:59 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/20 16:43:39 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 21:51:45 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*clear_return(t_list *head, void *new, void (*del)(void *))
+static t_list	*clear_return(t_list *head, void *new, void (*del)(void *))
 {
 	ft_lstclear(&head, del);
 	del(new);

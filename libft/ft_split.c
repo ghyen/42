@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:49:10 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/18 23:50:12 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 21:51:35 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	total_len(char const *str, char c)
+static int	total_len(char const *str, char c)
 {
 	int	i;
 	int	count;
@@ -31,7 +31,7 @@ int	total_len(char const *str, char c)
 	return (count);
 }
 
-char	*get_word(char const *str, int len)
+static char	*get_word(char const *str, int len)
 {
 	char	*ret;
 	int		i;
@@ -49,7 +49,7 @@ char	*get_word(char const *str, int len)
 	return (ret);
 }
 
-int	word_count(char const *str, char c)
+static int	word_count(char const *str, char c)
 {
 	int	len;
 
@@ -59,7 +59,7 @@ int	word_count(char const *str, char c)
 	return (len);
 }
 
-char	**ft_free(char **ret, int i)
+static char	**ft_free(char **ret, int i)
 {
 	while (i)
 		free(ret[--i]);

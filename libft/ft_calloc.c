@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:34:19 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/20 17:45:24 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/20 21:40:36 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_calloc(size_t count, size_t size)
 	unsigned char	*tmp;
 	unsigned int	len;
 
+	if (!count && !size)
+		return (ft_strdup(""));
 	len = size * count;
 	ret = malloc(len);
 	if (!ret)
