@@ -40,7 +40,7 @@ SRCS_BONUS = 	ft_lstnew.c\
 				ft_lstlast.c\
 				ft_lstadd_back.c\
 				ft_lstdelone.c\
-				#ft_lstclear.c\
+				ft_lstclear.c\
 				ft_lstiter.c\
 				ft_lstmap.c
 
@@ -49,17 +49,6 @@ OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 CC	=	cc
 RM	=	rm -f
 CFLAGS	=	-Wall -Wextra -Werror  -std=c99
-
-#$(NAME):${OBJS}
-#	ar	-rc	$@	$^
-
-#all:	${NAME}
-#clean:
-#		${RM} ${OBJS}
-#fclean:	clean
-#		${RM} ${NAME}
-#re:	fclean all
-#.PHONY:	all	re	clean	fclean
 
 $(NAME): all
 
