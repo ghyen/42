@@ -2,7 +2,8 @@
 #include <stdio.h>
 int	main(void)
 {
-	char a = 'a';
-	printf("%p", &a);
+	int a = -1;
+	ft_printf("%p", &a);
+	printf("\n%p", &a);
 	return (0);
 }

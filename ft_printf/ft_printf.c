@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:03:03 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/25 17:03:26 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/26 17:49:18 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,25 @@ int	format_s(va_list ap)
 
 int	format_p(va_list ap)
 {
-	void	*tmp;
+	int	tmp;
 
 	tmp = va_arg(ap, void *);
-	write(1, ft_print_memory(tmp, ft_strlen(tmp) * 4), ft_strlen(tmp));
+	ft_dec_to_hex((long long)tmp);
 	return (ft_strlen(tmp) + 1);
 }
 
 int	format_d(va_list ap)
 {
 	int	tmp;
+
+	tmp = va_arg(ap, int);
+	write(1, ft_itoa(tmp), ft_strlen(ft_itoa(tmp)));
+	return (ft_strlen(ft_itoa(tmp)) + 1);
+}
+
+int	format_i(va_list ap)
+{
+	long long	tmp;
 
 	tmp = va_arg(ap, int);
 	write(1, ft_itoa(tmp), ft_strlen(ft_itoa(tmp)));
@@ -56,10 +65,10 @@ int	redirection(const char format, va_list ap)
 		return (format_s(ap));
 	else if (format == 'p')
 		return (format_p(ap));
-	//else if (format == 'd')
-	//	return (format_d(ap));
-	//else if (format == 'i')
-	//	return (format_i(ap));
+	else if (format == 'd')
+		return (format_d(ap));
+	else if (format == 'i')
+		return (format_i(ap));
 	//else if (format == 'u')
 	//	return (format_u(ap));
 	//else if (format == 'x')

@@ -6,11 +6,11 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:11:09 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/25 17:04:47 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/26 16:37:26 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static int	count_digits(int n)
 {
