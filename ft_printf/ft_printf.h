@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:13 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/28 19:59:42 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/28 20:49:02 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		format_u(va_list ap);
 int		format_x_lower(va_list ap);
 int		format_x_upper(va_list ap);
 int		format_ps(void);
+int		ft_isprint(int c);
 
 #endif

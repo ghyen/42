@@ -6,7 +6,7 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:36:30 by gkwon             #+#    #+#              #
-#    Updated: 2022/11/28 18:57:37 by gkwon            ###   ########.fr        #
+#    Updated: 2022/11/28 20:49:52 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS_MAN	=	ft_printf.c\
 				ft_to_add.c\
 				ft_to_hex.c\
 				ft_format1.c\
-				ft_format2.c
+				ft_format2.c\
+				ft_isprint.c
 
 OBJS_MAN	=	$(SRCS_MAN:.c=.o)
 CC	=	cc
