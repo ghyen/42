@@ -6,16 +6,20 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:36:30 by gkwon             #+#    #+#              #
-#    Updated: 2022/11/26 16:41:24 by gkwon            ###   ########.fr        #
+#    Updated: 2022/11/28 18:57:37 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	ft_printf.a
+NAME		=	libftprintf.a
 SRCS_MAN	=	ft_printf.c\
 				ft_strlen.c\
-				ft_print_memory.c\
 				ft_itoa.c\
-				ft_ft_strdup.c
+				ft_unsigned_itoa.c\
+				ft_strdup.c\
+				ft_to_add.c\
+				ft_to_hex.c\
+				ft_format1.c\
+				ft_format2.c
 
 OBJS_MAN	=	$(SRCS_MAN:.c=.o)
 CC	=	cc
