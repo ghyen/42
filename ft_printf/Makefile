@@ -6,46 +6,37 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:36:30 by gkwon             #+#    #+#              #
-#    Updated: 2022/11/28 20:49:52 by gkwon            ###   ########.fr        #
+#    Updated: 2022/11/30 14:28:56 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libftprintf.a
-SRCS_MAN	=	ft_printf.c\
-				ft_strlen.c\
-				ft_itoa.c\
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+NAME = libftprintf.a
+LIBFT = ./libft/libft.a
+SRCS_MAN = ft_printf.c\
 				ft_unsigned_itoa.c\
-				ft_strdup.c\
 				ft_to_add.c\
 				ft_to_hex.c\
 				ft_format1.c\
-				ft_format2.c\
-				ft_isprint.c
+				ft_format2.c
 
-OBJS_MAN	=	$(SRCS_MAN:.c=.o)
-CC	=	cc
-RM	=	rm -f
-CFLAGS	=	-Wall -Wextra -Werror  -std=c99
+OBJS_MAN = $(SRCS_MAN:.c=.o)
 
-$(NAME): all
-
-all:
-	rm -f all $(NAME)
-	ar rc $(NAME) $^
-
-all: $(OBJS_MAN)
-
-%.o:%.c
-	$(CC)	$(CFLAGS) -c $<
-
-clean:
-	rm -f $(OBJS_MAN) $(OBJS_BONUS) all bonus
-
-fclean: clean
+SRCS = $(SRCS_MAN)
+OBJS = $(OBJS_MAN)
+all : $(NAME)
+$(NAME) : $(LIBFT) $(OBJS)
+	cp $(LIBFT) $(NAME)
+	ar -scr $@ $(OBJS)
+%.o : %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+$(LIBFT) :
+	make -C ./libft bonus
+clean :
+	make -C ./libft fclean
+	rm -f $(OBJS_MAN)
+fclean : clean
 	rm -f $(NAME)
-
-re : 
-	make fclean 
-	make all
-
-.PHONY : clean fclean re 
+re : fclean all
+.PHONY: all re fclean clean

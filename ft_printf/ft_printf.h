@@ -6,12 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:13 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/28 20:49:02 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 14:31:51 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# define M_ERROR -1
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>

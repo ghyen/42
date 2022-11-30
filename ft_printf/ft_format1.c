@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:55:32 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/28 19:59:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 14:36:06 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	format_d(va_list ap)
 {
 	char	*tmp;
 	int		len;
+
 	tmp = ft_itoa(va_arg(ap, int));
 	write(1, tmp, ft_strlen(tmp));
 	len = ft_strlen(tmp);

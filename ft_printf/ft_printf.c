@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:03:03 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/28 20:40:00 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 14:36:01 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ int	ft_printf(const char *format, ...)
 	len = 0;
 	while (*format)
 	{
-		if (!ft_isprint(*format))
-			return (-1);
 		if (*format != '%')
 		{
-			write(1, format, 1);
+			if (write(1, format, 1) == M_ERROR)
+				return (M_ERROR);
 			len++;
 		}
 		else
