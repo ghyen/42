@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:11:00 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/28 20:22:46 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 21:43:37 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static size_t	cal_and_print(unsigned int nb, char *tmp, char *base)
 	}
 	len = j;
 	while (--j != -1)
-		write(1, &tmp[j], 1);
+		if (write(1, &tmp[j], 1) == M_ERROR)
+			return (M_ERROR);
 	return (len);
 }
 
@@ -44,7 +45,8 @@ size_t	ft_to_hex(unsigned int nb, int letter)
 		base = "0123456789ABCDEF";
 	if (nb == 0)
 	{
-		write(1, &base[0], 1);
+		if (write(1, &base[0], 1) == M_ERROR)
+			return (M_ERROR);
 		return (1);
 	}
 	else

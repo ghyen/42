@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:55:32 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/30 14:36:06 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 21:40:49 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	format_c(va_list ap)
 	char	tmp;
 
 	tmp = va_arg(ap, int);
-	write(1, &tmp, sizeof(char));
+	if (write(1, &tmp, sizeof(char)) == M_ERROR)
+		return (M_ERROR);
 	return (1);
 }
 
@@ -28,10 +29,12 @@ int	format_s(va_list ap)
 	tmp = va_arg(ap, char *);
 	if (!tmp)
 	{
-		write(1, "(null)", 6);
+		if (write(1, "(null)", 6) == M_ERROR)
+			return (M_ERROR);
 		return (6);
 	}
-	write(1, tmp, ft_strlen(tmp));
+	if (write(1, tmp, ft_strlen(tmp)) == M_ERROR)
+		return (M_ERROR);
 	return (ft_strlen(tmp));
 }
 
@@ -46,17 +49,14 @@ int	format_d(va_list ap)
 	int		len;
 
 	tmp = ft_itoa(va_arg(ap, int));
-	write(1, tmp, ft_strlen(tmp));
+	if (!tmp)
+		return (M_ERROR);
 	len = ft_strlen(tmp);
+	if (write(1, tmp, ft_strlen(tmp)) == M_ERROR)
+	{
+		free(tmp);
+		return (M_ERROR);
+	}
 	free(tmp);
 	return (len);
-}
-
-int	format_i(va_list ap)
-{
-	char	*tmp;
-
-	tmp = ft_itoa(va_arg(ap, int));
-	write(1, tmp, ft_strlen(tmp));
-	return (ft_strlen(tmp));
 }

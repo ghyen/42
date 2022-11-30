@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:30:28 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/28 20:28:26 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 20:34:12 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static size_t	cal_and_print(size_t nb, char *tmp, char *base)
 	tmp[j] = '0';
 	len += j + 1;
 	while (j != -1)
-		write(1, &tmp[j--], 1);
+		if (write(1, &tmp[j--], 1) == M_ERROR)
+			return (M_ERROR);
 	return (len);
 }
 

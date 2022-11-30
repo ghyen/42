@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:56:17 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/30 14:36:07 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/11/30 21:41:51 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ int	format_u(va_list ap)
 	int		len;
 
 	tmp = ft_unsigned_itoa(va_arg(ap, int));
-	write(1, tmp, ft_strlen(tmp));
+	if (!tmp)
+		return (M_ERROR);
+	if (write(1, tmp, ft_strlen(tmp)) == M_ERROR)
+	{
+		free(tmp);
+		return (M_ERROR);
+	}
 	len = ft_strlen(tmp);
 	free(tmp);
 	return (len);
