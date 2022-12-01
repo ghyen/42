@@ -6,16 +6,22 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:09 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/30 22:43:54 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/01 22:11:27 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define OPEN_MAX 256
 # define BUFF_SIZE 1
+
 # include <stdlib.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memmove(void *dst, const void *src, size_t len);
+size_t	ft_strlen(const char *s);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif
