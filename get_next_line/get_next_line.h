@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:09 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/01 22:11:27 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/03 21:11:58 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_backup
+{
+	char			*content;
+	struct s_list	*next;
+}					t_backup;
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
