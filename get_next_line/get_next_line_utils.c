@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:12 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/01 22:10:17 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/04 22:50:55 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (*s++)
+	if (!s)
+		return (0);
+	while (s[len])
 		len++;
 	return (len);
 }
@@ -61,17 +63,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (p);
 }
 
-int		is_in_nl(char *buff)
-{
-	int	i;
-
-	i = 0;
-	while (buff[i])
-		if (buff[i++] == '\n')
-			return (i - 1);
-	return (-1);
-}
-
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*dest;
@@ -84,4 +75,34 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	while (n--)
 		*dest++ = *source++;
 	return (dst);
+}
+
+t_backup	*ft_lstnew(int fd)
+{
+	t_backup	*new_list;
+
+	new_list = malloc(sizeof(t_backup));
+	if (!new_list)
+		return (NULL);
+	new_list->content = ft_strdup("");
+	new_list->next = NULL;
+	new_list->fd = fd;
+	return (new_list);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	size_t	len;
+	char	*ret;
+
+	len = 0;
+	while (s1[len])
+		len++;
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (0);
+	while (*s1)
+		*ret++ = (char)*s1++;
+	*ret = 0;
+	return (ret - len);
 }
