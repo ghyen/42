@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:12 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/06 18:31:05 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/07 04:40:51 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_free(t_backup *lst, t_backup *head)
 {
-	size_t	len;
-
-	len = 0;
-	if (!s)
-		return (0);
-	while (s[len])
-		len++;
-	return (len);
+	while (head->next && !(head->next == lst))
+		head = head->next;
+	head->next = lst->next;
+	free(lst->content);
+	lst->content = NULL;
+	free(lst);
 }
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
@@ -52,8 +50,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	s1l;
 	unsigned int	s2l;
 
-	s1l = ft_strlen(s1);
-	s2l = ft_strlen(s2);
+	s1l = 0;
+	s2l = 0;
+	while (s1[s1l])
+		s1l++;
+	while (s2[s2l])
+		s2l++;
 	p = (char *)malloc(s1l + s2l + 1);
 	if (!p)
 		return (NULL);
@@ -62,20 +64,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	p[s1l + s2l] = 0;
 	free((void *)s1);
 	return (p);
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char	*dest;
-	unsigned char	*source;
-
-	if (dst == 0 && src == 0)
-		return (0);
-	dest = dst;
-	source = (unsigned char *)src;
-	while (n--)
-		*dest++ = *source++;
-	return (dst);
 }
 
 t_backup	*ft_lstnew(int fd)

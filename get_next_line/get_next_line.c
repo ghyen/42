@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:02 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/06 18:30:29 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/07 04:46:07 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*ret;
+	char			*ret;
+	unsigned int	slen;
 
-	if (len == 0 || *s == 0 || ft_strlen(s) <= start)
-		return (ft_strdup(""));
-	if (ft_strlen(s) <= len + start)
-		len = ft_strlen(s) - start;
+	slen = 0;
+	while (s[slen])
+		slen++;
+	if (len == 0 || *s == 0 || slen <= start)
+		return (NULL);
+	if (slen <= len + start)
+		len = slen - start;
 	ret = (char *)malloc(len + 1);
 	if (!ret)
 		return (0);
@@ -64,20 +68,24 @@ t_backup	*find_fd(t_backup *head, int fd)
 	return (at);
 }
 
-char	*cut_nl(t_backup *lst, int flag)
+char	*cut_nl(t_backup *lst, t_backup *head, int size)
 {
 	int		at;
 	char	*tmp;
-	char	*fre;
 
 	at = 0;
-	while (lst->content[at] && lst->content[at] != '\n')
+	if (size == -1)
+	{
+		ft_free(lst, head);
+		return (0);
+	}
+	while (lst->content[at])
 		at++;
-	fre = lst->content;
-	tmp = ft_substr(lst->content, 0, at + flag);
-	lst->content = ft_strdup(lst->content + at + flag);
-	free(fre);
-	fre = NULL;
+	tmp = ft_substr(lst->content, 0, at + 1);
+	if (tmp != NULL)
+		lst->content = ft_strdup(lst->content + at + 1);
+	if (!*(lst->content))
+		ft_free(lst, head);
 	return (tmp);
 }
 
@@ -86,43 +94,36 @@ char	*get_next_line(int fd)
 	static t_backup	*head;
 	char			buff[BUFF_SIZE + 1];
 	t_backup		*lst;
-	int				size;
-	int				flag;
+	ssize_t			size;
 
-	flag = 0;
+	if (BUFF_SIZE < 1)
+		return (0);
+	size = 1;
 	lst = find_fd(head, fd);
 	if (!head)
 		head = lst;
-	while (1)
+	while (!(ft_strchr(lst->content, '\n')))
 	{
 		size = read(fd, buff, BUFF_SIZE);
-		buff[size] = 0;
-		lst->content = ft_strjoin(lst->content, buff);
 		if (size < 1)
-		{
 			break ;
-			//free node
-		}
-		if ((ft_strchr(lst->content, '\n')))
-		{
-			flag = 1;
-			break ;
-		}
+		buff[BUFF_SIZE] = 0;
+		lst->content = ft_strjoin(lst->content, buff);
 	}
-	return (cut_nl(lst, flag));
+	return (cut_nl(lst, head, size));
 }
 
-//#include <fcntl.h>
-//#include <stdio.h>
-//int	main(void)
-//{
-//	int	fd;
+// #include <fcntl.h>
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	fd;
 
-//	fd = open("./test.txt", O_RDONLY);
-//	//printf("%s", get_next_line(0));
-//	//printf("%s", get_next_line(fd));
-//	printf("%s", get_next_line(fd));
-//	printf("%s", get_next_line(fd));
-//	printf("%s", get_next_line(fd));
-//	close(fd);
-//}
+// 	fd = open("./a.txt", O_RDONLY);
+// 	//printf("%s", get_next_line(0));
+// 	//printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	close(fd);
+// }
