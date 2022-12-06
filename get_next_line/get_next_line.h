@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:09 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/04 21:42:21 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/06 18:02:47 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_backup			*ft_lstnew(int fd);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strchr(const char *s, int c);
 t_backup			*find_fd(t_backup *head, int fd);
-char				*cut_nl(t_backup *lst, char *buff);
+char				*cut_nl(t_backup *lst, int flag);
 char				*ft_strdup(const char *s1);
 
 #endif

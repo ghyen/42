@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:12 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/04 22:50:55 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/06 18:31:05 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memmove(p, s1, s1l);
 	ft_memmove(p + s1l, s2, s2l);
 	p[s1l + s2l] = 0;
+	free((void *)s1);
 	return (p);
 }
 

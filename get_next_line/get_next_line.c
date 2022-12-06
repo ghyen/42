@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:02 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/04 23:11:48 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/06 18:30:29 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,20 @@ t_backup	*find_fd(t_backup *head, int fd)
 	return (at);
 }
 
-char	*cut_nl(t_backup *lst, char *buff)
+char	*cut_nl(t_backup *lst, int flag)
 {
 	int		at;
 	char	*tmp;
+	char	*fre;
 
 	at = 0;
-	while (buff[at] && buff[at] != '\n')
+	while (lst->content[at] && lst->content[at] != '\n')
 		at++;
-	tmp = ft_strjoin(lst->content, ft_substr(buff, 0, at));
-	free(lst->content);
-	lst->content = ft_strdup(ft_substr(buff, at, ft_strlen(buff)));
+	fre = lst->content;
+	tmp = ft_substr(lst->content, 0, at + flag);
+	lst->content = ft_strdup(lst->content + at + flag);
+	free(fre);
+	fre = NULL;
 	return (tmp);
 }
 
@@ -84,38 +87,42 @@ char	*get_next_line(int fd)
 	char			buff[BUFF_SIZE + 1];
 	t_backup		*lst;
 	int				size;
+	int				flag;
 
+	flag = 0;
 	lst = find_fd(head, fd);
 	if (!head)
 		head = lst;
 	while (1)
 	{
 		size = read(fd, buff, BUFF_SIZE);
+		buff[size] = 0;
+		lst->content = ft_strjoin(lst->content, buff);
 		if (size < 1)
 		{
 			break ;
+			//free node
 		}
 		if ((ft_strchr(lst->content, '\n')))
 		{
+			flag = 1;
 			break ;
 		}
-		buff[size] = 0;
-		lst->content = ft_strjoin(lst->content, buff);
 	}
-	return (cut_nl(lst, buff));
+	return (cut_nl(lst, flag));
 }
 
-#include <fcntl.h>
-#include <stdio.h>
-int	main(void)
-{
-	int	fd;
+//#include <fcntl.h>
+//#include <stdio.h>
+//int	main(void)
+//{
+//	int	fd;
 
-	fd = open("./test.txt", O_RDONLY);
-	//printf("%s", get_next_line(0));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	close(fd);
-}
+//	fd = open("./test.txt", O_RDONLY);
+//	//printf("%s", get_next_line(0));
+//	//printf("%s", get_next_line(fd));
+//	printf("%s", get_next_line(fd));
+//	printf("%s", get_next_line(fd));
+//	printf("%s", get_next_line(fd));
+//	close(fd);
+//}
