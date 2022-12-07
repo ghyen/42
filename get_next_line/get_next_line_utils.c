@@ -12,41 +12,31 @@
 
 #include "get_next_line.h"
 
-void	ft_free(t_backup *lst, t_backup *head)
+void	ft_free(t_backup *lst, t_backup **head)
 {
-	while (head->next && !(head->next == lst))
-		head = head->next;
-	head->next = lst->next;
+	if (!(*head)->next)
+	{
+		free((*head)->content);
+		free(*head);
+		*head = NULL;
+		return ;
+	}
+	else
+	{
+		while ((*head)->next && !((*head)->next == lst))
+			*head = (*head)->next;
+		(*head)->next = lst->next;
+	}
 	free(lst->content);
 	lst->content = NULL;
 	free(lst);
-}
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	unsigned char	*dest;
-	unsigned char	*soruce;
-
-	dest = dst;
-	soruce = (unsigned char *)src;
-	if (dest == soruce || len == 0)
-		return (dest);
-	if (dest > soruce && len)
-	{
-		dest += len - 1;
-		soruce += len - 1;
-		while (len--)
-			*dest-- = *soruce--;
-	}
-	if (dest < soruce && len)
-		while (len--)
-			*dest++ = *soruce++;
-	return (dst);
+	lst = NULL;
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*p;
+	int				i;
 	unsigned int	s1l;
 	unsigned int	s2l;
 
@@ -59,8 +49,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	p = (char *)malloc(s1l + s2l + 1);
 	if (!p)
 		return (NULL);
-	ft_memmove(p, s1, s1l);
-	ft_memmove(p + s1l, s2, s2l);
+	i = -1;
+	while (s1[++i])
+		p[i] = s1[i];
+	i = -1;
+	while (s2[++i])
+		p[s1l + i] = s2[i];
 	p[s1l + s2l] = 0;
 	free((void *)s1);
 	return (p);

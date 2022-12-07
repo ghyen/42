@@ -12,7 +12,10 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -32,8 +35,8 @@ t_backup			*ft_lstnew(int fd);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strchr(const char *s, int c);
 t_backup			*find_fd(t_backup *head, int fd);
-char				*cut_nl(t_backup *lst, t_backup *head, int size);
+char				*cut_nl(t_backup *lst, t_backup **head, int size);
 char				*ft_strdup(const char *s1);
-void				ft_free(t_backup *lst, t_backup *head);
+void				ft_free(t_backup *lst, t_backup **head);
 
 #endif

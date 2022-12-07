@@ -21,7 +21,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (s[slen])
 		slen++;
 	if (len == 0 || *s == 0 || slen <= start)
-		return (NULL);
+		return (ft_strdup(""));
 	if (slen <= len + start)
 		len = slen - start;
 	ret = (char *)malloc(len + 1);
@@ -68,7 +68,7 @@ t_backup	*find_fd(t_backup *head, int fd)
 	return (at);
 }
 
-char	*cut_nl(t_backup *lst, t_backup *head, int size)
+char	*cut_nl(t_backup *lst, t_backup **head, int size)
 {
 	int		at;
 	char	*tmp;
@@ -79,38 +79,57 @@ char	*cut_nl(t_backup *lst, t_backup *head, int size)
 		ft_free(lst, head);
 		return (0);
 	}
-	while (lst->content[at])
+	while (lst->content[at] && lst->content[at] != '\n')
 		at++;
-	tmp = ft_substr(lst->content, 0, at + 1);
-	if (tmp != NULL)
-		lst->content = ft_strdup(lst->content + at + 1);
-	if (!*(lst->content))
+	if (at == 0)
+	{
 		ft_free(lst, head);
+		return (0);
+	}
+	tmp = ft_substr(lst->content, 0, at + 1);
+	if (lst->content[at] != '\n')
+		ft_free(lst, head);
+	else
+		lst->content = ft_strdup(lst->content + at + 1);
+	return (tmp);
+}
+
+int		eof(int size, t_backup *lst, t_backup **head)
+{
+	char *tmp;
+
+	tmp = ft_strdup(lst->content);
+	ft_free(lst, head);
 	return (tmp);
 }
 
 char	*get_next_line(int fd)
 {
 	static t_backup	*head;
-	char			buff[BUFF_SIZE + 1];
+	char			buff[BUFFER_SIZE + 1];
 	t_backup		*lst;
 	ssize_t			size;
 
-	if (BUFF_SIZE < 1)
+	if (BUFFER_SIZE < 1)
 		return (0);
 	size = 1;
 	lst = find_fd(head, fd);
 	if (!head)
 		head = lst;
-	while (!(ft_strchr(lst->content, '\n')))
+	while (!(ft_strchr(lst->content, '\n')) && size)
 	{
-		size = read(fd, buff, BUFF_SIZE);
+		size = read(fd, buff, BUFFER_SIZE);
 		if (size < 1)
-			break ;
-		buff[BUFF_SIZE] = 0;
+			eof(size, lst, head);
+		buff[BUFFER_SIZE] = 0;
 		lst->content = ft_strjoin(lst->content, buff);
+		if (lst->content[0] == 0)
+		{
+			ft_free(lst, &head);
+			return (0);
+		}
 	}
-	return (cut_nl(lst, head, size));
+	return (cut_nl(lst, &head, size));
 }
 
 // #include <fcntl.h>
