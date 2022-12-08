@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:02 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/08 20:20:47 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/08 21:42:12 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -83,7 +83,7 @@ char	*cut_nl(t_backup *lst, t_backup **head, int size)
 	return (tmp);
 }
 
-char	*ft_read(int size, t_backup *lst, t_backup **head, int fd)
+char	*ft_read(ssize_t size, t_backup *lst, t_backup **head, int fd)
 {
 	char	*tmp;
 	char	buff[BUFFER_SIZE + 1];
@@ -121,6 +121,8 @@ char	*get_next_line(int fd)
 		return (0);
 	size = 1;
 	lst = find_fd(&head, fd);
+	if (!lst)
+		return (NULL);
 	if (!head)
 		head = lst;
 	return (ft_read(size, lst, &head, fd));
