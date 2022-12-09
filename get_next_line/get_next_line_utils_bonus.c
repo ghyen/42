@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:12 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/08 21:35:59 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/09 22:22:07 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-void	ft_free(t_backup *lst, t_backup **head)
+char	*ft_free(t_backup *lst, t_backup **head)
 {
 	t_backup	*tmp;
 
 	tmp = (*head);
-	if (!(*head)->next)
+	if ((*head)->fd == lst->fd)
 	{
-		free((*head)->content);
-		(*head)->content = NULL;
-		free(*head);
-		*head = NULL;
-		return ;
+		*head = tmp->next;
+		free(tmp->content);
+		tmp->content = NULL;
+		free(tmp);
 	}
 	else
 	{
@@ -52,24 +51,25 @@ void	ft_free(t_backup *lst, t_backup **head)
 			lst = NULL;
 		}
 	}
+	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, unsigned int s1l,
+		unsigned int s2l)
 {
-	char			*p;
-	int				i;
-	unsigned int	s1l;
-	unsigned int	s2l;
+	char	*p;
+	int		i;
 
-	s1l = 0;
-	s2l = 0;
 	while (s1[s1l])
 		s1l++;
 	while (s2[s2l])
 		s2l++;
 	p = (char *)malloc(s1l + s2l + 1);
 	if (!p)
+	{
+		free((void *)s1);
 		return (NULL);
+	}
 	i = -1;
 	while (s1[++i])
 		p[i] = s1[i];
@@ -90,7 +90,10 @@ t_backup	*ft_lstnew(int fd)
 		return (NULL);
 	new_list->content = ft_strdup("");
 	if (!new_list->content)
+	{
+		free(new_list);
 		return (NULL);
+	}
 	new_list->next = NULL;
 	new_list->fd = fd;
 	return (new_list);

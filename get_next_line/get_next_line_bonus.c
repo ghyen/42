@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:02 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/08 21:42:12 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/09 22:34:50 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,38 +40,40 @@ t_backup	*find_fd(t_backup **head, int fd)
 	t_backup	*at;
 
 	at = *head;
-	if (!at)
+	if (!*head)
 	{
-		at = ft_lstnew(fd);
-		if (!at)
+		*head = ft_lstnew(fd);
+		if (!*head)
 			return (0);
+		return (*head);
 	}
 	while (at)
 	{
 		if (fd == at->fd)
 			break ;
 		if (!at->next)
+		{
 			at->next = ft_lstnew(fd);
+			if (!at->next)
+				return (0);
+		}	
 		at = at->next;
 	}
 	return (at);
 }
 
-char	*cut_nl(t_backup *lst, t_backup **head, int size)
+char	*cut_nl(t_backup *lst, t_backup **head)
 {
 	int		at;
 	char	*tmp;
 	char	*fre;
 
 	at = 0;
-	if (size == -1)
-	{
-		ft_free(lst, head);
-		return (0);
-	}
 	while (lst->content[at] && (lst->content[at] != '\n'))
 		at++;
 	tmp = ft_substr(lst->content, 0, at + 1);
+	if (!tmp)
+		return (ft_free(lst, head));
 	if (!lst->content[at + 1])
 		ft_free(lst, head);
 	else
@@ -79,6 +81,11 @@ char	*cut_nl(t_backup *lst, t_backup **head, int size)
 		fre = lst->content;
 		lst->content = ft_strdup(lst->content + at + 1);
 		free(fre);
+		if (!lst->content)
+		{
+			free(tmp);
+			return (ft_free(lst, head));
+		}
 	}
 	return (tmp);
 }
@@ -92,21 +99,19 @@ char	*ft_read(ssize_t size, t_backup *lst, t_backup **head, int fd)
 	{
 		size = read(fd, buff, BUFFER_SIZE);
 		if (size == -1)
-		{
-			ft_free(lst, head);
-			return (0);
-		}
+			return (ft_free(lst, head));
 		buff[size] = 0;
-		lst->content = ft_strjoin(lst->content, buff);
+		lst->content = ft_strjoin(lst->content, buff, 0, 0);
+		if (!lst->content)
+			return (ft_free(lst, head));
 		if (lst->content[0] == 0)
-		{
-			ft_free(lst, head);
-			return (0);
-		}
+			return (ft_free(lst, head));
 	}
 	if (ft_strchr(lst->content, '\n'))
-		return (cut_nl(lst, head, size));
+		return (cut_nl(lst, head));
 	tmp = ft_strdup(lst->content);
+	if (!tmp)
+		return (ft_free(lst, head));
 	ft_free(lst, head);
 	return (tmp);
 }
@@ -123,7 +128,5 @@ char	*get_next_line(int fd)
 	lst = find_fd(&head, fd);
 	if (!lst)
 		return (NULL);
-	if (!head)
-		head = lst;
 	return (ft_read(size, lst, &head, fd));
 }
