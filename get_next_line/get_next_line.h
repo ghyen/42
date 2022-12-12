@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:09 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/09 22:56:09 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/12 17:43:23 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
+# define MY_OPEN_MAX 49152
 # include <stdlib.h>
 # include <unistd.h>
 

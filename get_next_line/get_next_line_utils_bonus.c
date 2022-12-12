@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:12 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/09 22:22:07 by gkwon            ###   ########.fr       */
+/*   Updated: 2022/12/12 17:43:13 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ t_backup	*ft_lstnew(int fd)
 {
 	t_backup	*new_list;
 
+	if (fd > MY_OPEN_MAX)
+		return (0);
 	new_list = malloc(sizeof(t_backup));
 	if (!new_list)
 		return (NULL);
