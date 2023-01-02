@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_head.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/01/02 05:32:13 by edwin            ###   ########.fr       */
+/*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
+/*   Updated: 2023/01/02 22:00:27 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	init_head(t_info *t)
+int	valid_input(char **argv)
 {
-	t = (t_info *)malloc(sizeof(t_info));
-	t->head = NULL;
-	t->tail = NULL;
-	t->now = 0;
-	t->size = 0;
+	int	i;
+	int	j;
+
+	i = -1;
+	while (argv[++i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!(argv[i][j] >= '0' && argv[i][j++] <= '9'))
+				return (0);
+		}
+	}
+	return (1);
 }
