@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   init_head.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/02 05:59:48 by edwin            ###   ########.fr       */
+/*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
+/*   Updated: 2023/01/02 05:32:13 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_node
+void	init_head(t_info *t)
 {
-	int			*content;
-	struct s_node	*next;
-	struct s_node	*pre;
-}					t_node;
-
-typedef struct s_info
-{
-	int			now;
-	int			size;
-	struct s_node	*head_a;
-	struct s_node	*tail_a;
-	struct s_node	*head_b;
-	struct s_node	*tail_b;
-}					t_info;
-
-#endif
+	t = (t_info *)malloc(sizeof(t_info));
+	t->head = NULL;
+	t->tail = NULL;
+	t->now = 0;
+	t->size = 0;
+}
