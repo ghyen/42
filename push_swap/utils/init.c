@@ -3,23 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/01/04 04:58:47 by edwin            ###   ########.fr       */
+/*   Updated: 2023/01/04 21:08:03 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-void	init_info(t_info *t)
+static int	long_long_return(int flag)
 {
-	t = (t_info *)malloc(sizeof(t_info));
-	t->head_a = NULL;
-	t->head_b = NULL;
-	t->tail_a = NULL;
-	t->tail_b = NULL;
-	t->size = 0;
+	if (flag == -1)
+		return (0);
+	return (-1);
+}
+
+int	ft_atoi(const char *str)
+{
+	long long	ret;
+	long long	tmp;
+	int			flag;
+
+	ret = 0;
+	flag = 1;
+	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
+		|| *str == '\r' || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			flag = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		tmp = ret;
+		ret *= 10;
+		ret += (*str++ - '0');
+		if (tmp > ret)
+			return (long_long_return(flag));
+	}
+	return (ret * flag);
+}
+
+void	init_info(t_info **t)
+{
+	*t = (t_info *)malloc(sizeof(t_info));
+	(*t)->head = NULL;
+	(*t)->tail = NULL;
+	(*t)->size = 0;
 }
 
 t_node	*init_node(int val, unsigned int idx)
@@ -34,31 +67,26 @@ t_node	*init_node(int val, unsigned int idx)
 	return (new);
 }
 
-void	init_stack(char **argv, t_info *info)
-{
-	int	idx;
-
-	idx = 0;
-	while (**argv)
-	{
-		init_elm(ft_atoi(*argv, info), info, (&idx)++);
-		*argv++;
-	}
-	
-}
-
-void	init_elm(int val, t_info *info, int *idx)
+void	init_stack(int argc, char **argv, t_info **info)
 {
 	t_node	*pre_node;
 	t_node	*cur_node;
+	int		idx;
 
-	cur_node = init_node(val, *idx++);
-	if (!pre_node)
-		info->head_a = cur_node;
-	else
+	idx = 0;
+	while (--argc)
 	{
-		pre_node->next = cur_node;
-		cur_node->next = pre_node;
+		cur_node = init_node(ft_atoi(*argv), idx++);
+		if ((*info)->head == NULL)
+			(*info)->head = cur_node;
+		else
+		{
+			pre_node->next = cur_node;
+			cur_node->pre = pre_node;
+		}
+		pre_node = cur_node;
+		*argv++;
 	}
-	pre_node = cur_node;
+	(*info)->tail = pre_node;
+	(*info)->size = --idx;
 }
