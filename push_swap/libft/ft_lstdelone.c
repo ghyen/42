@@ -1,42 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:29:29 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/19 23:53:44 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/20 00:02:48 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int	valid_input(char **argv, int *size)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	i;
-	int	j;
-	int	flag;
-
-	i = -1;
-	while (argv[++i])
-	{
-		j = 0;
-		flag = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j] == '-')
-				j++;
-			while (ft_isdigit(argv[i][j]))
-			{
-				flag = 1;
-				j++;
-			}
-			if (flag == 0 && !ft_isdigit(argv[i][j]))
-				return (0);
-			if ((*size)++ >= 0 && argv[i][j] == ' ')
-				j++;
-		}
-	}
-	return (1);
+	del(lst->content);
+	free(lst);
 }

@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:29:29 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/11 15:59:30 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/20 17:45:17 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int	valid_input(char **argv, int *size)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
-	int	j;
-	int	flag;
+	unsigned char	*p;
 
-	i = -1;
-	while (argv[++i])
-	{
-		j = 0;
-		flag = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j] == '-')
-				j++;
-			while (ft_isdigit(argv[i][j]))
-			{
-				flag = 1;
-				j++;
-			}
-			if (flag == 0 && !ft_isdigit(argv[i][j]))
-				return (0);
-			if ((*size)++ >= 0 && argv[i][j] == ' ')
-				j++;
-		}
-	}
-	return (1);
+	p = s;
+	while (n--)
+		*p++ = 0;
 }

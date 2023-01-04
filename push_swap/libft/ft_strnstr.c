@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:29:29 by gkwon            ###   ########.fr       */
+/*   Created: 2022/08/27 17:28:40 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/20 18:11:56 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int	valid_input(char **argv, int *size)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	int	i;
 	int	j;
-	int	flag;
 
-	i = -1;
-	while (argv[++i])
+	i = 0;
+	if (needle[i] == 0)
+		return ((char *)haystack);
+	while (haystack[i] && len)
 	{
 		j = 0;
-		flag = 0;
-		while (argv[i][j])
+		while (haystack[i + j] == needle[j] && len - j)
 		{
-			if (argv[i][j] == '-')
-				j++;
-			while (ft_isdigit(argv[i][j]))
-			{
-				flag = 1;
-				j++;
-			}
-			if (flag == 0 && !ft_isdigit(argv[i][j]))
-				return (0);
-			if ((*size)++ >= 0 && argv[i][j] == ' ')
-				j++;
+			if (needle[j + 1] == '\0')
+				return ((char *)&haystack[i]);
+			j++;
 		}
+		i++;
+		len--;
 	}
-	return (1);
+	return (0);
 }

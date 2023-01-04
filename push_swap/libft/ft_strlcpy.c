@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:29:29 by gkwon            ###   ########.fr       */
+/*   Created: 2022/08/26 22:23:26 by gkwon             #+#    #+#             */
+/*   Updated: 2022/11/20 17:45:09 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int	valid_input(char **argv, int *size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	int	i;
-	int	j;
-	int	flag;
 
-	i = -1;
-	while (argv[++i])
-	{
-		j = 0;
-		flag = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j] == '-')
-				j++;
-			while (ft_isdigit(argv[i][j]))
-			{
-				flag = 1;
-				j++;
-			}
-			if (flag == 0 && !ft_isdigit(argv[i][j]))
-				return (0);
-			if ((*size)++ >= 0 && argv[i][j] == ' ')
-				j++;
-		}
-	}
-	return (1);
+	i = 0;
+	while (src[i])
+		i++;
+	if (dstsize == 0)
+		return (i);
+	while (dstsize-- > 1 && *src)
+		*dst++ = *src++;
+	*dst = 0;
+	return (i);
 }

@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:29:29 by gkwon            ###   ########.fr       */
+/*   Created: 2022/11/09 13:43:20 by gkwon             #+#    #+#             */
+/*   Updated: 2022/12/04 15:49:22 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int	valid_input(char **argv, int *size)
+t_list	*ft_lstnew(void *content)
 {
-	int	i;
-	int	j;
-	int	flag;
+	t_list	*new_list;
 
-	i = -1;
-	while (argv[++i])
-	{
-		j = 0;
-		flag = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j] == '-')
-				j++;
-			while (ft_isdigit(argv[i][j]))
-			{
-				flag = 1;
-				j++;
-			}
-			if (flag == 0 && !ft_isdigit(argv[i][j]))
-				return (0);
-			if ((*size)++ >= 0 && argv[i][j] == ' ')
-				j++;
-		}
-	}
-	return (1);
+	new_list = malloc(sizeof(t_list));
+	if (!new_list)
+		return (NULL);
+	new_list->content = content;
+	new_list->next = NULL;
+	return (new_list);
 }

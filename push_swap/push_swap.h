@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/04 21:02:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/05 02:11:45 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "./libft/libft.h"
 
 typedef struct s_node
 {
@@ -36,7 +37,10 @@ int					ft_atoi(const char *str);
 void				init_info(t_info **t);
 t_node				*init_node(int val, unsigned int idx);
 void				init_stack(int argc, char **argv, t_info **info);
-int					valid_input(char **argv);
+int					valid_input(char **argv, int *size);
 void				sa(t_info *info);
 void				sb(t_info *info);
+void				ss(t_info *info_a, t_info *info_b);
+void				swap(t_info *info);
+int	*pre_sorting(char **argv, int size);
 #endif

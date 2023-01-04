@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:48:55 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/04 22:07:16 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/04 23:43:11 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	swap(t_info *info)
 	int	tmp;
 
 	if (info->size < 2)
-		return (0);
+		return ;
 	tmp = info->head->val;
 	info->head->val = info->head->next->val;
 	info->head->next->val = tmp;
