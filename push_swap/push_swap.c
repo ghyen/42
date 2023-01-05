@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 02:11:46 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/05 23:18:23 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 
 int	is_sorted(t_info *info)
 {
-	while (info->head->next)
+	t_node	*find;
+
+	find = info->head;
+	while (find->next)
 	{
-		if (info->head->val > info->head->next->val)
+		if (find->val > find->next->val)
 			return (0);
-		info->head = info->head->next;
+		find = find->next;
 	}
 	return (1);
 }
 
-void	ft_error()
+void	ft_error(void)
 {
 	printf("error");
 	exit(1);
@@ -34,18 +37,27 @@ int	main(int argc, char **argv)
 {
 	t_info	*info_a;
 	t_info	*info_b;
-	int *array;
+	int		*array;
 
 	if (argc == 1)
 		exit(0);
 	init_info(&info_a);
 	init_info(&info_b);
-	if (!valid_input(++argv, &info_a->size))
+	if (!valid_input(argv, &info_a->size))
 		ft_error();
-	array = pre_sorting(argv, info_a->size);
-	init_stack(info_a->size, array, &info_a);
-	printf("%d",info_a->size);
-	//pre-sorting
+	array = pre_sorting(++argv, info_a->size, info_a);
+	int i = 0;
+	while (i < info_a->size)
+	{
+		printf("%d ",array[i++]);
+	}
+	t_node *tmp = info_a->head;
+	while (tmp->next != NULL)
+	{
+		printf("%d",tmp->val);
+		tmp = tmp->next;
+	}
+	printf("%d",tmp->val);
 	//indexing and find pivot
 	//pb
 	//find cost

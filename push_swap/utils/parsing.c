@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:29:29 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/05 17:00:32 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	valid_input(char **argv, int *size)
 	int	j;
 	int	flag;
 
-	i = -1;
+	i = 0;
 	while (argv[++i])
 	{
 		j = 0;

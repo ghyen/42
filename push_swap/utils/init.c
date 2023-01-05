@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/01/05 02:05:59 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/05 23:18:55 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ t_node	*init_node(int val, unsigned int idx)
 	return (new);
 }
 
-void	init_stack(int size, int *argv, t_info **info)
+void	init_stack(int size, int *array, t_info **info)
 {
 	t_node	*pre_node;
 	t_node	*cur_node;
 	int		idx;
 
 	idx = 0;
-	while (--size)
+	while (size--)
 	{
-		cur_node = init_node(*argv, idx++);
+		cur_node = init_node(*array, idx++);
 		if ((*info)->head == NULL)
 			(*info)->head = cur_node;
 		else
@@ -50,7 +50,7 @@ void	init_stack(int size, int *argv, t_info **info)
 			cur_node->pre = pre_node;
 		}
 		pre_node = cur_node;
-		(*argv)++;
+		array++;
 	}
 	(*info)->tail = pre_node;
 }
