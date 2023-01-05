@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 17:00:32 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/05 23:48:26 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	valid_input(char **argv, int *size)
+int	valid_digit(char **argv, int *size)
 {
 	int	i;
 	int	j;
@@ -38,5 +38,16 @@ int	valid_input(char **argv, int *size)
 				j++;
 		}
 	}
+	return (1);
+}
+
+int	valid_dup(int *array, long find, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+		if (array[i++] == find || find > INT32_MAX || find < INT32_MIN)
+			return (0);
 	return (1);
 }

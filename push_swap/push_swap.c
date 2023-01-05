@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 23:18:23 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/05 23:43:59 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 		exit(0);
 	init_info(&info_a);
 	init_info(&info_b);
-	if (!valid_input(argv, &info_a->size))
+	if (!valid_digit(argv, &info_a->size))
 		ft_error();
 	array = pre_sorting(++argv, info_a->size, info_a);
 	int i = 0;
