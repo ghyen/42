@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:43:04 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 01:10:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/06 22:59:40 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,55 @@ void	pop_push(t_info **from_info, t_info **to_info)
 	(*to_info)->size++;
 }
 
+t_node	*pop(t_info **info)
+{
+	t_node	*pop;
+
+	if ((*info)->size < 1)
+		return (NULL);
+	pop = (*info)->head;
+	if ((*info)->size == 1)
+	{
+		(*info)->head = NULL;
+		(*info)->tail = NULL;
+	}
+	else if ((*info)->size > 1)
+	{
+		(*info)->head = (*info)->head->next;
+		(*info)->head->pre = NULL;
+	}
+	pop->next = NULL;
+	modify_idx(*info, -1);
+	(*info)->size--;
+	return (pop);
+}
+
+void	push(t_info **info, t_node *node)
+{
+	if ((*info)->size == 0)
+	{
+		node->idx = 0;
+		(*info)->head = node;
+		(*info)->tail = node;
+	}
+	else if ((*info)->size >= 1)
+	{
+		node->idx = 0;
+		modify_idx(*info, 1);
+		(*info)->head->pre = node;
+		node->next = (*info)->head;
+		(*info)->head = node;
+	}
+	(*info)->size++;
+}
+
 void	pa(t_info **info_a, t_info **info_b)
 {
 	if (!(*info_b)->size)
 		return ;
 	write(1, "pa\n", 3);
-	pop_push(info_b, info_a);
+	push(info_a, pop(info_b));
+	//pop_push(info_b, info_a);
 }
 
 void	pb(t_info **info_a, t_info **info_b)
@@ -50,5 +93,6 @@ void	pb(t_info **info_a, t_info **info_b)
 	if (!(*info_a)->size)
 		return ;
 	write(1, "pb\n", 3);
-	pop_push(info_a, info_b);
+	push(info_b, pop(info_a));
+	//pop_push(info_a, info_b);
 }

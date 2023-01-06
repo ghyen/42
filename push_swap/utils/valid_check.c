@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 23:48:26 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/06 16:59:28 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,20 @@ int	valid_digit(char **argv, int *size)
 int	valid_dup(int *array, long find, int len)
 {
 	int	i;
+	int	cnt;
 
+	cnt = 0;
 	i = 0;
 	while (i < len)
-		if (array[i++] == find || find > INT32_MAX || find < INT32_MIN)
+	{
+		if (find > INT32_MAX || find < INT32_MIN)
 			return (0);
+		if (array[i++] == find)
+		{
+			cnt++;
+			if (cnt > 1)
+				return (0);
+		}
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/05 23:43:59 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/06 23:14:48 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,24 @@ int	main(int argc, char **argv)
 	init_info(&info_b);
 	if (!valid_digit(argv, &info_a->size))
 		ft_error();
-	array = pre_sorting(++argv, info_a->size, info_a);
+	array = parsing(++argv, info_a->size, info_a);
+	find_pivot_and_pb(array, info_a, info_b);
+
 	int i = 0;
 	while (i < info_a->size)
 	{
 		printf("%d ",array[i++]);
 	}
-	t_node *tmp = info_a->head;
+
+	//t_node *tmp = info_a->head;
+	//while (tmp->next != NULL)
+	//{
+	//	printf("%d",tmp->val);
+	//	tmp = tmp->next;
+	//}
+	//printf("%d",tmp->val);
+
+	t_node *tmp = info_b->head;
 	while (tmp->next != NULL)
 	{
 		printf("%d",tmp->val);
