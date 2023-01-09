@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cal.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/09 23:41:12 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/10 04:28:21 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	cal(t_info *info_a, t_info *info_b)
 	int		b;
 
 	loop = 0;
-	while (loop < 6)
-	{
-		best[loop] = 0;
-		now[loop++] = 0;
-	}
-	best[5] = 9999;
+	while (loop < 5)
+		best[loop++] = 0;
+	best[5] = INT32_MAX;
 	tmp_b = info_b->head;
 	loop = info_b->size;
 	while (loop--)
 	{
+		i = -1;
+		while (++i < 6)
+			now[i] = 0;
 		cal2(tmp_b, now, info_a, info_b);
 		//printf("best : %d, now : %d", best[5], now[5]);
 		a = best[5];
@@ -41,9 +41,7 @@ void	cal(t_info *info_a, t_info *info_b)
 		{
 			i = -1;
 			while (++i < 6)
-			{
 				best[i] = now[i];
-			}
 		}
 		tmp_b = tmp_b->next;
 	}
@@ -62,13 +60,13 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 		now[2] = info_b->size - tmp_b->idx;
 	if (info_a->head && info_a->head->val < tmp_b->val)
 	{
-		while (tmp_b->val > tmp_a->val && tmp_a)
+		while (tmp_a && tmp_b->val > tmp_a->val)
 		{
 			now[3]++;
 			tmp_a = tmp_a->next;
 		}
 		tmp_a = info_a->tail;
-		while (tmp_b->val > tmp_a->val && tmp_a)
+		while (tmp_a && tmp_b->val < tmp_a->val)
 		{
 			now[4]++;
 			tmp_a = tmp_a->pre;
@@ -80,10 +78,12 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 void	def_sum(int **now)
 {
 	int	i;
+	int	a;
 
 	i = 0;
 	while (++i < 4)
 	{
+		a = (*now)[i];
 		if (i == 3)
 		{
 			if ((*now)[i] != (*now)[i + 1])
@@ -104,8 +104,10 @@ void	def_sum(int **now)
 				(*now)[5] += (*now)[i];
 				(*now)[i + 1] = 0;
 			}
-			(*now)[5] += (*now)[i];
 		}
+		else
+			(*now)[5] += (*now)[i];
+		a = (*now)[5];
 	}
 }
 
@@ -132,7 +134,7 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 				pa_flag = 1;
 				ra(info_a);
 			}
-			else
+			else if (i == 4)
 				rra(info_a);
 			best[i]--;
 		}

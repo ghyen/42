@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/09 22:37:45 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/10 03:36:41 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	main(int argc, char **argv)
 	while (info_b->size != 0)
 		cal(info_a, info_b);
 
-	int i = 0;
-	while (i < info_a->size)
-	{
-		printf("%d ",array[i++]);
-	}
+	// int i = 0;
+	// while (i < info_a->size)
+	// {
+	// 	printf("%d ",array[i++]);
+	// }
 
 	t_node *tmp = info_a->head;
 	while (tmp->next != NULL)
