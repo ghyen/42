@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/01/05 23:18:55 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/09 21:46:08 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,17 @@ void	init_stack(int size, int *array, t_info **info)
 		array++;
 	}
 	(*info)->tail = pre_node;
+}
+
+int	*init_cal(void)
+{
+	int	*ret;
+	int	loop;
+
+	loop = 5;
+	ret = malloc(sizeof(int) * 6);
+	while (loop--)
+		ret[loop] = 0;
+	ret[5] = INT32_MAX;
+	return (ret);
 }

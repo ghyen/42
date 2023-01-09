@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:08:26 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/06 20:42:29 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/09 19:24:29 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	reverse_rotate(t_info *info)
 {
 	t_node	*tmp;
 
-	info->tail->idx = 0;
-	info->head->idx = 1;
 	tmp = info->tail;
 	modify_idx(info, 1);
-	tmp->pre->next = NULL;
-	info->tail = info->tail->pre;
-	info->head->next = tmp;
+	tmp->idx = 0;
 	tmp->next = info->head;
+	info->tail = tmp->pre;
+	tmp->pre->next = 0;
+	tmp->next = info->head;
+	info->head->pre = tmp;
 	info->head = tmp;
 }
 

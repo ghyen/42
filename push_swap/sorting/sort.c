@@ -6,29 +6,33 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:48:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/06 22:17:04 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/09 20:23:22 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
+#include <stdio.h>
 void	find_pivot_and_pb(int *array, t_info *info_a, t_info *info_b)
 {
 	int		p1;
 	int		p2;
 	int		loop;
 
-	loop = info_a->size;
+	loop = ((info_a->size) / 3 * 2);
 	p1 = array[(info_a->size / 3) - 1];
 	p2 = array[((info_a->size / 3) * 2) - 1];
-	while (loop--)
+	printf("p1 = %d, p2 = %d \n",p1,p2);
+	while (loop)
 	{
-		if (info_a->head->val < p2)
+		if (info_a->head->val <= p2)
 		{
 			pb(&info_a, &info_b);
-			if (info_b->head->val < p1)
+			if (info_b->head->val <= p1)
 				rb(info_b);
+			loop--;
 		}
+		else
+			ra(info_a);
 	}
 	loop = info_a->size;
 	while (loop--)

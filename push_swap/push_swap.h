@@ -6,16 +6,16 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/06 22:40:10 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/09 23:37:13 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "./libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include "./libft/libft.h"
 
 typedef struct s_node
 {
@@ -31,6 +31,15 @@ typedef struct s_info
 	struct s_node	*head;
 	struct s_node	*tail;
 }					t_info;
+
+typedef struct s_cal
+{
+	int				rb;
+	int				rrb;
+	int				ra;
+	int				rra;
+	int				sum;
+}					t_cal;
 
 static int			long_long_return(int flag);
 int					ft_atoi(const char *str);
@@ -49,12 +58,26 @@ int					valid_dup(int *array, long find, int len);
 void				reverse_rotate(t_info *info);
 void				rotate(t_info *info);
 void				modify_idx(t_info *info, int modify);
-void	find_pivot_and_pb(int *array, t_info *info_a, t_info *info_b);
+void				find_pivot_and_pb(int *array, t_info *info_a,
+						t_info *info_b);
+int	*init_cal(void);
 //	push
-void	pa(t_info **info_a, t_info **info_b);
-void	pb(t_info **info_a, t_info **info_b);
+void				pa(t_info **info_a, t_info **info_b);
+void				pb(t_info **info_a, t_info **info_b);
 
 //	rotate
-void	rb(t_info *info);
-void	modify_idx(t_info *info, int modify);
+void				rb(t_info *info);
+void				ra(t_info *info);
+void				modify_idx(t_info *info, int modify);
 #endif
+
+//	rotate2
+void				rra(t_info *info);
+void				rrb(t_info *info);
+void				rrr(t_info *info_a, t_info *info_b);
+
+//	cal
+void	cal(t_info *info_a, t_info *info_b);
+void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b);
+void	def_sum(int **now);
+void	do_op(int *best, t_info *info_a, t_info *info_b);

@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/06 23:14:48 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/09 22:37:45 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	main(int argc, char **argv)
 		ft_error();
 	array = parsing(++argv, info_a->size, info_a);
 	find_pivot_and_pb(array, info_a, info_b);
+	while (info_b->size != 0)
+		cal(info_a, info_b);
 
 	int i = 0;
 	while (i < info_a->size)
@@ -54,21 +56,21 @@ int	main(int argc, char **argv)
 		printf("%d ",array[i++]);
 	}
 
-	//t_node *tmp = info_a->head;
-	//while (tmp->next != NULL)
-	//{
-	//	printf("%d",tmp->val);
-	//	tmp = tmp->next;
-	//}
-	//printf("%d",tmp->val);
-
-	t_node *tmp = info_b->head;
+	t_node *tmp = info_a->head;
 	while (tmp->next != NULL)
 	{
 		printf("%d",tmp->val);
 		tmp = tmp->next;
 	}
 	printf("%d",tmp->val);
+
+	//t_node *tmp = info_b->head;
+	//while (tmp->next != NULL)
+	//{
+	//	printf("%d",tmp->val);
+	//	tmp = tmp->next;
+	//}
+	//printf("%d",tmp->val);
 	//indexing and find pivot
 	//pb
 	//find cost

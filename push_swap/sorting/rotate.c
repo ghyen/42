@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:43:07 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/06 23:14:11 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/09 20:13:47 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	rotate(t_info *info)
 	tmp = info->head;
 	modify_idx(info, -1);
 	info->head->idx = info->size - 1;
-	info->head->next->pre = NULL;
-	tmp->next = NULL;
-	info->tail->next = tmp;
+	info->head->next->pre = 0;
+	info->head = info->head->next;
 	tmp->pre = info->tail;
+	info->tail->next = tmp;
 	info->tail = tmp;
-	tmp->idx = 0;
+	info->tail->next = 0;
 }
 
 void	modify_idx(t_info *info, int modify)
