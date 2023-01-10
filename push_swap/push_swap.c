@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/10 03:36:41 by edwin            ###   ########.fr       */
+/*   Updated: 2023/01/10 21:46:25 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	main(int argc, char **argv)
 	array = parsing(++argv, info_a->size, info_a);
 	find_pivot_and_pb(array, info_a, info_b);
 	while (info_b->size != 0)
+	{
+		optimize(info_a);
 		cal(info_a, info_b);
+	}
 
 	// int i = 0;
 	// while (i < info_a->size)
@@ -59,7 +62,8 @@ int	main(int argc, char **argv)
 	t_node *tmp = info_a->head;
 	while (tmp->next != NULL)
 	{
-		printf("%d",tmp->val);
+		//printf("\n");
+		printf("%d ",tmp->val);
 		tmp = tmp->next;
 	}
 	printf("%d",tmp->val);

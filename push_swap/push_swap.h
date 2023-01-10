@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/09 23:37:13 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/10 17:50:30 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ typedef struct s_info
 	struct s_node	*tail;
 }					t_info;
 
-typedef struct s_cal
-{
-	int				rb;
-	int				rrb;
-	int				ra;
-	int				rra;
-	int				sum;
-}					t_cal;
-
-static int			long_long_return(int flag);
 int					ft_atoi(const char *str);
 void				init_info(t_info **t);
 t_node				*init_node(int val, unsigned int idx);

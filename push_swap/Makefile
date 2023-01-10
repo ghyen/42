@@ -6,25 +6,26 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 20:39:12 by gkwon             #+#    #+#              #
-#    Updated: 2022/12/29 20:57:20 by gkwon            ###   ########.fr        #
+#    Updated: 2023/01/10 17:49:47 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-NAME = push_swap.a
 LIBFT = ./libft/libft.a
-SRCS_MAN = ft_printf.c\
-				ft_unsigned_itoa.c\
-				ft_to_add.c\
-				ft_to_hex.c\
-				ft_format1.c\
-				ft_format2.c
+SRCS = push_swap.c\
+			sorting/cal.c\
+	     	sorting/rotate.c\
+		 	sorting/sort.c\
+			sorting/push.c\
+			sorting/rotate2.c\
+			sorting/swap.c\
+			utils/init.c\
+			utils/valid_check.c
+				
+OBJS = $(SRCS:.c=.o)
+NAME = push_swap.a
 
-OBJS_MAN = $(SRCS_MAN:.c=.o)
-
-SRCS = $(SRCS_MAN)
-OBJS = $(OBJS_MAN)
 all : $(NAME)
 $(NAME) : $(LIBFT) $(OBJS)
 	cp $(LIBFT) $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cal.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/10 04:28:21 by edwin            ###   ########.fr       */
+/*   Updated: 2023/01/10 21:51:03 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 
 	tmp_a = info_a->head;
 	now[0] = tmp_b->idx;
-	if (tmp_b->idx < (info_b->size / 2))
+	if (tmp_b->idx < (unsigned int)(info_b->size / 2))
 		now[1] = tmp_b->idx;
 	else
 		now[2] = info_b->size - tmp_b->idx;
@@ -138,5 +138,20 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 				rra(info_a);
 			best[i]--;
 		}
+	}
+}
+
+void	optimize(t_info *info_a)
+{
+	int		ra_cnt;
+	int		rra_cnt;
+	t_node	*tmp;
+
+	tmp = info_a->head;
+	ra_cnt = 0;
+	rra_cnt = 0;
+	while (info_a->head->val > info_a->tail->val)
+	{
+		tmp = tmp->next;
 	}
 }
