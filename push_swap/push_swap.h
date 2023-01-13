@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/10 17:50:30 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/11 00:28:00 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,4 @@ void	cal(t_info *info_a, t_info *info_b);
 void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b);
 void	def_sum(int **now);
 void	do_op(int *best, t_info *info_a, t_info *info_b);
+void	optimize(t_info *info_a);

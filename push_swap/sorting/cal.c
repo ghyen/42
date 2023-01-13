@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cal.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/10 21:51:03 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/11 00:38:08 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,73 @@ void	cal(t_info *info_a, t_info *info_b)
 void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 {
 	t_node	*tmp_a;
+	int		pre;
 
+	pre = INT32_MIN;
 	tmp_a = info_a->head;
 	now[0] = tmp_b->idx;
 	if (tmp_b->idx < (unsigned int)(info_b->size / 2))
 		now[1] = tmp_b->idx;
 	else
 		now[2] = info_b->size - tmp_b->idx;
-	if (info_a->head && info_a->head->val < tmp_b->val)
+	while (tmp_a && tmp_b->val > tmp_a->val)
 	{
-		while (tmp_a && tmp_b->val > tmp_a->val)
-		{
-			now[3]++;
-			tmp_a = tmp_a->next;
-		}
-		tmp_a = info_a->tail;
-		while (tmp_a && tmp_b->val < tmp_a->val)
-		{
-			now[4]++;
-			tmp_a = tmp_a->pre;
-		}
+		now[3]++;
+		tmp_a = tmp_a->next;
 	}
+	tmp_a = info_a->tail;
+	while (tmp_a && tmp_b->val > tmp_a->val)
+	{
+		now[4]++;
+		tmp_a = tmp_a->pre;
+	}
+	// while (tmp_a)
+	// {
+	// 	if (tmp_b->val < tmp_a->val)
+	// 	{
+	// 		now[3]--;
+	// 		if (now[3] < 0)
+	// 			now[3] = 0;
+	// 		break ;
+	// 	}
+	// 	else
+	// 		now[3]++;
+	// 	if (pre > tmp_b->val)
+	// 	{
+	// 		now[4]--;
+	// 		if (now[4] < 0)
+	// 			now[4] = 0;
+	// 		break ;
+	// 	}
+	// 	pre = tmp_a->val;
+	// 	tmp_a = tmp_a->next;
+	// 	if (now[3] == info_a->size)
+	// 		now[3] = 0;
+	// }
+	// tmp_a = info_a->tail;
+	// while (tmp_a)
+	// {
+	// 	if (tmp_b->val > tmp_a->val)
+	// 	{
+	// 		now[4]--;
+	// 		if (now[4] < 0)
+	// 			now[4] = 0;
+	// 		break ;
+	// 	}
+	// 	else
+	// 		now[4]++;
+	// 	if (pre > tmp_b->val)
+	// 	{
+	// 		now[4]--;
+	// 		if (now[4] < 0)
+	// 			now[4] = 0;
+	// 		break ;
+	// 	}
+	// 	pre = tmp_a->val;
+	// 	tmp_a = tmp_a->pre;
+	// 	if (now[4] == info_a->size)
+	// 		now[4] = 0;
+	// }
 	def_sum(&now);
 }
 
@@ -147,11 +193,24 @@ void	optimize(t_info *info_a)
 	int		rra_cnt;
 	t_node	*tmp;
 
-	tmp = info_a->head;
 	ra_cnt = 0;
 	rra_cnt = 0;
-	while (info_a->head->val > info_a->tail->val)
+	tmp = info_a->head;
+	while (tmp && tmp->next && tmp->val > tmp->next->val)
 	{
+		ra_cnt++;
 		tmp = tmp->next;
 	}
+	tmp = info_a->tail;
+	while (tmp && tmp->pre && tmp->val < tmp->pre->val)
+	{
+		ra_cnt++;
+		tmp = tmp->pre;
+	}
+	if (ra_cnt > rra_cnt)
+		while (rra_cnt--)
+			rra(info_a);
+	else
+		while (ra_cnt--)
+			ra(info_a);
 }
