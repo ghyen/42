@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/10 21:46:25 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/16 20:36:59 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	main(int argc, char **argv)
 	find_pivot_and_pb(array, info_a, info_b);
 	while (info_b->size != 0)
 	{
-		optimize(info_a);
 		cal(info_a, info_b);
+		optimize(info_a);
 	}
 
 	// int i = 0;

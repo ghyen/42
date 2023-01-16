@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/10 21:51:03 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/16 20:58:32 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,7 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 			now[3]++;
 			tmp_a = tmp_a->next;
 		}
-		tmp_a = info_a->tail;
-		while (tmp_a && tmp_b->val < tmp_a->val)
-		{
-			now[4]++;
-			tmp_a = tmp_a->pre;
-		}
+		now[4] = info_a->size - now[3];
 	}
 	def_sum(&now);
 }
@@ -150,8 +145,21 @@ void	optimize(t_info *info_a)
 	tmp = info_a->head;
 	ra_cnt = 0;
 	rra_cnt = 0;
-	while (info_a->head->val > info_a->tail->val)
+	while (tmp->val > info_a->tail->val)
 	{
+		ra_cnt++;
 		tmp = tmp->next;
+		if (ra_cnt == info_a->size)
+		{
+			ra_cnt = 0;
+			break ;
+		}
 	}
+	rra_cnt = info_a->size - ra_cnt;
+	if (ra_cnt > rra_cnt)
+		while (rra_cnt--)
+			rra(info_a);
+	else
+		while (ra_cnt--)
+			ra(info_a);
 }
