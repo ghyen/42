@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/11 00:38:08 by edwin            ###   ########.fr       */
+/*   Updated: 2023/01/15 03:22:36 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 	// 	{
 	// 		now[4]--;
 	// 		if (now[4] < 0)
-	// 			now[4] = 0;
+	// 		 	now[4] = 0;
 	// 		break ;
 	// 	}
 	// 	pre = tmp_a->val;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
+#    By: edwin <edwin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 20:39:12 by gkwon             #+#    #+#              #
-#    Updated: 2023/01/10 17:49:47 by gkwon            ###   ########.fr        #
+#    Updated: 2023/01/13 13:45:38 by edwin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(LIBFT) :
 	make -C ./libft bonus
 clean :
 	make -C ./libft fclean
-	rm -f $(OBJS_MAN)
+	rm -f $(OBJS)
 fclean : clean
 	rm -f $(NAME)
 re : fclean all
