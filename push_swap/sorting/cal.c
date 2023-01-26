@@ -6,11 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/27 00:13:22 by edwin            ###   ########.fr       */
-=======
-/*   Updated: 2023/01/16 20:58:32 by gkwon            ###   ########.fr       */
->>>>>>> 0670d6ae7014e3f09f7047077eaf606bfabd6bec
+/*   Updated: 2023/01/27 01:39:30 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +65,8 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 	// 	return ;
 	while (tmp_a && tmp_b->val > tmp_a->val)
 	{
-<<<<<<< HEAD
 		now[3]++;
 		tmp_a = tmp_a->next;
-=======
-		while (tmp_a && tmp_b->val > tmp_a->val)
-		{
-			now[3]++;
-			tmp_a = tmp_a->next;
-		}
-		now[4] = info_a->size - now[3];
->>>>>>> 0670d6ae7014e3f09f7047077eaf606bfabd6bec
 	}
 	if (now[3] > 0)
 		now[4] = info_a->size - now[3];
@@ -208,12 +195,8 @@ void	optimize(t_info *info_a)
 
 	ra_cnt = 0;
 	rra_cnt = 0;
-<<<<<<< HEAD
 	tmp = info_a->head;
 	while (tmp && tmp->next && tmp->val > tmp->next->val)
-=======
-	while (tmp->val > info_a->tail->val)
->>>>>>> 0670d6ae7014e3f09f7047077eaf606bfabd6bec
 	{
 		ra_cnt++;
 		tmp = tmp->next;
@@ -223,7 +206,6 @@ void	optimize(t_info *info_a)
 			break ;
 		}
 	}
-<<<<<<< HEAD
 	tmp = info_a->tail;
 	while (tmp && tmp->pre && tmp->val < tmp->pre->val)
 	{
@@ -235,13 +217,5 @@ void	optimize(t_info *info_a)
 			rra(info_a);
 	else
 		while (ra_cnt-- > 0)
-=======
-	rra_cnt = info_a->size - ra_cnt;
-	if (ra_cnt > rra_cnt)
-		while (rra_cnt--)
-			rra(info_a);
-	else
-		while (ra_cnt--)
->>>>>>> 0670d6ae7014e3f09f7047077eaf606bfabd6bec
 			ra(info_a);
 }

@@ -6,11 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/27 01:08:54 by edwin            ###   ########.fr       */
-=======
-/*   Updated: 2023/01/16 20:36:59 by gkwon            ###   ########.fr       */
->>>>>>> 0670d6ae7014e3f09f7047077eaf606bfabd6bec
+/*   Updated: 2023/01/27 01:39:34 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +53,10 @@ int	main(int argc, char **argv)
 	find_pivot_and_pb(array, info_a, info_b);
 	while (info_b->size != 0)
 	{
-<<<<<<< HEAD
 		
 		cal(info_a, info_b);
 		if (is_sorted(info_a) == 0)
 			optimize(info_a);
-=======
-		cal(info_a, info_b);
-		optimize(info_a);
->>>>>>> 0670d6ae7014e3f09f7047077eaf606bfabd6bec
 	}
 
 	// int i = 0;
