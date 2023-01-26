@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/15 03:22:36 by edwin            ###   ########.fr       */
+/*   Updated: 2023/01/27 00:13:22 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	cal(t_info *info_a, t_info *info_b)
 		i = -1;
 		while (++i < 6)
 			now[i] = 0;
+		now[5] = INT32_MAX;
 		cal2(tmp_b, now, info_a, info_b);
 		//printf("best : %d, now : %d", best[5], now[5]);
 		a = best[5];
@@ -60,17 +61,15 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 		now[1] = tmp_b->idx;
 	else
 		now[2] = info_b->size - tmp_b->idx;
+	// if (tmp_a && tmp_a->val < tmp_b->val)
+	// 	return ;
 	while (tmp_a && tmp_b->val > tmp_a->val)
 	{
 		now[3]++;
 		tmp_a = tmp_a->next;
 	}
-	tmp_a = info_a->tail;
-	while (tmp_a && tmp_b->val > tmp_a->val)
-	{
-		now[4]++;
-		tmp_a = tmp_a->pre;
-	}
+	if (now[3] > 0)
+		now[4] = info_a->size - now[3];
 	// while (tmp_a)
 	// {
 	// 	if (tmp_b->val < tmp_a->val)
@@ -86,7 +85,7 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 	// 	{
 	// 		now[4]--;
 	// 		if (now[4] < 0)
-	// 		 	now[4] = 0;
+	// 				now[4] = 0;
 	// 		break ;
 	// 	}
 	// 	pre = tmp_a->val;
@@ -127,6 +126,7 @@ void	def_sum(int **now)
 	int	a;
 
 	i = 0;
+	(*now)[5] = 0;
 	while (++i < 4)
 	{
 		a = (*now)[i];
@@ -204,13 +204,13 @@ void	optimize(t_info *info_a)
 	tmp = info_a->tail;
 	while (tmp && tmp->pre && tmp->val < tmp->pre->val)
 	{
-		ra_cnt++;
+		rra_cnt++;
 		tmp = tmp->pre;
 	}
-	if (ra_cnt > rra_cnt)
-		while (rra_cnt--)
+	if (rra_cnt != 0 && ra_cnt > rra_cnt)
+		while (rra_cnt-- > 0)
 			rra(info_a);
 	else
-		while (ra_cnt--)
+		while (ra_cnt-- > 0)
 			ra(info_a);
 }

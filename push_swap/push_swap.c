@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/22 10:01:05 by edwin            ###   ########.fr       */
+/*   Updated: 2023/01/27 01:08:54 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 int	is_sorted(t_info *info)
 {
 	t_node	*find;
+	int		flag;
 
+	flag = 0;
 	find = info->head;
 	while (find->next)
 	{
 		if (find->val > find->next->val)
-			return (0);
+			flag++;
 		find = find->next;
 	}
+	if (flag > 2)
+		return (0);
 	return (1);
 }
 
@@ -49,8 +53,10 @@ int	main(int argc, char **argv)
 	find_pivot_and_pb(array, info_a, info_b);
 	while (info_b->size != 0)
 	{
-		optimize(info_a);
+		
 		cal(info_a, info_b);
+		if (is_sorted(info_a) == 0)
+			optimize(info_a);
 	}
 
 	// int i = 0;
