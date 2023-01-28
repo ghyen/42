@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/16 20:58:32 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/26 17:43:17 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ void	optimize(t_info *info_a)
 			break ;
 		}
 	}
+	//if (tmp->val < info_a->tail->val && )
+	//{
+
+	//}
 	rra_cnt = info_a->size - ra_cnt;
 	if (ra_cnt > rra_cnt)
 		while (rra_cnt--)

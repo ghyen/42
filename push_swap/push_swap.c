@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/16 20:36:59 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:01:18 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(int argc, char **argv)
 	while (info_b->size != 0)
 	{
 		cal(info_a, info_b);
-		optimize(info_a);
+		if (is_sorted(info_a) == 0)
+			optimize(info_a);
 	}
 
 	// int i = 0;
