@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/29 01:07:18 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/29 21:08:58 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void				sa(t_info *info);
 void				sb(t_info *info);
 void				ss(t_info *info_a, t_info *info_b);
 void				swap(t_info *info);
-int					*parsing(char **argv, int size, t_info *info_a);
+int					*parsing(char **argv, int size, t_info *info_a,
+						t_info *info_b);
 void				ft_error(void);
 int					is_sorted(t_info *info);
 int					valid_dup(int *array, long find, int len);
@@ -50,7 +51,7 @@ void				rotate(t_info *info);
 void				modify_idx(t_info *info, int modify);
 void				find_pivot_and_pb(int *array, t_info *info_a,
 						t_info *info_b);
-int	*init_cal(void);
+int					*init_cal(void);
 //	push
 void				pa(t_info **info_a, t_info **info_b);
 void				pb(t_info **info_a, t_info **info_b);
@@ -67,8 +68,9 @@ void				rrb(t_info *info);
 void				rrr(t_info *info_a, t_info *info_b);
 
 //	cal
-void	cal(t_info *info_a, t_info *info_b);
-void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b);
-void	def_sum(int **now);
-void	do_op(int *best, t_info *info_a, t_info *info_b);
-void	optimize(t_info *info_a);
+void				cal(t_info *info_a, t_info *info_b);
+void				cal2(t_node *tmp_b, int *now, t_info *info_a,
+						t_info *info_b);
+void				def_sum(int **now);
+void				do_op(int *best, t_info *info_a, t_info *info_b);
+void				optimize(t_info *info_a);

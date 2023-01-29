@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:48:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/29 18:13:44 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/29 21:41:44 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,18 @@ int	*bubble_sort(int *arr, int size)
 	return (arr);
 }
 
-int	*parsing(char **argv, int size, t_info *info_a)
+int *hard_coding(t_info *info_a, t_info *info_b)
+{
+	while (info_a->size > 3)
+		pb(info_a, info_b);
+	if (info_a->head->val > info_a->head->next->val)
+		sa(info_a);
+	if (info_a->head->val > info_a->tail->val)
+		ra(info_a);
+	return (0);
+}
+
+int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
 {
 	int		cnt;
 	int		*array;
@@ -86,6 +97,8 @@ int	*parsing(char **argv, int size, t_info *info_a)
 		argv++;
 	}
 	init_stack(size, array, &info_a);
+	if (info_a->size < 6)
+		return (hard_coding(info_a, info_b));
 	if (!is_sorted(info_a))
 		return (bubble_sort(array, size));
 	else

@@ -6,12 +6,12 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/29 17:59:47 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/29 21:17:36 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-#include <stdio.h>
+
 void	cal(t_info *info_a, t_info *info_b)
 {
 	int		loop;
@@ -19,8 +19,6 @@ void	cal(t_info *info_a, t_info *info_b)
 	int		best[6];
 	int		now[6];
 	int		i;
-	int		a;
-	int		b;
 
 	loop = 0;
 	while (loop < 5)
@@ -35,9 +33,6 @@ void	cal(t_info *info_a, t_info *info_b)
 			now[i] = 0;
 		now[5] = INT32_MAX;
 		cal2(tmp_b, now, info_a, info_b);
-		//printf("best : %d, now : %d", best[5], now[5]);
-		a = best[5];
-		b = now[5];
 		if (best[5] > now[5])
 		{
 			i = -1;
@@ -87,18 +82,12 @@ void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 
 	pre = INT32_MIN;
 	tmp_a = info_a->head;
-	// 0->index 1->rb 2->rrb 3->ra 4->rra 5->sum
 	now[0] = tmp_b->idx;
 	if (tmp_b->idx < (unsigned int)(info_b->size / 2))
 		now[1] = tmp_b->idx;
 	else
 		now[2] = info_b->size - tmp_b->idx;
 	now[3] = find_index(info_a, tmp_b->val);
-	//while (tmp_a && !is_be_sorted(tmp_a, tmp_b->val))
-	//{
-	//	now[3]++;
-	//	tmp_a = tmp_a->next;
-	//}
 	if (now[3] > 0)
 		now[4] = info_a->size - now[3];
 	def_sum(&now);
@@ -173,35 +162,52 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 	}
 }
 
-void	optimize(t_info *info_a)
+int	get_max_idx(t_info *info_a)
 {
-	int		ra_cnt;
-	int		rra_cnt;
+	int		i;
+	int		idx;
+	int		max;
 	t_node	*tmp;
 
-	ra_cnt = 0;
-	rra_cnt = 0;
 	tmp = info_a->head;
-	while (tmp && tmp->next && tmp->val > tmp->next->val)
+	max = INT32_MIN;
+	i = 0;
+	idx = 0;
+	while (i < info_a->size)
 	{
-		ra_cnt++;
-		tmp = tmp->next;
-		if (ra_cnt == info_a->size)
+		if (max < tmp->val)
 		{
-			ra_cnt = 0;
-			break ;
+			max = tmp->val;
+			idx = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (idx);
+}
+
+void	optimize(t_info *info_a)
+{
+	int	cnt;
+
+	cnt = 0;
+	cnt = get_max_idx(info_a);
+	if (cnt > info_a->size / 2)
+	{
+		cnt = info_a->size - cnt - 1;
+		while (cnt)
+		{
+			rra(info_a);
+			cnt--;
 		}
 	}
-	tmp = info_a->tail;
-	while (tmp && tmp->pre && tmp->val < tmp->pre->val)
-	{
-		rra_cnt++;
-		tmp = tmp->pre;
-	}
-	if (rra_cnt != 0 && ra_cnt > rra_cnt)
-		while (rra_cnt-- > 0)
-			rra(info_a);
 	else
-		while (ra_cnt-- > 0)
+	{
+		cnt++;
+		while (cnt)
+		{
 			ra(info_a);
+			cnt--;
+		}
+	}
 }
