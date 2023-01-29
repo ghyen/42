@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:48:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/09 20:23:22 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/29 18:13:44 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	find_pivot_and_pb(int *array, t_info *info_a, t_info *info_b)
 	loop = ((info_a->size) / 3 * 2);
 	p1 = array[(info_a->size / 3) - 1];
 	p2 = array[((info_a->size / 3) * 2) - 1];
-	printf("p1 = %d, p2 = %d \n",p1,p2);
+	//printf("p1 = %d, p2 = %d \n",p1,p2);
 	while (loop)
 	{
 		if (info_a->head->val <= p2)

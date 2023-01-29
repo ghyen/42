@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:08:26 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/09 19:24:29 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/26 23:36:50 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	rrb(t_info *info)
 	if (info->size < 2)
 		return ;
 	reverse_rotate(info);
-	write(1, "rra\n", 4);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_info *info_a, t_info *info_b)

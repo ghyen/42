@@ -6,7 +6,7 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 20:39:12 by gkwon             #+#    #+#              #
-#    Updated: 2023/01/16 21:12:09 by gkwon            ###   ########.fr        #
+#    Updated: 2023/01/29 18:07:49 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,13 @@ SRCS = push_swap.c\
 			utils/valid_check.c
 				
 OBJS = $(SRCS:.c=.o)
-NAME = push_swap.a
+NAME = push_swap
 
 all : $(NAME)
 $(NAME) : $(LIBFT) $(OBJS)
 	cp $(LIBFT) $(NAME)
 	ar -scr $@ $(OBJS)
+	cc ${CFLAGS} ${SRCS} $(LIBFT) -o ${NAME}
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 $(LIBFT) :

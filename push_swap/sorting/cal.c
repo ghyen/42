@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/26 17:43:17 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/29 17:59:47 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	cal(t_info *info_a, t_info *info_b)
 		i = -1;
 		while (++i < 6)
 			now[i] = 0;
+		now[5] = INT32_MAX;
 		cal2(tmp_b, now, info_a, info_b);
 		//printf("best : %d, now : %d", best[5], now[5]);
 		a = best[5];
@@ -48,25 +49,58 @@ void	cal(t_info *info_a, t_info *info_b)
 	do_op(best, info_a, info_b);
 }
 
+int	find_index(t_info *info_a, int val)
+{
+	t_node	*tmp;
+	int		max;
+	int		cnt;
+	int		max_idx;
+
+	cnt = 0;
+	max = INT32_MIN;
+	tmp = info_a->head;
+	if (info_a->size < 2)
+		return (0);
+	while (1)
+	{
+		if (max < tmp->val)
+		{
+			max = tmp->val;
+			max_idx = cnt;
+		}
+		if (tmp->next && tmp->val < val && tmp->next->val > val)
+			return (cnt + 1);
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
+		cnt++;
+	}
+	if (tmp->val < val && info_a->head->val > val)
+		return (0);
+	return (max_idx + 1);
+}
+
 void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 {
 	t_node	*tmp_a;
+	int		pre;
 
+	pre = INT32_MIN;
 	tmp_a = info_a->head;
+	// 0->index 1->rb 2->rrb 3->ra 4->rra 5->sum
 	now[0] = tmp_b->idx;
 	if (tmp_b->idx < (unsigned int)(info_b->size / 2))
 		now[1] = tmp_b->idx;
 	else
 		now[2] = info_b->size - tmp_b->idx;
-	if (info_a->head && info_a->head->val < tmp_b->val)
-	{
-		while (tmp_a && tmp_b->val > tmp_a->val)
-		{
-			now[3]++;
-			tmp_a = tmp_a->next;
-		}
+	now[3] = find_index(info_a, tmp_b->val);
+	//while (tmp_a && !is_be_sorted(tmp_a, tmp_b->val))
+	//{
+	//	now[3]++;
+	//	tmp_a = tmp_a->next;
+	//}
+	if (now[3] > 0)
 		now[4] = info_a->size - now[3];
-	}
 	def_sum(&now);
 }
 
@@ -76,6 +110,7 @@ void	def_sum(int **now)
 	int	a;
 
 	i = 0;
+	(*now)[5] = 0;
 	while (++i < 4)
 	{
 		a = (*now)[i];
@@ -109,13 +144,11 @@ void	def_sum(int **now)
 void	do_op(int *best, t_info *info_a, t_info *info_b)
 {
 	int	i;
-	int	pa_flag;
 
-	pa_flag = 0;
 	i = 0;
 	while (++i < 5)
 	{
-		if (i == 3 && best[i] == 0)
+		if (i == 3 && best[3] == 0 && best[4] == 0)
 			pa(&info_a, &info_b);
 		while (best[i] > 0)
 		{
@@ -125,12 +158,16 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 				rrb(info_b);
 			else if (i == 3)
 			{
+				while (best[i]--)
+					ra(info_a);
 				pa(&info_a, &info_b);
-				pa_flag = 1;
-				ra(info_a);
 			}
 			else if (i == 4)
-				rra(info_a);
+			{
+				while (best[i]--)
+					rra(info_a);
+				pa(&info_a, &info_b);
+			}
 			best[i]--;
 		}
 	}
@@ -142,10 +179,10 @@ void	optimize(t_info *info_a)
 	int		rra_cnt;
 	t_node	*tmp;
 
-	tmp = info_a->head;
 	ra_cnt = 0;
 	rra_cnt = 0;
-	while (tmp->val > info_a->tail->val)
+	tmp = info_a->head;
+	while (tmp && tmp->next && tmp->val > tmp->next->val)
 	{
 		ra_cnt++;
 		tmp = tmp->next;
@@ -155,15 +192,16 @@ void	optimize(t_info *info_a)
 			break ;
 		}
 	}
-	//if (tmp->val < info_a->tail->val && )
-	//{
-
-	//}
-	rra_cnt = info_a->size - ra_cnt;
-	if (ra_cnt > rra_cnt)
-		while (rra_cnt--)
+	tmp = info_a->tail;
+	while (tmp && tmp->pre && tmp->val < tmp->pre->val)
+	{
+		rra_cnt++;
+		tmp = tmp->pre;
+	}
+	if (rra_cnt != 0 && ra_cnt > rra_cnt)
+		while (rra_cnt-- > 0)
 			rra(info_a);
 	else
-		while (ra_cnt--)
+		while (ra_cnt-- > 0)
 			ra(info_a);
 }

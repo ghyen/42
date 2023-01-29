@@ -9,7 +9,7 @@
                 "type": "lldb",
                 "request": "launch",
                 "program": "${workspaceFolder}/a.out",
-                "args": ["9 8 7 6 5 4 3 2 1"],
+                "args": ["330 -266 350 845 980 -949"],
                 "cwd": "${fileDirname}"   
         }
     ]
