@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/29 21:09:02 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/30 17:06:42 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_error(void)
 	exit(1);
 }
 
-void	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_info	*info_a;
 	t_info	*info_b;
@@ -49,7 +49,7 @@ void	main(int argc, char **argv)
 		ft_error();
 	array = parsing(++argv, info_a->size, info_a, info_b);
 	if (!array)
-		return ;
+		return (0);
 	find_pivot_and_pb(array, info_a, info_b);
 	while (info_b->size != 0)
 		cal(info_a, info_b);
