@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/30 17:06:42 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 15:13:28 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,25 @@ void	ft_error(void)
 	exit(1);
 }
 
+void	free_all(t_info **info_a, t_info **info_b)
+{
+	t_node	*loop;
+	t_node	*fre;
+	int		i;
+
+	i = 0;
+	loop = (*info_a)->head;
+	free(*info_b);
+	while (i < (*info_a)->size)
+	{
+		fre = loop;
+		loop = loop->next;
+		free(fre);
+		i++;
+	}
+	free(*info_a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	*info_a;
@@ -54,4 +73,7 @@ int	main(int argc, char **argv)
 	while (info_b->size != 0)
 		cal(info_a, info_b);
 	optimize(info_a);
+	free(array);
+	free_all(&info_a, &info_b);
+	system("leaks a.out");
 }

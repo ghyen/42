@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/01/09 21:46:08 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 14:13:45 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,37 @@ int	*init_cal(void)
 		ret[loop] = 0;
 	ret[5] = INT32_MAX;
 	return (ret);
+}
+
+int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
+{
+	int		cnt;
+	int		*array;
+	char	**str;
+
+	array = malloc(sizeof(int) * size);
+	cnt = 0;
+	while (*argv)
+	{
+		str = ft_split(*argv, ' ');
+		while (str[cnt])
+		{
+			array[cnt] = ft_atoi(str[cnt]);
+			if (!valid_dup(array, (long)array[cnt], cnt + 1))
+			{
+				free(str[cnt]);
+				ft_error();
+			}
+			free(str[cnt]);
+			cnt++;
+		}
+		argv++;
+		free(str);
+	}
+	init_stack(size, array, &info_a);
+	if (info_a->size < 6)
+		return (hard_coding(info_a, info_b));
+	if (!is_sorted(info_a))
+		return (bubble_sort(array, size));
+	return (array);
 }

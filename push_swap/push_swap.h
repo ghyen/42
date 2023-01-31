@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/29 21:08:58 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 13:09:31 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void				pb(t_info **info_a, t_info **info_b);
 void				rb(t_info *info);
 void				ra(t_info *info);
 void				modify_idx(t_info *info, int modify);
-#endif
 
 //	rotate2
 void				rra(t_info *info);
@@ -74,3 +73,9 @@ void				cal2(t_node *tmp_b, int *now, t_info *info_a,
 void				def_sum(int **now);
 void				do_op(int *best, t_info *info_a, t_info *info_b);
 void				optimize(t_info *info_a);
+
+// sort
+int					*hard_coding(t_info *info_a, t_info *info_b);
+int					*bubble_sort(int *arr, int size);
+
+#endif
