@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   valid_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/06 16:59:28 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 20:48:31 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	valid_dup(int *array, long find, int len)
 	i = 0;
 	while (i < len)
 	{
-		if (find > INT32_MAX || find < INT32_MIN)
+		if (find > INT_MAX || find < INT_MIN)
 			return (0);
 		if (array[i++] == find)
 		{
@@ -60,4 +60,28 @@ int	valid_dup(int *array, long find, int len)
 		}
 	}
 	return (1);
+}
+
+int	get_max_idx(t_info *info_a)
+{
+	int		i;
+	int		idx;
+	int		max;
+	t_node	*tmp;
+
+	tmp = info_a->head;
+	max = INT_MIN;
+	i = 0;
+	idx = 0;
+	while (i < info_a->size)
+	{
+		if (max < tmp->val)
+		{
+			max = tmp->val;
+			idx = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (idx);
 }

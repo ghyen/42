@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:48:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/31 14:53:46 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 20:57:03 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	find_pivot_and_pb(int *array, t_info *info_a, t_info *info_b)
 	loop = info_a->size;
 	while (loop--)
 		pb(&info_a, &info_b);
-	//free(array);
 }
 
 int	*bubble_sort(int *arr, int size)
@@ -71,7 +70,7 @@ int	find_min(t_info *info_a)
 	int		idx;
 
 	tmp = info_a->head;
-	min = INT32_MAX;
+	min = INT_MAX;
 	while (tmp)
 	{
 		if (min > tmp->val)

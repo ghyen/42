@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/01/31 14:13:45 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 20:07:34 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,48 +55,31 @@ void	init_stack(int size, int *array, t_info **info)
 	(*info)->tail = pre_node;
 }
 
-int	*init_cal(void)
-{
-	int	*ret;
-	int	loop;
-
-	loop = 5;
-	ret = malloc(sizeof(int) * 6);
-	while (loop--)
-		ret[loop] = 0;
-	ret[5] = INT32_MAX;
-	return (ret);
-}
-
 int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
 {
 	int		cnt;
 	int		*array;
 	char	**str;
+	int		i;
 
+	cnt = -1;
 	array = malloc(sizeof(int) * size);
-	cnt = 0;
-	while (*argv)
+	while (*(++argv))
 	{
+		i = -1;
 		str = ft_split(*argv, ' ');
-		while (str[cnt])
+		while (str[++i])
 		{
-			array[cnt] = ft_atoi(str[cnt]);
+			array[++cnt] = ft_atoi(str[i]);
 			if (!valid_dup(array, (long)array[cnt], cnt + 1))
-			{
-				free(str[cnt]);
 				ft_error();
-			}
-			free(str[cnt]);
-			cnt++;
+			free(str[i]);
 		}
-		argv++;
 		free(str);
 	}
 	init_stack(size, array, &info_a);
 	if (info_a->size < 6)
 		return (hard_coding(info_a, info_b));
-	if (!is_sorted(info_a))
+	else
 		return (bubble_sort(array, size));
-	return (array);
 }

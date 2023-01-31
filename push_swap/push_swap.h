@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/31 13:09:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/01/31 20:48:31 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "./libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_node
 {
@@ -51,7 +54,6 @@ void				rotate(t_info *info);
 void				modify_idx(t_info *info, int modify);
 void				find_pivot_and_pb(int *array, t_info *info_a,
 						t_info *info_b);
-int					*init_cal(void);
 //	push
 void				pa(t_info **info_a, t_info **info_b);
 void				pb(t_info **info_a, t_info **info_b);
@@ -72,7 +74,6 @@ void				cal2(t_node *tmp_b, int *now, t_info *info_a,
 						t_info *info_b);
 void				def_sum(int **now);
 void				do_op(int *best, t_info *info_a, t_info *info_b);
-void				optimize(t_info *info_a);
 
 // sort
 int					*hard_coding(t_info *info_a, t_info *info_b);
