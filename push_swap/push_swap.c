@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/31 20:45:22 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/06 19:29:35 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	is_sorted(t_info *info)
 
 void	ft_error(void)
 {
-	printf("error");
+	write(1, "Error\n", 6);
 	exit(1);
 }
 
@@ -103,4 +103,5 @@ int	main(int argc, char **argv)
 	optimize(info_a);
 	free(array);
 	free_all(&info_a, &info_b);
+	return (0);
 }

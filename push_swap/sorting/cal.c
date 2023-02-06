@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/31 20:56:15 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/06 19:14:52 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ int	find_index(t_info *info_a, int val)
 
 void	cal2(t_node *tmp_b, int *now, t_info *info_a, t_info *info_b)
 {
-	t_node	*tmp_a;
-	int		pre;
-
-	pre = INT_MIN;
-	tmp_a = info_a->head;
 	now[0] = tmp_b->idx;
 	if (tmp_b->idx < (unsigned int)(info_b->size / 2))
 		now[1] = tmp_b->idx;
@@ -125,7 +120,12 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 		{
 			if (i == 1)
 				rb(info_b);
-			else if (i == 2)
+			else if (i == 2 && best[4] > 0)
+			{
+				rrr(info_a, info_b);
+				best[4]--;
+			}
+			else if (i == 2 && best[4] == 0)
 				rrb(info_b);
 			else if (i == 3 || i == 4)
 			{

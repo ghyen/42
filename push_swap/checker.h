@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 14:13:32 by gkwon            ###   ########.fr       */
+/*   Created: 2023/02/06 11:41:57 by gkwon             #+#    #+#             */
+/*   Updated: 2023/02/06 19:29:31 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include "./libft/libft.h"
+# include "./get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -35,20 +36,13 @@ typedef struct s_info
 	struct s_node	*tail;
 }					t_info;
 
-int					ft_atoi(const char *str);
-void				init_info(t_info **t);
-t_node				*init_node(int val, unsigned int idx);
-void				init_stack(int argc, int *argv, t_info **info);
+void				ft_error(void);
 int					valid_digit(char **argv, int *size);
+int					is_sorted(t_info *info);
+void				init_info(t_info **t);
 int					*parsing(char **argv, int size, t_info *info_a,
 						t_info *info_b);
 void				ft_error(void);
-int					is_sorted(t_info *info);
-int					valid_dup(int *array, long find, int len);
-int					get_max_idx(t_info *info_a);
-void				modify_idx(t_info *info, int modify);
-void				find_pivot_and_pb(int *array, t_info *info_a,
-						t_info *info_b);
 //	swap
 void				sa(t_info *info);
 void				sb(t_info *info);
@@ -68,13 +62,6 @@ void				rra(t_info *info);
 void				rrb(t_info *info);
 void				rrr(t_info *info_a, t_info *info_b);
 void				reverse_rotate(t_info *info);
-//	cal
-void				cal(t_info *info_a, t_info *info_b);
-void				cal2(t_node *tmp_b, int *now, t_info *info_a,
-						t_info *info_b);
-void				def_sum(int **now);
-void				do_op(int *best, t_info *info_a, t_info *info_b);
-
 // sort
 int					*hard_coding(t_info *info_a, t_info *info_b);
 int					*bubble_sort(int *arr, int size);
