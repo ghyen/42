@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/02/06 20:18:44 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/06 21:35:19 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ void	init_stack(int size, int *array, t_info **info)
 int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
 {
 	int		cnt;
-	int	*array;
+	int		*array;
 	char	**str;
 	int		i;
+	long	tmp;
 
-	cnt = -1;
+	cnt = 0;
 	array = malloc(sizeof(int) * size);
 	while (*(++argv))
 	{
@@ -70,9 +71,11 @@ int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
 		str = ft_split(*argv, ' ');
 		while (str[++i])
 		{
-			array[++cnt] = ft_atoi(str[i]);
-			if (!valid_dup(array, (long)array[cnt], cnt + 1))
+			tmp = ft_atoi(str[i]);
+			if (!valid_dup(array, tmp, cnt + 1))
 				ft_error();
+			else
+				array[cnt++] = tmp;
 			free(str[i]);
 		}
 		free(str);

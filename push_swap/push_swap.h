@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 19:50:15 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/06 21:07:39 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_info
 	struct s_node	*tail;
 }					t_info;
 
-int					ft_atoi(const char *str);
+long					ft_atoi(const char *str);
 void				init_info(t_info **t);
 t_node				*init_node(int val, unsigned int idx);
 void				init_stack(int argc, int *argv, t_info **info);

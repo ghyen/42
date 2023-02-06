@@ -8,8 +8,8 @@
             "name": "(lldb) 시작",
                 "type": "lldb",
                 "request": "launch",
-                "program": "${workspaceFolder}/a.out",
-                "args": ["330 -266 350 845 980 -949"],
+                "program": "${workspaceFolder}/push_swap",
+                "args": ["2147483649", "1", "2"],
                 "cwd": "${fileDirname}"   
         }
     ]
