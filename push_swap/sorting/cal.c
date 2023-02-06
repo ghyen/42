@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 19:14:52 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/06 20:44:15 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	def_sum(int **now)
 
 	i = 0;
 	(*now)[5] = 0;
-	while (++i < 4)
+	while (++i <= 4)
 	{
 		if (i == 3)
 		{
@@ -120,12 +120,7 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 		{
 			if (i == 1)
 				rb(info_b);
-			else if (i == 2 && best[4] > 0)
-			{
-				rrr(info_a, info_b);
-				best[4]--;
-			}
-			else if (i == 2 && best[4] == 0)
+			else if (i == 2)
 				rrb(info_b);
 			else if (i == 3 || i == 4)
 			{
