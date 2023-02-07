@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 20:57:46 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:53:55 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ int	valid_digit(char **argv, int *size)
 	int	j;
 
 	i = 0;
+	if (!argv[1][0])
+		return (0);
 	while (argv[++i])
 	{
 		j = 0;
 		while (argv[i][j])
 		{
-			if (argv[i][j] == '-')
+			while (argv[i][j] == '-' || argv[i][j] == ' ')
 				j++;
 			if (!ft_isdigit(argv[i][j]))
 				return (0);
 			while (ft_isdigit(argv[i][j]))
 				j++;
-			if (argv[i][j] != 0 && !ft_isdigit(argv[i][j]))
-				return (0);
 			if ((*size)++ >= 0 && argv[i][j] == ' ')
 				j++;
 		}

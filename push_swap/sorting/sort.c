@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:48:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 21:24:15 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:47:31 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ void	pb_until_asize3(t_info *info_a, t_info *info_b)
 
 int	*hard_coding(t_info *info_a, t_info *info_b)
 {
-	if (info_a->size == 1)
-		return (0);
 	pb_until_asize3(info_a, info_b);
 	if (find_min(info_a) == 1 && info_a->head->val > info_a->tail->val)
 		ra(info_a);

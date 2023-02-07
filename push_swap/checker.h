@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:41:57 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 19:29:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:29:43 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_info
 	struct s_node	*tail;
 }					t_info;
 
+int					check_string(t_info *info_a, t_info *info_b, char *string);
 void				ft_error(void);
 int					valid_digit(char **argv, int *size);
 int					is_sorted(t_info *info);

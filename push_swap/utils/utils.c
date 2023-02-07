@@ -6,11 +6,11 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:30:10 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 14:30:42 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:44:14 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	optimize(t_info *info_a)
 {

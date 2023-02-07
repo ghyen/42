@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/02/07 13:10:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:43:40 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ void	init_stack(int size, int *array, t_info **info)
 	(*info)->tail = pre_node;
 }
 
-int	*init_and_redirectino(t_info *info_a, t_info *info_b, int *array)
+int	*init_and_redirection(t_info *info_a, t_info *info_b, int *array)
 {
 	init_stack(info_a->size, array, &info_a);
+	if (is_sorted(info_a))
+		exit(0);
 	if (info_a->size < 6)
 		return (hard_coding(info_a, info_b));
 	else
@@ -87,5 +89,5 @@ int	*parsing(int *array, char **argv, t_info *info_a, t_info *info_b)
 		}
 		free(str);
 	}
-	return (init_and_redirectino(info_a, info_b, array));
+	return (init_and_redirection(info_a, info_b, array));
 }

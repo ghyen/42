@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 14:32:16 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:42:14 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int					get_max_idx(t_info *info_a);
 void				modify_idx(t_info *info, int modify);
 void				find_pivot_and_pb(int *array, t_info *info_a,
 						t_info *info_b);
-int					*init_and_redirectino(t_info *info_a, t_info *info_b,
+int					*init_and_redirection(t_info *info_a, t_info *info_b,
 						int *array);
 void				optimize(t_info *info_a);
 void				free_all(t_info **info_a, t_info **info_b);

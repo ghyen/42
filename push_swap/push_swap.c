@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 14:31:03 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:17:07 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	main(int argc, char **argv)
 	if (!valid_digit(argv, &info_a->size))
 		ft_error();
 	array = malloc(sizeof(int) * info_a->size);
-	parsing(array, argv, info_a, info_b);
 	if (!array)
+		return (0);
+	if (!parsing(array, argv, info_a, info_b))
 		return (0);
 	find_pivot_and_pb(array, info_a, info_b);
 	while (info_b->size != 0)
