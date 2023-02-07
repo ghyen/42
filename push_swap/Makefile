@@ -6,7 +6,7 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 20:39:12 by gkwon             #+#    #+#              #
-#    Updated: 2023/01/29 18:07:49 by gkwon            ###   ########.fr        #
+#    Updated: 2023/02/07 14:31:05 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,24 +21,51 @@ SRCS = push_swap.c\
 			sorting/rotate2.c\
 			sorting/swap.c\
 			utils/init.c\
-			utils/valid_check.c
-				
+			utils/valid_check.c\
+
+BONUS_SRCS = checker.c\
+				get_next_line/get_next_line.c\
+				get_next_line/get_next_line_utils.c\
+				main_bonus.c\
+				sorting/cal.c\
+	     		sorting/rotate.c\
+		 		sorting/sort.c\
+				sorting/push.c\
+				sorting/rotate2.c\
+				sorting/swap.c\
+				utils/init.c\
+				utils/valid_check.c\
+
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 OBJS = $(SRCS:.c=.o)
 NAME = push_swap
+BOUNS_NAME = checker
 
 all : $(NAME)
+
 $(NAME) : $(LIBFT) $(OBJS)
 	cp $(LIBFT) $(NAME)
 	ar -scr $@ $(OBJS)
-	cc ${CFLAGS} ${SRCS} $(LIBFT) -o ${NAME}
+	$(CC) ${CFLAGS} ${SRCS} $(LIBFT) -o ${NAME}
+
+$(BONUS_NAME) : $(BONUS_OBJS)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS)
+
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
+
 $(LIBFT) :
 	make -C ./libft bonus
+
+bonus : $(BONUS_NAME)
+
 clean :
 	make -C ./libft fclean
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
+
 fclean : clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
+
 re : fclean all
-.PHONY: all re fclean clean
+
+.PHONY: all re fclean clean bonus

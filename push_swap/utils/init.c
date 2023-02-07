@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/02/06 21:35:19 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 13:10:31 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,23 @@ void	init_stack(int size, int *array, t_info **info)
 	(*info)->tail = pre_node;
 }
 
-int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
+int	*init_and_redirectino(t_info *info_a, t_info *info_b, int *array)
+{
+	init_stack(info_a->size, array, &info_a);
+	if (info_a->size < 6)
+		return (hard_coding(info_a, info_b));
+	else
+		return (bubble_sort(array, info_a->size));
+}
+
+int	*parsing(int *array, char **argv, t_info *info_a, t_info *info_b)
 {
 	int		cnt;
-	int		*array;
 	char	**str;
 	int		i;
 	long	tmp;
 
 	cnt = 0;
-	array = malloc(sizeof(int) * size);
 	while (*(++argv))
 	{
 		i = -1;
@@ -80,9 +87,5 @@ int	*parsing(char **argv, int size, t_info *info_a, t_info *info_b)
 		}
 		free(str);
 	}
-	init_stack(size, array, &info_a);
-	if (info_a->size < 6)
-		return (hard_coding(info_a, info_b));
-	else
-		return (bubble_sort(array, size));
+	return (init_and_redirectino(info_a, info_b, array));
 }

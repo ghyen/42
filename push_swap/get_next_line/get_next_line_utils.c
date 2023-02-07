@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:52:53 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/12 17:43:30 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 13:24:26 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_free(t_backup *lst, t_backup **head)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2, unsigned int s1l,
+char	*ft_strjoin_gnl(char const *s1, char const *s2, unsigned int s1l,
 		unsigned int s2l)
 {
 	char	*p;
@@ -81,7 +81,7 @@ char	*ft_strjoin(char const *s1, char const *s2, unsigned int s1l,
 	return (p);
 }
 
-t_backup	*ft_lstnew(int fd)
+t_backup	*ft_lstnew_gnl(int fd)
 {
 	t_backup	*new_list;
 

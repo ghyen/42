@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:02 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/09 23:04:59 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 13:28:10 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_backup	*find_fd(t_backup **head, int fd)
 	at = *head;
 	if (!*head)
 	{
-		*head = ft_lstnew(fd);
+		*head = ft_lstnew_gnl(fd);
 		if (!*head)
 			return (0);
 		return (*head);
@@ -53,7 +53,7 @@ t_backup	*find_fd(t_backup **head, int fd)
 			break ;
 		if (!at->next)
 		{
-			at->next = ft_lstnew(fd);
+			at->next = ft_lstnew_gnl(fd);
 			if (!at->next)
 				return (0);
 		}	
@@ -101,7 +101,7 @@ char	*ft_read(ssize_t size, t_backup *lst, t_backup **head, int fd)
 		if (size == -1)
 			return (ft_free(lst, head));
 		buff[size] = 0;
-		lst->content = ft_strjoin(lst->content, buff, 0, 0);
+		lst->content = ft_strjoin_gnl(lst->content, buff, 0, 0);
 		if (!lst->content)
 			return (ft_free(lst, head));
 		if (lst->content[0] == 0)

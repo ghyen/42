@@ -6,7 +6,7 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:36:30 by gkwon             #+#    #+#              #
-#    Updated: 2023/02/06 21:26:04 by gkwon            ###   ########.fr        #
+#    Updated: 2023/02/07 14:20:50 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ OBJS_MAN	=	$(SRCS_MAN:.c=.o)
 OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 CC	=	cc
 RM	=	rm -f
-CFLAGS	=	-Wall -Wextra -Werror  -std=c99 -g
+CFLAGS	=	-Wall -Wextra -Werror  -std=c99
 
 $(NAME): all
 

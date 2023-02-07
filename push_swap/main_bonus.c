@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 20:49:19 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 14:31:03 by gkwon            ###   ########.fr       */
+/*   Created: 2023/02/07 14:25:45 by gkwon             #+#    #+#             */
+/*   Updated: 2023/02/07 14:26:11 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 int	main(int argc, char **argv)
 {
 	t_info	*info_a;
 	t_info	*info_b;
-	int		*array;
+	char	*tmp;
 
 	if (argc == 1)
 		exit(0);
@@ -24,15 +24,12 @@ int	main(int argc, char **argv)
 	init_info(&info_b);
 	if (!valid_digit(argv, &info_a->size))
 		ft_error();
-	array = malloc(sizeof(int) * info_a->size);
-	parsing(array, argv, info_a, info_b);
-	if (!array)
-		return (0);
-	find_pivot_and_pb(array, info_a, info_b);
-	while (info_b->size != 0)
-		cal(info_a, info_b);
-	optimize(info_a);
-	free(array);
-	free_all(&info_a, &info_b);
-	return (0);
+	parsing(argv, info_a->size, info_a, info_b);
+	tmp = get_next_line(0);
+	if (check_string(info_a, info_b, tmp) == 0)
+		ft_error();
+	if (info_b->size == 0 && is_sorted(info_a))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }

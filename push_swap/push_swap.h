@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 21:07:39 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:32:16 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ typedef struct s_info
 	struct s_node	*tail;
 }					t_info;
 
-long					ft_atoi(const char *str);
+long				ft_atoi(const char *str);
 void				init_info(t_info **t);
 t_node				*init_node(int val, unsigned int idx);
 void				init_stack(int argc, int *argv, t_info **info);
 int					valid_digit(char **argv, int *size);
-int					*parsing(char **argv, int size, t_info *info_a,
+int					*parsing(int *array, char **argv, t_info *info_a,
 						t_info *info_b);
 void				ft_error(void);
 int					is_sorted(t_info *info);
@@ -49,6 +49,10 @@ int					get_max_idx(t_info *info_a);
 void				modify_idx(t_info *info, int modify);
 void				find_pivot_and_pb(int *array, t_info *info_a,
 						t_info *info_b);
+int					*init_and_redirectino(t_info *info_a, t_info *info_b,
+						int *array);
+void				optimize(t_info *info_a);
+void				free_all(t_info **info_a, t_info **info_b);
 //	swap
 void				sa(t_info *info);
 void				sb(t_info *info);
