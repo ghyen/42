@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:24:28 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/06 20:44:15 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:11:57 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,20 @@ void	do_op(int *best, t_info *info_a, t_info *info_b)
 	while (++i < 5)
 	{
 		if (i == 3 && best[3] == 0 && best[4] == 0)
-			pa(&info_a, &info_b);
+			pa(1, &info_a, &info_b);
 		while (best[i] > 0)
 		{
 			if (i == 1)
-				rb(info_b);
+				rb(1, info_b);
 			else if (i == 2)
-				rrb(info_b);
+				rrb(1, info_b);
 			else if (i == 3 || i == 4)
 			{
 				while (i == 3 && best[i]--)
-					ra(info_a);
+					ra(1, info_a);
 				while (i == 4 && best[i]--)
-					rra(info_a);
-				pa(&info_a, &info_b);
+					rra(1, info_a);
+				pa(1, &info_a, &info_b);
 			}
 			best[i]--;
 		}

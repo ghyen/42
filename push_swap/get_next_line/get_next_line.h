@@ -6,14 +6,14 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:09 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 13:23:54 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 13:33:51 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1
 # define MY_OPEN_MAX 49152
 # include <stdlib.h>
 # include <unistd.h>

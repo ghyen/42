@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:48:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 15:47:31 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:12:58 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	find_pivot_and_pb(int *array, t_info *info_a, t_info *info_b)
 	{
 		if (info_a->head->val <= p2)
 		{
-			pb(&info_a, &info_b);
+			pb(1, &info_a, &info_b);
 			if (info_b->head->val <= p1)
-				rb(info_b);
+				rb(1, info_b);
 			loop--;
 		}
 		else
-			ra(info_a);
+			ra(1, info_a);
 	}
 	loop = info_a->size;
 	while (loop--)
-		pb(&info_a, &info_b);
+		pb(1, &info_a, &info_b);
 }
 
 int	*bubble_sort(int *arr, int size)
@@ -95,12 +95,12 @@ void	pb_until_asize3(t_info *info_a, t_info *info_b)
 		{
 			idx = info_a->size - idx;
 			while (--idx > -1)
-				rra(info_a);
+				rra(1, info_a);
 		}
 		else
 			while (--idx > -1)
-				ra(info_a);
-		pb(&info_a, &info_b);
+				ra(1, info_a);
+		pb(1, &info_a, &info_b);
 	}
 }
 
@@ -108,17 +108,17 @@ int	*hard_coding(t_info *info_a, t_info *info_b)
 {
 	pb_until_asize3(info_a, info_b);
 	if (find_min(info_a) == 1 && info_a->head->val > info_a->tail->val)
-		ra(info_a);
+		ra(1, info_a);
 	if (info_a->head->val > info_a->head->next->val)
-		sa(info_a);
+		sa(1, info_a);
 	if (info_a->tail->val < info_a->head->val)
-		rra(info_a);
+		rra(1, info_a);
 	if (info_a->tail->pre->val > info_a->tail->val)
 	{
-		rra(info_a);
-		sa(info_a);
+		rra(1, info_a);
+		sa(1, info_a);
 	}
 	while (info_b->size)
-		pa(&info_a, &info_b);
+		pa(1, &info_a, &info_b);
 	return (0);
 }

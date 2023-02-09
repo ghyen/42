@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:30:10 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 14:44:14 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:13:19 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	optimize(t_info *info_a)
 		cnt = info_a->size - cnt - 1;
 		while (cnt)
 		{
-			rra(info_a);
+			rra(1, info_a);
 			cnt--;
 		}
 	}
@@ -32,7 +32,7 @@ void	optimize(t_info *info_a)
 		cnt++;
 		while (cnt)
 		{
-			ra(info_a);
+			ra(1, info_a);
 			cnt--;
 		}
 	}

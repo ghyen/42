@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 15:42:14 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:08:07 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,23 @@ int					*init_and_redirection(t_info *info_a, t_info *info_b,
 void				optimize(t_info *info_a);
 void				free_all(t_info **info_a, t_info **info_b);
 //	swap
-void				sa(t_info *info);
-void				sb(t_info *info);
-void				ss(t_info *info_a, t_info *info_b);
+void				sa(int print, t_info *info);
+void				sb(int print, t_info *info);
+void				ss(int print, t_info *info_a, t_info *info_b);
 void				swap(t_info *info);
 //	push
-void				pa(t_info **info_a, t_info **info_b);
-void				pb(t_info **info_a, t_info **info_b);
+void				pa(int print, t_info **info_a, t_info **info_b);
+void				pb(int print, t_info **info_a, t_info **info_b);
 //	rotate
-void				rb(t_info *info);
-void				ra(t_info *info);
-void				rr(t_info *info_a, t_info *info_b);
+void				rb(int print, t_info *info);
+void				ra(int print, t_info *info);
+void				rr(int print, t_info *info_a, t_info *info_b);
 void				rotate(t_info *info);
 void				modify_idx(t_info *info, int modify);
 //	rotate2
-void				rra(t_info *info);
-void				rrb(t_info *info);
-void				rrr(t_info *info_a, t_info *info_b);
+void				rra(int print, t_info *info);
+void				rrb(int print, t_info *info);
+void				rrr(int print, t_info *info_a, t_info *info_b);
 void				reverse_rotate(t_info *info);
 //	cal
 void				cal(t_info *info_a, t_info *info_b);

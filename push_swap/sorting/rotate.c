@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:43:07 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/09 20:13:47 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:04:00 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,30 @@ void	modify_idx(t_info *info, int modify)
 	}
 }
 
-void	ra(t_info *info)
+void	ra(int print, t_info *info)
 {
 	if (info->size < 2)
 		return ;
 	rotate(info);
-	write(1, "ra\n", 3);
+	if (print)
+		write(1, "ra\n", 3);
 }
 
-void	rb(t_info *info)
+void	rb(int print, t_info *info)
 {
 	if (info->size < 2)
 		return ;
 	rotate(info);
-	write(1, "rb\n", 3);
+	if (print)
+		write(1, "rb\n", 3);
 }
 
-void	rr(t_info *info_a, t_info *info_b)
+void	rr(int print, t_info *info_a, t_info *info_b)
 {
 	if (info_a->size < 2 || info_b->size < 2)
 		return ;
 	rotate(info_a);
 	rotate(info_b);
-	write(1, "rr\n", 3);
+	if (print)
+		write(1, "rr\n", 3);
 }

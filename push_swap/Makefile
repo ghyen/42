@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/29 20:39:12 by gkwon             #+#    #+#              #
-#    Updated: 2023/02/07 15:50:38 by gkwon            ###   ########.fr        #
+#    Created: 2023/02/09 15:14:40 by gkwon             #+#    #+#              #
+#    Updated: 2023/02/09 15:14:41 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS = push_swap.c\
 		 	sorting/sort.c\
 			sorting/push.c\
 			sorting/rotate2.c\
-			sorting/swap.c\
+			sorting/swap.c
 			utils/init.c\
 			utils/valid_check.c\
 			utils/utils.c
@@ -41,19 +41,19 @@ BONUS_SRCS = checker.c\
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 OBJS = $(SRCS:.c=.o)
 NAME = push_swap
-BONUS_NAME = mychecker
+BONUS_NAME = checker
 
 all : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
 	cp $(LIBFT) $(NAME)
 	ar -scr $@ $(OBJS)
-	$(CC) ${CFLAGS} ${SRCS} $(LIBFT) -o ${NAME} -g
+	$(CC) ${CFLAGS} ${SRCS} $(LIBFT) -o ${NAME}
 
 $(BONUS_NAME) : $(LIBFT) $(BONUS_OBJS)
 	cp $(LIBFT) $(NAME)
 	ar -scr $@ $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(BONUS_SRCS) $(LIBFT) -o $(BONUS_NAME) 
+	$(CC) $(CFLAGS) $(BONUS_SRCS) $(LIBFT) -o $(BONUS_NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@

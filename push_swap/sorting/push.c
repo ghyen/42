@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:43:04 by gkwon             #+#    #+#             */
-/*   Updated: 2023/01/31 13:02:41 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:10:01 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,20 @@ void	push(t_info **info, t_node *node)
 	(*info)->size++;
 }
 
-void	pa(t_info **info_a, t_info **info_b)
+void	pa(int print, t_info **info_a, t_info **info_b)
 {
 	if (!(*info_b)->size)
 		return ;
-	write(1, "pa\n", 3);
+	if (print)
+		write(1, "pa\n", 3);
 	push(info_a, pop(info_b));
 }
 
-void	pb(t_info **info_a, t_info **info_b)
+void	pb(int print, t_info **info_a, t_info **info_b)
 {
 	if (!(*info_a)->size)
 		return ;
-	write(1, "pb\n", 3);
+	if (print)
+		write(1, "pb\n", 3);
 	push(info_b, pop(info_a));
 }
