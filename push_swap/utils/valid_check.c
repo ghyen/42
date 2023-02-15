@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:29:32 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/07 16:53:55 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/13 16:55:45 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	valid_dup(int *array, long find, int len)
 
 	cnt = 0;
 	i = 0;
+	if (find > INT_MAX || find < INT_MIN)
+		return (0);
 	while (i < len)
 	{
-		if (find > INT_MAX || find < INT_MIN)
-			return (0);
 		if (array[i++] == find)
 		{
 			cnt++;
-			if (cnt > 1)
+			if (cnt >= 1)
 				return (0);
 		}
 	}

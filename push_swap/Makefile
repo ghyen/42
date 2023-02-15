@@ -6,7 +6,7 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:14:40 by gkwon             #+#    #+#              #
-#    Updated: 2023/02/09 15:14:41 by gkwon            ###   ########.fr        #
+#    Updated: 2023/02/15 15:28:40 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS = push_swap.c\
 		 	sorting/sort.c\
 			sorting/push.c\
 			sorting/rotate2.c\
-			sorting/swap.c
+			sorting/swap.c\
 			utils/init.c\
 			utils/valid_check.c\
 			utils/utils.c
@@ -51,7 +51,6 @@ $(NAME) : $(LIBFT) $(OBJS)
 	$(CC) ${CFLAGS} ${SRCS} $(LIBFT) -o ${NAME}
 
 $(BONUS_NAME) : $(LIBFT) $(BONUS_OBJS)
-	cp $(LIBFT) $(NAME)
 	ar -scr $@ $(BONUS_OBJS)
 	$(CC) $(CFLAGS) $(BONUS_SRCS) $(LIBFT) -o $(BONUS_NAME)
 

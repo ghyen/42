@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:25:45 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/09 15:02:48 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/15 16:50:48 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	main(int argc, char **argv)
 			break ;
 		if (check_string(info_a, info_b, tmp) == 0)
 			ft_error();
-		if ((info_b->size == 0 && is_sorted(info_a)))
-			break ;
 	}
 	if (info_b->size == 0 && is_sorted(info_a))
 		write(1, "OK\n", 3);

@@ -8,8 +8,8 @@
             "name": "(lldb) 시작",
                 "type": "lldb",
                 "request": "launch",
-                "program": "${workspaceFolder}/mychecker",
-                "args": ["0 1 2 -1"],
+                "program": "${workspaceFolder}/push_swap",
+                "args": ["2 1 -2 0"],
                 "cwd": "${fileDirname}"   
         }
     ]

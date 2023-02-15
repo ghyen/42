@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:55:15 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/09 14:08:07 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/13 16:55:25 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				def_sum(int **now);
 void				do_op(int *best, t_info *info_a, t_info *info_b);
 
 // sort
-int					*hard_coding(t_info *info_a, t_info *info_b);
+void				*hard_coding(t_info *info_a, t_info *info_b);
 int					*bubble_sort(int *arr, int size);
 
 #endif

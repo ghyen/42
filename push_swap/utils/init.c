@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 05:28:16 by edwin             #+#    #+#             */
-/*   Updated: 2023/02/07 16:43:40 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/13 16:50:32 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	*parsing(int *array, char **argv, t_info *info_a, t_info *info_b)
 		while (str[++i])
 		{
 			tmp = ft_atoi(str[i]);
-			if (!valid_dup(array, tmp, cnt + 1))
+			if (!valid_dup(array, tmp, cnt))
 				ft_error();
 			else
 				array[cnt++] = tmp;
