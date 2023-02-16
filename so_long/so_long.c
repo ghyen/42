@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:20:17 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/16 12:59:43 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/16 13:10:20 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ int	main(int argc, char **argv)
 {
 	t_win		win;
 	t_map		map;
+	int			i;
 
+	i = 0;
 	printf("asdasd: %d",123);
 	if (!argv || argc == 0)
 		return (0);
@@ -59,13 +61,14 @@ int	main(int argc, char **argv)
 	if (win.fd <= 0)
 		ft_error(E_FD);
 	printf("asdasd: %d",win.fd);
+	// randomly segfalut and map validerror
 	init_map(&map, win.fd, 0);
 	if (!map_valid_check(&map))
 		ft_error(E_MAP_VAL);
 	win.mlx = mlx_init();
 	if (!win.mlx)
 		return (0);
-	int i = 0;
+	i = 0;
 	printf("%s\n", map.map_char[i]);
 	while (map.map_char[i])
 	{
