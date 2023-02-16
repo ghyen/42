@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:20:17 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/15 23:40:58 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/16 12:59:43 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_error(char *error_msg)
 {
 	ft_putstr_fd(error_msg, 2);
 	ft_putstr_fd("ERROR\n", 2);
+	exit(0);
 }
 
 #include <stdio.h>
@@ -51,10 +52,10 @@ int	main(int argc, char **argv)
 	t_win		win;
 	t_map		map;
 
-printf("asdasd: %d",123);
-	if (!argv||argc == 0)
+	printf("asdasd: %d",123);
+	if (!argv || argc == 0)
 		return (0);
-	win.fd = open("./map/map.ber", O_RDONLY);
+	win.fd = open(argv[1], O_RDONLY);
 	if (win.fd <= 0)
 		ft_error(E_FD);
 	printf("asdasd: %d",win.fd);
@@ -64,11 +65,11 @@ printf("asdasd: %d",123);
 	win.mlx = mlx_init();
 	if (!win.mlx)
 		return (0);
-
 	int i = 0;
+	printf("%s\n", map.map_char[i]);
 	while (map.map_char[i])
 	{
-		printf("%s\n", map.map_char[i]);
+		printf("%s\n", map.map_char[i++]);
 	}
 	win.window = mlx_new_window(win.mlx, 1000, 1000, "so_long");
 	if (!win.window)

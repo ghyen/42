@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:40:26 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/15 23:22:41 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/16 12:08:43 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	at_least_one(t_map *map, int i, int j)
 {
 	while (map->map_char[++i])
 	{
+		j = -1;
 		while (map->map_char[i][++j])
 		{
 			if (map->map_char[i][j] == 'C')
