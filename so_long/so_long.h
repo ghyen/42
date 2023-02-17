@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:26:12 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/15 23:19:55 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/17 20:56:37 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include "./minilibx/mlx.h"
 # include "./get_next_line/get_next_line.h"
 
-# define E_MAP_VAL	"MAP VALID"
+# define E_MAP_VAL	"MAP ELEMENT IS NOT SUPOSSED TO BE"
 # define E_FD		"MAP OEPN FAILED"
 # define PARSINGERR	"PARSING FAILED"
+# define E_MAP_BFS 	"MAP CAN NOT SOLVED"
 
 typedef struct s_player t_player;
 typedef unsigned int t_ui;
@@ -48,6 +49,7 @@ typedef struct s_map
 	int				collect_cnt;
 	int				exit_cnt;
 	int				player_cnt;
+	int				exist_exit;	
 }					t_map;
 
 /* ===============.=============== */

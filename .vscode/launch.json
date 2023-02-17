@@ -12,7 +12,7 @@
 			// debug request
 			"request": "launch",
 			// launch 하는 대상 프로그램
-			"program": "${fileDirname}/so_long",
+			"program": "/Users/gkwon/Desktop/42/so_long/so_long",
 			// 실행하는 프로그램에 대해 인자가 필요한 경우 아래에 추가
 			"args": ["./map/map.ber"],
 			// debug가 시작후 main 시작 부분에서 멈추게 하는지에 대한 여부

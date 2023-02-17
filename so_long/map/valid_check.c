@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:40:26 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/16 12:08:43 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/17 21:07:56 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	at_least_one(t_map *map, int i, int j)
 				map->collect_cnt++;
 			if (map->map_char[i][j] == 'P')
 			{
-				map->player.x = i;
-				map->player.y = j;
+				map->player.x = j;
+				map->player.y = i;
 				map->player_cnt++;
 			}
 			if (map->map_char[i][j] == 'E')
@@ -42,20 +42,24 @@ int	dfs(t_map *map, t_ui x, t_ui y)
 	int	j;
 
 	i = -2;
-	map->map_visited[y][x] = 1;
-	if ((x < 0 || y < 0) || (x > map->x || y > map->y)
-		|| map->map_char[y][x] == '1')
+	if (map->map_visited[y][x])
 		return (0);
+	map->map_visited[y][x] = 1;
 	if (map->map_char[y][x] == 'C')
 		map->collect_cnt--;
 	if (map->map_char[y][x] == 'E')
+	{
+		map->exist_exit = 1;
 		return (1);
+	}
 	while (++i < 2)
 	{
 		j = -2;
 		while (++j < 2)
-			if ((i || j) && (!map->map_visited[y + j][x + i])) // 0,0 제자리 방지
-				if (dfs(map, x + i, y + j) == 1)
+			if (i != j && (i || j) && (x + i >= 0 || y + j >= 0)
+				&& map->map_char[y + j][x + i] != '1')
+				if ((dfs(map, x + i, y + j) == 1) || (map->exist_exit == 1
+						&& map->collect_cnt == 0))
 					return (1);
 	}
 	return (0);
@@ -63,16 +67,16 @@ int	dfs(t_map *map, t_ui x, t_ui y)
 
 int	valid_exit_check(t_map *map)
 {
-	int	i;
+	unsigned int	i;
 	unsigned int	j;
 
 	i = -1;
 	map->map_visited = malloc(sizeof(int *) * map->y);
-	while (map->map_visited[++i])
+	while (++i < map->y)
 	{
 		j = 0;
 		map->map_visited[i] = malloc(sizeof(int) * map->x);
-		while (j <= map->x)
+		while (j < map->x)
 			map->map_visited[i][j++] = 0;
 	}
 	return (dfs(map, map->player.x, map->player.y));
@@ -85,7 +89,7 @@ int	map_valid_check(t_map *map)
 	map->exit_cnt = 0;
 	if (!at_least_one(map, -1, -1))
 		ft_error(E_MAP_VAL);
-	if (valid_exit_check(map) && map->collect_cnt == 0)
+	if (valid_exit_check(map))
 		return (1);
 	return (0);
 }
