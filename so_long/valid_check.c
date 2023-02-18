@@ -6,11 +6,11 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:40:26 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/17 21:07:56 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/19 06:01:06 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 int	at_least_one(t_map *map, int i, int j)
 {
@@ -48,10 +48,7 @@ int	dfs(t_map *map, t_ui x, t_ui y)
 	if (map->map_char[y][x] == 'C')
 		map->collect_cnt--;
 	if (map->map_char[y][x] == 'E')
-	{
 		map->exist_exit = 1;
-		return (1);
-	}
 	while (++i < 2)
 	{
 		j = -2;
@@ -79,6 +76,7 @@ int	valid_exit_check(t_map *map)
 		while (j < map->x)
 			map->map_visited[i][j++] = 0;
 	}
+	map->all_col_cnt = map->collect_cnt;
 	return (dfs(map, map->player.x, map->player.y));
 }
 

@@ -6,15 +6,19 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:20:17 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/17 21:15:45 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/19 06:09:36 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	drow_window(void *mlx, void *window)
+void	drow_window(t_map *map)
 {
-	mlx_loop(mlx);
+	init_img(map);
+	draw_map(map, -1);
+	mlx_hook(map->window, X_EVENT_KEY_PRESS, 0, press_key, map);
+	mlx_hook(map->window, X_EVENT_KEY_EXIT, 0, exit_game, map);
+	mlx_loop(map->mlx);
 }
 
 size_t	ft_strlen(const char *s)
@@ -44,12 +48,6 @@ void	init_map(t_map *map, int fd, int cnt)
 	map->map_char[cnt] = line;
 }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	while (*s)
-		write(fd, s++, 1);
-}
-
 void	ft_error(char *error_msg)
 {
 	ft_putstr_fd(error_msg, 2);
@@ -59,23 +57,21 @@ void	ft_error(char *error_msg)
 
 int	main(int argc, char **argv)
 {
-	t_win		win;
 	t_map		map;
-	int			i;
 
 	if (!argv || argc == 0)
 		return (0);
-	win.fd = open(argv[1], O_RDONLY);
-	if (win.fd <= 0)
+	map.fd = open("./map/map.ber", O_RDONLY);
+	if (map.fd <= 0)
 		ft_error(E_FD);
-	init_map(&map, win.fd, 0);
+	init_map(&map, map.fd, 0);
 	if (!map_valid_check(&map))
 		ft_error(E_MAP_BFS);
-	win.mlx = mlx_init();
-	if (!win.mlx)
+	map.mlx = mlx_init();
+	if (!map.mlx)
 		return (0);
-	win.window = mlx_new_window(win.mlx, 1000, 1000, "so_long");
-	if (!win.window)
+	map.window = mlx_new_window(map.mlx, 64 * map.x, 64 * map.y, "so_long");
+	if (!map.window)
 		return (0);
-	drow_window(win.mlx, win.window);
+	drow_window(&map);
 }
