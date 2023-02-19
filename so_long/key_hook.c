@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 04:08:00 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/19 06:12:44 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/19 16:24:53 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	move(t_map *map, int key)
 		map->player.y = ny;
 		draw_map(map, -1);
 		map->player.mov_cnt++;
+		ft_putstr_fd("move count : ", 1);
 		ft_putnbr_fd(map->player.mov_cnt, 1);
 		ft_putstr_fd("\n", 1);
 	}

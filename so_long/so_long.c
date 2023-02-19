@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:20:17 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/19 06:09:36 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/19 19:18:04 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ void	drow_window(t_map *map)
 	mlx_hook(map->window, X_EVENT_KEY_PRESS, 0, press_key, map);
 	mlx_hook(map->window, X_EVENT_KEY_EXIT, 0, exit_game, map);
 	mlx_loop(map->mlx);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (*s++)
-		len++;
-	return (len);
 }
 
 void	init_map(t_map *map, int fd, int cnt)
@@ -55,13 +45,29 @@ void	ft_error(char *error_msg)
 	exit(1);
 }
 
+int	valid_argv(char **argv)
+{
+	char	**split;
+	int		len;
+
+	len = 0;
+	split = ft_split(*argv, '.');
+	while (split[len])
+		len++;
+	if (!ft_strncmp(split[len - 1], "ber", 4))
+		return (1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_map		map;
 
-	if (!argv || argc == 0)
+	if (!*(++argv) || argc == 1)
 		return (0);
-	map.fd = open("./map/map.ber", O_RDONLY);
+	if (!valid_argv(argv))
+		ft_error(E_FD);
+	map.fd = open(*(argv), O_RDONLY);
 	if (map.fd <= 0)
 		ft_error(E_FD);
 	init_map(&map, map.fd, 0);
