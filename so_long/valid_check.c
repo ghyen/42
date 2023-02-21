@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:40:26 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/19 19:18:46 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/21 12:43:54 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	is_map_closed(t_map *map)
 		i = -1;
 		while (++i < map->x)
 			if (map->map_char[j][i] != '1')
-				return (0);
+				ft_error(E_MAP_N_SQUARE);
 		j += map->y - 1;
 	}
 	j = 0;
@@ -88,7 +88,7 @@ int	is_map_closed(t_map *map)
 		i = -1;
 		while (++i < map->y)
 			if (map->map_char[i][j] != '1')
-				return (0);
+				ft_error(E_MAP_N_SQUARE);
 		j += map->x - 1;
 	}
 	return (1);

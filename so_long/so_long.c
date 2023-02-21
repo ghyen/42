@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:20:17 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/19 19:18:04 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/21 12:45:58 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_map(t_map *map, int fd, int cnt)
 	char	*line;
 
 	line = get_next_line(fd);
+	if (cnt == 0 && !line)
+		ft_error(E_FD);
 	if (cnt == 0)
 		map->x = ft_strlen(line) - 1;
 	if (!line)
@@ -40,8 +42,9 @@ void	init_map(t_map *map, int fd, int cnt)
 
 void	ft_error(char *error_msg)
 {
+	ft_putstr_fd("ERROR : ", 2);
 	ft_putstr_fd(error_msg, 2);
-	ft_putstr_fd(" ERROR\n", 2);
+	ft_putstr_fd("\n", 2);
 	exit(1);
 }
 

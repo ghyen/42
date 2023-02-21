@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:26:12 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/19 19:19:22 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/21 12:43:37 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define E_FD "MAP OEPN FAILED"
 # define PARSINGERR "PARSING FAILED"
 # define E_MAP_BFS "MAP CAN NOT SOLVED"
+# define E_MAP_N_SQUARE "MAP IS NOT SQUARE"
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
