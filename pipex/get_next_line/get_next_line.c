@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:58:02 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/09 23:04:59 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/23 20:37:13 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*ret;
 	unsigned int	slen;
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (s[slen])
 		slen++;
 	if (len == 0 || *s == 0 || slen <= start)
-		return (ft_strdup(""));
+		return (ft_gnl_strdup(""));
 	if (slen <= len + start)
 		len = slen - start;
 	ret = (char *)malloc(len + 1);
@@ -42,7 +42,7 @@ t_backup	*find_fd(t_backup **head, int fd)
 	at = *head;
 	if (!*head)
 	{
-		*head = ft_lstnew(fd);
+		*head = ft_gnl_lstnew(fd);
 		if (!*head)
 			return (0);
 		return (*head);
@@ -53,7 +53,7 @@ t_backup	*find_fd(t_backup **head, int fd)
 			break ;
 		if (!at->next)
 		{
-			at->next = ft_lstnew(fd);
+			at->next = ft_gnl_lstnew(fd);
 			if (!at->next)
 				return (0);
 		}	
@@ -71,7 +71,7 @@ char	*cut_nl(t_backup *lst, t_backup **head)
 	at = 0;
 	while (lst->content[at] && (lst->content[at] != '\n'))
 		at++;
-	tmp = ft_substr(lst->content, 0, at + 1);
+	tmp = ft_gnl_substr(lst->content, 0, at + 1);
 	if (!tmp)
 		return (ft_free(lst, head));
 	if (!lst->content[at + 1])
@@ -79,7 +79,7 @@ char	*cut_nl(t_backup *lst, t_backup **head)
 	else
 	{
 		fre = lst->content;
-		lst->content = ft_strdup(lst->content + at + 1);
+		lst->content = ft_gnl_strdup(lst->content + at + 1);
 		free(fre);
 		if (!lst->content)
 		{
@@ -95,21 +95,21 @@ char	*ft_read(ssize_t size, t_backup *lst, t_backup **head, int fd)
 	char	*tmp;
 	char	buff[BUFFER_SIZE + 1];
 
-	while (!(ft_strchr(lst->content, '\n')) && size)
+	while (!(ft_gnl_strchr(lst->content, '\n')) && size)
 	{
 		size = read(fd, buff, BUFFER_SIZE);
 		if (size == -1)
 			return (ft_free(lst, head));
 		buff[size] = 0;
-		lst->content = ft_strjoin(lst->content, buff, 0, 0);
+		lst->content = ft_gnl_strjoin(lst->content, buff, 0, 0);
 		if (!lst->content)
 			return (ft_free(lst, head));
 		if (lst->content[0] == 0)
 			return (ft_free(lst, head));
 	}
-	if (ft_strchr(lst->content, '\n'))
+	if (ft_gnl_strchr(lst->content, '\n'))
 		return (cut_nl(lst, head));
-	tmp = ft_strdup(lst->content);
+	tmp = ft_gnl_strdup(lst->content);
 	if (!tmp)
 		return (ft_free(lst, head));
 	ft_free(lst, head);

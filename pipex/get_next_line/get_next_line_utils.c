@@ -6,13 +6,13 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:52:53 by gkwon             #+#    #+#             */
-/*   Updated: 2022/12/12 17:43:30 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/23 20:36:37 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_gnl_strchr(const char *s, int c)
 {
 	unsigned char	*p;
 
@@ -54,7 +54,7 @@ char	*ft_free(t_backup *lst, t_backup **head)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2, unsigned int s1l,
+char	*ft_gnl_strjoin(char const *s1, char const *s2, unsigned int s1l,
 		unsigned int s2l)
 {
 	char	*p;
@@ -81,7 +81,7 @@ char	*ft_strjoin(char const *s1, char const *s2, unsigned int s1l,
 	return (p);
 }
 
-t_backup	*ft_lstnew(int fd)
+t_backup	*ft_gnl_lstnew(int fd)
 {
 	t_backup	*new_list;
 
@@ -90,7 +90,7 @@ t_backup	*ft_lstnew(int fd)
 	new_list = malloc(sizeof(t_backup));
 	if (!new_list)
 		return (NULL);
-	new_list->content = ft_strdup("");
+	new_list->content = ft_gnl_strdup("");
 	if (!new_list->content)
 	{
 		free(new_list);
@@ -101,7 +101,7 @@ t_backup	*ft_lstnew(int fd)
 	return (new_list);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_gnl_strdup(const char *s1)
 {
 	size_t	len;
 	char	*ret;
