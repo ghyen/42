@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.c                                         :+:      :+:    :+:   */
+/*   server_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 19:57:36 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/24 17:01:08 by gkwon            ###   ########.fr       */
+/*   Created: 2023/02/24 17:51:51 by gkwon             #+#    #+#             */
+/*   Updated: 2023/02/24 18:46:33 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
-void	send_message(void)
+void	send_message(pid_t pid, char *msg)
 {
 	static int	i;
 	static int	bit;
@@ -21,15 +21,15 @@ void	send_message(void)
 	i = 0;
 	bit = 8;
 	kill_count = 0;
-	while (g_client_data.msg[i] != '\0')
+	while (msg[i] != '\0')
 	{
 		while (--bit >= 0)
 		{
-			if ((g_client_data.msg[i] >> bit) & 1)
-				kill(g_client_data.opponent_pid, SIGUSR1);
+			if ((msg[i] >> bit) & 1)
+				kill(pid, SIGUSR1);
 			else
-				kill(g_client_data.opponent_pid, SIGUSR2);
-			usleep(125);
+				kill(pid, SIGUSR2);
+			usleep(250);
 			kill_count++;
 		}
 		bit = 8;
@@ -37,23 +37,19 @@ void	send_message(void)
 	}
 	ft_putnbr_fd(kill_count, 1);
 	ft_putchar_fd('\n', 1);
-	if (g_client_data.msg[i] == '\0')
+	if (msg[i] == '\0')
 	{
 		while (bit-- > 0)
 		{
-			kill(g_client_data.opponent_pid, SIGUSR2);
-			usleep(125);
+			kill(pid, SIGUSR2);
+			usleep(250);
 		}
 		pause();
 	}
 }
 
-int	main(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*message;
-
-	//server start
-	server();
-	//client strat
-	client();
+	while (*s)
+		write(fd, s++, 1);
 }

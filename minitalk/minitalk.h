@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 20:10:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/19 20:11:24 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/24 17:02:07 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
+# define SIGUSR1 0
+# define SIGUSR2 1
 
 typedef struct s_node
 {
@@ -34,6 +36,5 @@ typedef struct s_info
 	struct s_node	*head;
 	struct s_node	*tail;
 }					t_info;
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:41:20 by gkwon             #+#    #+#             */
-/*   Updated: 2023/02/23 20:38:58 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/02/24 14:57:48 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef struct s_node
 	struct s_node	*next;
 	struct s_node	*pre;
 }					t_node;
+
+typedef struct s_command
+{
+	char	*infile;
+	char	*command;
+}				t_command;
 
 typedef struct s_info
 {
