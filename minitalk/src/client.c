@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:06:40 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/07 17:25:07 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/08 20:01:38 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	send_message(pid_t pid, char *msg)
 			kill(pid, SIGUSR2);
 			usleep(250);
 		}
-		pajjuse();
+		pause();
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	pid_t	pid;
+	
 
 	if (argc != 3)
 	{

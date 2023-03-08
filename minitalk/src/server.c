@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:06:33 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/07 17:30:47 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/08 20:44:58 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "../minitalk.h"
 
 void	send_message(pid_t pid, char *msg)
@@ -44,7 +45,7 @@ void	send_message(pid_t pid, char *msg)
 			kill(pid, SIGUSR2);
 			usleep(250);
 		}
-		pajjuse();
+		pause();
 	}
 }
 
@@ -53,6 +54,11 @@ int	main(void)
 	struct sigaction	sig;
 
 	ft_printf("pid : %d\n", getpid());
-	
+	sig.sa_flags = SA_SIGINFO;
+	sig.sa_handler = send_message;
+	sigemptyset(&sig.sa_mask);
+	sigaction(SIGUSR1, );
+	while (1)
+		pause();
 	return (0);
 }

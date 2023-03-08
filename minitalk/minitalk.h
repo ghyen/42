@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 20:10:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/07 17:58:17 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/08 20:14:42 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,17 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
-typedef struct s_node
+typedef struct s_client_info
 {
-	int				val;
-	unsigned int	idx;
-	struct s_node	*next;
-	struct s_node	*pre;
-}					t_node;
+	struct sigaction	sig;
+	
+}					t_client_info;
 
-typedef struct s_info
+typedef struct s_server_info
 {
-	int				size;
-	struct s_node	*head;
-	struct s_node	*tail;
-}					t_info;
+	struct sigaction	sig;
+	
+}					t_server_info;
 
 /* ===============./ft_printf=============== */
 
