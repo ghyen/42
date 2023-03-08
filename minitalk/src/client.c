@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_utils.c                                     :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 17:51:51 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/02 19:39:41 by gkwon            ###   ########.fr       */
+/*   Created: 2023/02/21 13:06:40 by gkwon             #+#    #+#             */
+/*   Updated: 2023/03/07 17:25:07 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	send_message(pid_t pid, char *msg)
 		i++;
 	}
 	ft_putnbr_fd(kill_count, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("\n", 1);
 	if (msg[i] == '\0')
 	{
 		while (bit-- > 0)
@@ -44,30 +44,24 @@ void	send_message(pid_t pid, char *msg)
 			kill(pid, SIGUSR2);
 			usleep(250);
 		}
-		pause();
+		pajjuse();
 	}
 }
 
-static void	ft_putstr_fd(char *s, int fd)
+int	main(int argc, char **argv)
 {
-	while (*s)
-		write(fd, s++, 1);
-}
+	pid_t	pid;
 
-static void	ft_putnbr_fd(int n, int fd)
-{
-	if (n == -2147483648)
+	if (argc != 3)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		ft_putstr_fd("invalid argument\n", 2);
+		exit(1);
 	}
-	if (n < 0)
+	pid = ft_atoi(argv[1]);
+	send_message(pid, argv[2]);
+	while (1)
 	{
-		write(fd, "-", 1);
-		n *= -1;
+		//receive server's signal
 	}
-	if (n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	n = (n % 10) + '0';
-	write(fd, &n, 1);
+	return (0);
 }
