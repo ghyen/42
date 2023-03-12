@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:13 by gkwon             #+#    #+#             */
-/*   Updated: 2022/11/30 21:49:13 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/11 19:34:02 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft/libft.h"
 
 int		ft_printf(const char *format, ...);
 size_t	ft_strlen(const char *s);

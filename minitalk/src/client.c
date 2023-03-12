@@ -3,45 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:06:40 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/08 20:01:38 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/11 19:48:58 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-void	send_message(pid_t pid, char *msg)
+t_client_info	g_info;
+
+void	send_message(int signo, siginfo_t *info, void *s)
 {
 	static int	i;
 	static int	bit;
-	static int	kill_count;
+	(void)info;
+	(void)s;
 
 	i = 0;
 	bit = 8;
-	kill_count = 0;
-	while (msg[i] != '\0')
+	if (signo == SIGUSR2)
+		exit(1);
+	while (g_info.str[i] != '\0')
 	{
 		while (--bit >= 0)
 		{
-			if ((msg[i] >> bit) & 1)
-				kill(pid, SIGUSR1);
+			if ((g_info.str[i] >> bit) & 1)
+				kill(g_info.server_pid, SIGUSR1);
 			else
-				kill(pid, SIGUSR2);
+				kill(g_info.server_pid, SIGUSR2);
 			usleep(250);
-			kill_count++;
 		}
 		bit = 8;
 		i++;
 	}
-	ft_putnbr_fd(kill_count, 1);
-	ft_putstr_fd("\n", 1);
-	if (msg[i] == '\0')
+	if (g_info.str[i] == '\0')
 	{
 		while (bit-- > 0)
 		{
-			kill(pid, SIGUSR2);
+			kill(g_info.server_pid, SIGUSR2);
 			usleep(250);
 		}
 		pause();
@@ -50,18 +51,21 @@ void	send_message(pid_t pid, char *msg)
 
 int	main(int argc, char **argv)
 {
-	
+	struct sigaction	sig;
 
 	if (argc != 3)
 	{
 		ft_putstr_fd("invalid argument\n", 2);
 		exit(1);
 	}
-	pid = ft_atoi(argv[1]);
-	send_message(pid, argv[2]);
+	g_info.server_pid = ft_atoi(argv[1]);
+	g_info.str = argv[2];
+	g_info.bits_cnt = 0;
+	sig.sa_sigaction = send_message;
+	sig.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &sig, NULL);
+	sigaction(SIGUSR2, &sig, NULL);
 	while (1)
-	{
-		//receive server's signal
-	}
+		pause();
 	return (0);
 }
