@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: edwin <edwin@student.42.fr>                +#+  +:+       +#+         #
+#    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 13:08:42 by gkwon             #+#    #+#              #
-#    Updated: 2023/03/07 17:23:22 by edwin            ###   ########.fr        #
+#    Updated: 2023/03/13 20:36:54 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ bonus :
 	make BONUS=1
 
 clean :
-	make -C ./libft fclean
+	make -C ./ft_printf fclean
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean : clean

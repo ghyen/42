@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 20:10:30 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/11 19:35:00 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/13 21:44:00 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_client_info
 typedef struct s_server_info
 {
 	int		client_pid;
-
+	char	msg;
+	int		bits;
 }			t_server_info;
 
 #endif
