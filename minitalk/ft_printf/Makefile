@@ -5,15 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/20 21:36:30 by gkwon             #+#    #+#              #
-#    Updated: 2022/12/01 18:32:22 by gkwon            ###   ########.fr        #
+#    Created: 2023/03/14 17:15:37 by gkwon             #+#    #+#              #
+#    Updated: 2023/03/14 17:17:01 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 NAME = libftprintf.a
-LIBFT = ./libft/libft.a
+LIB = ./libft/libft.a
 SRCS_MAN = ft_printf.c\
 				ft_unsigned_itoa.c\
 				ft_to_add.c\
@@ -26,12 +26,12 @@ OBJS_MAN = $(SRCS_MAN:.c=.o)
 SRCS = $(SRCS_MAN)
 OBJS = $(OBJS_MAN)
 all : $(NAME)
-$(NAME) : $(LIBFT) $(OBJS)
-	cp $(LIBFT) $(NAME)
+$(NAME) : $(LIB) $(OBJS)
+	cp $(LIB) $(NAME)
 	ar -scr $@ $(OBJS)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
-$(LIBFT) :
+$(LIB) :
 	make -C ./libft bonus
 clean :
 	make -C ./libft fclean
