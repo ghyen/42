@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/18 03:50:52 by edwin            ###   ########.fr       */
+/*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
+/*   Updated: 2023/03/18 03:52:39 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PIHILO_H
+#include "../philo.h"
 
-# include <pthread.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_philos
+void	eat(void)
 {
-    pthread_t   pthread;
-	int		left;
-	int		right;
-	int		eat_count;
-	int		id;
-}			t_philos;
+}
 
-#endif
+void    philo_start(t_philos **philos, char **argv)
+{
+    
+}

@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/18 03:50:52 by edwin            ###   ########.fr       */
+/*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
+/*   Updated: 2023/03/17 21:14:24 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PIHILO_H
-
-# include <pthread.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_philos
+int	ft_atoi(const char *str)
 {
-    pthread_t   pthread;
-	int		left;
-	int		right;
-	int		eat_count;
-	int		id;
-}			t_philos;
+	long long	ret;
+	long long	tmp;
+	int			flag;
 
-#endif
+	ret = 0;
+	flag = 1;
+	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
+		|| *str == '\r' || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			flag = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		tmp = ret;
+		ret *= 10;
+		ret += (*str++ - '0');
+	}
+	return (ret * flag);
+}
