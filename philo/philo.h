@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/18 20:23:27 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/18 21:59:43 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_philos
 	int			right;
 	int			eat_count;
 	int			id;
+	int			full;
+	int			dead;
+	t_env		env;
 }				t_philos;
 
 typedef struct s_env
@@ -41,9 +44,10 @@ typedef struct s_env
 
 typedef struct s_mutex
 {
+	pthread_mutex_t	eat_count;
 	pthread_mutex_t	printf;
 	pthread_mutex_t	dead;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	*forks;
 }				t_mutex;
 
 #endif

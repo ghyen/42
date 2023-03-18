@@ -6,23 +6,25 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/18 20:27:11 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/18 21:05:38 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	get_now_time(void)
+void	save_now_time(int *save_time)
 {
 	struct timeval	time;
+
 	gettimeofday(&time, NULL);
-	printf("%ld", )
+	&save_time = time.tv_usec;
 }
 
-int	printf_mutex(t_env, my_env, char *str)
+int	printf_mutex(t_env *my_env, int id, char *str)
 {
 	pthread_mutex_lock(printf);
-	printf("%dns %d %s", gettimeofday() - my_env.start_time, id, str);
+	save_now_time(my_env->now_time);
+	printf("%dns %d %s", my_env->now_time - my_env->start_time, id, str);
 	pthread_mutex_unlock(printf);
 }
 
@@ -37,12 +39,8 @@ int	ft_atoi(const char *str)
 	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
 		|| *str == '\r' || *str == ' ')
 		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			flag = -1;
+	if (*str == '+')
 		str++;
-	}
 	while (*str >= '0' && *str <= '9')
 	{
 		tmp = ret;
