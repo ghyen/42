@@ -6,36 +6,39 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/18 21:10:33 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/19 18:54:53 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-pthread_t	*init_start(t_mutex *mutex_info, t_env *my_env, char **argv)
+pthread_t	*init_start(t_mutex *mutex_info, char **argv)
 {
-	t_philos	*philos;
+	t_philo	*philo;
 	int			i;
+	int			num_philos;
 
-	i = 0;
-	my_env->num_philos = ft_atoi(argv[1]);
-	my_env->time_to_die = ft_atoi(argv[2]);
-	my_env->time_to_eat = ft_atoi(argv[3]);
-	my_env->time_to_sleep = ft_atoi(argv[4]);
-	if (argv[5])
-		my_env.num_times_must_eat = ft_atoi(argv[5]);
+	i = -1;
+	num_philos = ft_atoi(argv[1]);
+	philo = malloc(sizeof(t_philo) * num_philos);
 	mutex_info->forks = malloc(sizeof(pthread_mutex_t) * num_philos);
-	philos = malloc(sizeof(t_philos) * num_philos);
-	while (i < num_philos)
+	while (++i < num_philos)
 	{
-		pthread_mutex_init(mutex_info->forks, NULL);
-		philos[i].id = i + 1;
-		philos[i].left = i;
-		philos[i].right = (i + 1) % num_philos;
+		pthread_mutex_init(mutex_info->forks[i], NULL);
+		philo[i].id = i + 1;
+		philo[i].left = i;
+		philo[i].right = (i + 1) % num_philos;
+		philo[i].env.num_philos = num_philos;
+		philo[i].env.time_to_die = ft_atoi(argv[2]);
+		philo[i].env.time_to_eat = ft_atoi(argv[3]);
+		philo[i].env.time_to_sleep = ft_atoi(argv[4]);
+		if (argv[5])
+			philo[i].env.num_times_must_eat = ft_atoi(argv[5]);
 	}
 	pthread_mutex_init(mutex_info->printf, NULL);
 	pthread_mutex_init(mutex_info->dead, NULL);
-	return (philos);
+	pthread_mutex_init(mutex_info->eat_count, NULL);
+	return (philo);
 }
 
 int	print_error(char *error_str)
@@ -46,13 +49,12 @@ int	print_error(char *error_str)
 
 int	main(int argc, char **argv)
 {
-	t_philos	*philos;
+	t_philo	*philo;
 	t_mutex		mutex_info;
-	t_env		my_env;
 
 	if (argc != 5 && argc != 6)
 		return (print_error("error argc"));
-	save_now_time(&t_env.start_time);
-	philos = init_start(&mutex_info, &my_env, argv);
-	philo_start(&philos, &my_env, &mutex_info);
+	
+	philo = init_start(&mutex_info, argv);
+	create_philo(&philo, &mutex_info);
 }

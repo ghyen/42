@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/18 21:59:43 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/19 17:59:47 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-typedef struct s_philos
+typedef struct s_philo
 {
 	pthread_t	pthread;
 	int			left;
@@ -29,7 +29,7 @@ typedef struct s_philos
 	int			full;
 	int			dead;
 	t_env		env;
-}				t_philos;
+}				t_philo;
 
 typedef struct s_env
 {

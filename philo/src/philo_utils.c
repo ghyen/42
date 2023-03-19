@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/18 21:05:38 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/19 18:41:01 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,20 @@ void	save_now_time(int *save_time)
 	&save_time = time.tv_usec;
 }
 
-int	printf_mutex(t_env *my_env, int id, char *str)
+int	printf_mutex(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(printf);
-	save_now_time(my_env->now_time);
-	printf("%dns %d %s", my_env->now_time - my_env->start_time, id, str);
+	save_now_time(philo->env.now_time);
+	printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
+		philo->id, str);
 	pthread_mutex_unlock(printf);
 }
 
 int	ft_atoi(const char *str)
 {
-	long long	ret;
-	long long	tmp;
-	int			flag;
+	long long ret;
+	long long tmp;
+	int flag;
 
 	ret = 0;
 	flag = 1;
