@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/19 18:54:53 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/24 20:28:16 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-pthread_t	*init_start(t_mutex *mutex_info, char **argv)
+t_philo	*init_start(t_mutex *mutex_info, char **argv)
 {
 	t_philo	*philo;
 	int			i;
@@ -21,10 +21,15 @@ pthread_t	*init_start(t_mutex *mutex_info, char **argv)
 	i = -1;
 	num_philos = ft_atoi(argv[1]);
 	philo = malloc(sizeof(t_philo) * num_philos);
+	pthread_mutex_init(&(mutex_info->printf), NULL);
+	pthread_mutex_init(&(mutex_info->dead), NULL);
+	pthread_mutex_init(&(mutex_info->eat_count), NULL);
 	mutex_info->forks = malloc(sizeof(pthread_mutex_t) * num_philos);
 	while (++i < num_philos)
+		pthread_mutex_init(&(mutex_info->forks[i]), NULL);
+	i = -1;
+	while (++i < num_philos)
 	{
-		pthread_mutex_init(mutex_info->forks[i], NULL);
 		philo[i].id = i + 1;
 		philo[i].left = i;
 		philo[i].right = (i + 1) % num_philos;
@@ -34,10 +39,8 @@ pthread_t	*init_start(t_mutex *mutex_info, char **argv)
 		philo[i].env.time_to_sleep = ft_atoi(argv[4]);
 		if (argv[5])
 			philo[i].env.num_times_must_eat = ft_atoi(argv[5]);
+		philo[i].mutex = mutex_info;
 	}
-	pthread_mutex_init(mutex_info->printf, NULL);
-	pthread_mutex_init(mutex_info->dead, NULL);
-	pthread_mutex_init(mutex_info->eat_count, NULL);
 	return (philo);
 }
 
@@ -54,7 +57,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 5 && argc != 6)
 		return (print_error("error argc"));
-	
 	philo = init_start(&mutex_info, argv);
-	create_philo(&philo, &mutex_info);
+	create_philo(&philo);
+	return (0);
 }
