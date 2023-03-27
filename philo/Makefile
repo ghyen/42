@@ -6,7 +6,7 @@
 #    By: edwin <edwin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 21:21:25 by gkwon             #+#    #+#              #
-#    Updated: 2023/03/23 17:39:27 by edwin            ###   ########.fr        #
+#    Updated: 2023/03/25 17:49:39 by edwin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,10 @@ NAME=philo
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -g -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c -g $< -o $@
 
 clean :
 	rm -f $(OBJS)

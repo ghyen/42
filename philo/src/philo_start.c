@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/23 16:59:29 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/27 20:04:22 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	eat(t_philo *philo)
 		printf_mutex(philo, "has taken a fork");
 	}
 	printf_mutex(philo, "is eating");
-	usleep(philo->env.time_to_eat);
+	usleep(philo->env.time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->mutex->forks[philo->right]);
 	pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
     philo->eat_count++;
@@ -42,6 +42,7 @@ void	*start_thread(void *tmp)
 	t_philo	*philo;
 
 	philo = (t_philo *)tmp;
+    save_now_time(&(philo->env.start_time));
 	while (!philo->dead)
 	{
 		if (philo->env.num_times_must_eat > 1
@@ -52,7 +53,7 @@ void	*start_thread(void *tmp)
 		}
 		eat(philo);
 		printf_mutex(philo, "is sleeping");
-		usleep(philo->env.time_to_sleep);
+		usleep(philo->env.time_to_sleep * 1000);
 		printf_mutex(philo, "is thinking");
 	}
     return (NULL);
@@ -69,7 +70,6 @@ int	monitoring(t_philo **philos)
 		{
 			if ((*philos)[i].dead)
 			{
-				clean_deadbody(philos);
 				return (4);
 			}
 		}
@@ -88,4 +88,5 @@ void	create_philo(t_philo **philos)
 		if (monitoring(philos) == 4)
 			break ;
 	}
+    clean_deadbody(*philos);
 }

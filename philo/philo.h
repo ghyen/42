@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/23 16:24:28 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/27 01:16:49 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_philo
 
 t_philo	*init_start(t_mutex *mutex_info, char **argv);
 int		print_error(char *error_str);
-void	clean_deadbody(t_philo **philos);
+void	clean_deadbody(t_philo *philos);
 void	save_now_time(int *save_time);
 void	printf_mutex(t_philo *philo, char *str);
 int		ft_atoi(const char *str);

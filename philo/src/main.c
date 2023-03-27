@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/24 20:28:16 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/27 00:58:37 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,21 @@ t_philo	*init_start(t_mutex *mutex_info, char **argv)
 	mutex_info->forks = malloc(sizeof(pthread_mutex_t) * num_philos);
 	while (++i < num_philos)
 		pthread_mutex_init(&(mutex_info->forks[i]), NULL);
-	i = -1;
-	while (++i < num_philos)
+	i = 0;
+	while (i < num_philos)
 	{
 		philo[i].id = i + 1;
 		philo[i].left = i;
 		philo[i].right = (i + 1) % num_philos;
 		philo[i].env.num_philos = num_philos;
+		philo[i].dead = 0;
 		philo[i].env.time_to_die = ft_atoi(argv[2]);
 		philo[i].env.time_to_eat = ft_atoi(argv[3]);
 		philo[i].env.time_to_sleep = ft_atoi(argv[4]);
 		if (argv[5])
 			philo[i].env.num_times_must_eat = ft_atoi(argv[5]);
 		philo[i].mutex = mutex_info;
+		i++;
 	}
 	return (philo);
 }
