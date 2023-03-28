@@ -6,7 +6,7 @@
 /*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/27 01:53:24 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/29 04:19:50 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ void	clean_deadbody(t_philo *philos)
 	int	num_philos;
 
 	num_philos = philos[0].env.num_philos;
-	for (i = 0; i < num_philos; i++)
+	i = 0;
+	while (i < num_philos)
 	{
 		pthread_join(philos[i].pthread, NULL);
 		pthread_mutex_destroy(&(philos[i].mutex->forks[i]));
+		//printf("%d is deleted\n", philos[i].id);
+		i++;
 	}
 	free(philos[0].mutex->forks);
 	pthread_mutex_destroy(&(philos[0].mutex->printf));
@@ -90,15 +93,20 @@ void	printf_mutex(t_philo *philo, char *str)
 {
 	save_now_time(&philo->env.now_time);
 	if ((philo->env.now_time
-			- philo->env.last_eat_time >= philo->env.time_to_die)
+			- philo->env.start_time >= philo->env.time_to_die)
 		|| philo->env.now_time
 		- philo->env.start_time >= philo->env.time_to_die)
 	{
+       //printf("now time is %d\n start time is %d\n diff is %d\n", philo->env.now_time, philo->env.start_time,philo->env.now_time
+		//	- philo->env.last_eat_time);
 		philo->dead = 1;
+		pthread_mutex_lock(&philo->mutex->printf);
+		printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
+				philo->id, "is died");
+		pthread_mutex_unlock(&philo->mutex->printf);
 		return ;
 	}
 	pthread_mutex_lock(&philo->mutex->printf);
-	save_now_time(&philo->env.now_time);
 	printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
 			philo->id, str);
 	pthread_mutex_unlock(&philo->mutex->printf);
@@ -106,9 +114,9 @@ void	printf_mutex(t_philo *philo, char *str)
 
 int	ft_atoi(const char *str)
 {
-	long long ret;
-	long long tmp;
-	int flag;
+	long long	ret;
+	long long	tmp;
+	int			flag;
 
 	(void)tmp;
 	ret = 0;
