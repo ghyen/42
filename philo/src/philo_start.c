@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/29 04:20:29 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/29 19:03:44 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	eat(t_philo *philo)
 	}
 	printf_mutex(philo, "is eating");
 	usleep(philo->env.time_to_eat * 1000);
+	save_now_time(&(philo->env.last_eat_time));
     philo->eat_count++;
 	pthread_mutex_unlock(&philo->mutex->forks[philo->right]);
 	pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
@@ -43,9 +44,7 @@ void	*start_thread(void *tmp)
 
 	philo = (t_philo *)tmp;
 	usleep(1000);
-	//printf("%d is started\n", philo->id);
 	save_now_time(&(philo->env.start_time));
-    //printf("%d's start time is %d\n", philo->id, philo->env.start_time);
 	while (!philo->dead)
 	{
 		if (philo->env.num_times_must_eat > 0
@@ -64,11 +63,7 @@ void	*start_thread(void *tmp)
 
 int	monitoring(t_philo **philos)
 {
-	int	i;
-
-	i = -1;
-	while (++i < (*philos)->env.num_philos)
-		if ((*philos)[i].dead)
+	if ((*philos)->env.dead)
 			return (0);
     return (1);
 }
@@ -79,11 +74,8 @@ void	create_philo(t_philo **philos)
 
 	i = -1;
 	while (++i < (*philos)->env.num_philos)
-	{
 		pthread_create(&(*philos)[i].pthread, NULL, start_thread,
 				(void *)&(*philos)[i]);
-		//printf("%d is creadte\n", (*philos)[i].id);
-	}
 	while (monitoring(philos))
 		;
 	clean_deadbody(*philos);

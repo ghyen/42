@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/29 04:19:50 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/29 19:02:26 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	clean_deadbody(t_philo *philos)
 	i = 0;
 	while (i < num_philos)
 	{
-		pthread_join(philos[i].pthread, NULL);
+		pthread_detach(philos[i].pthread, NULL);
 		pthread_mutex_destroy(&(philos[i].mutex->forks[i]));
-		//printf("%d is deleted\n", philos[i].id);
 		i++;
 	}
 	free(philos[0].mutex->forks);
@@ -33,54 +32,6 @@ void	clean_deadbody(t_philo *philos)
 	free(philos);
 }
 
-// void	clean_deadbody(t_philo **philos)
-// {
-// 	int		i;
-// 	int		num_philos;
-// 	t_mutex	*tmp;
-
-// 	tmp = (*philos)->mutex;
-// 	num_philos = (*philos)->env.num_philos;
-// 	// Free all resources for each philosopher
-// 	i = 0;
-// 	while (i < num_philos)
-// 	{
-// 		pthread_join(philos[i]->pthread, NULL);
-// 		pthread_mutex_destroy(&(philos[i]->mutex->forks[i]));
-// 		if (i == num_philos)
-// 			free(philos[i]->mutex->forks);
-// 		free(philos[i]);
-// 		i++;
-// 	}
-// 	pthread_mutex_destroy(&(tmp->printf));
-// 	pthread_mutex_destroy(&(tmp->dead));
-// 	pthread_mutex_destroy(&(tmp->eat_count));
-// 	free(philos);
-// }
-
-// void	clean_deadbody(t_philo **philos)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while ((philos)[++i])
-// 	{
-// 		if (i + 1 == (*philos)->env.num_philos)
-// 		{
-// 			pthread_mutex_destroy(&((*philos)->mutex->printf));
-// 			pthread_mutex_destroy(&((*philos)->mutex->dead));
-// 			pthread_mutex_destroy(&((*philos)->mutex->eat_count));
-// 		}
-// 		pthread_mutex_destroy(&((*philos)->mutex->forks[i]));
-// 		free(&((*philos)->mutex->forks[i]));
-// 		if (i + 1 == (*philos)->env.num_philos)
-// 			free((*philos)->mutex->forks);
-// 		pthread_join(philos[i]->pthread, NULL);
-// 		free((philos)[i]);
-// 	}
-// 	free(philos);
-// }
-
 void	save_now_time(int *save_time)
 {
 	struct timeval	ms_time;
@@ -89,21 +40,25 @@ void	save_now_time(int *save_time)
 	*save_time = ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000;
 }
 
+//int	check_dead(t_philo *philo)
+//{
+
+//}
+
 void	printf_mutex(t_philo *philo, char *str)
 {
 	save_now_time(&philo->env.now_time);
 	if ((philo->env.now_time
 			- philo->env.start_time >= philo->env.time_to_die)
 		|| philo->env.now_time
-		- philo->env.start_time >= philo->env.time_to_die)
+		- philo->env.last_eat_time >= philo->env.time_to_die
+		|| philo->env.dead)
 	{
-       //printf("now time is %d\n start time is %d\n diff is %d\n", philo->env.now_time, philo->env.start_time,philo->env.now_time
-		//	- philo->env.last_eat_time);
-		philo->dead = 1;
+		philo->env.dead = 1;
 		pthread_mutex_lock(&philo->mutex->printf);
 		printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
 				philo->id, "is died");
-		pthread_mutex_unlock(&philo->mutex->printf);
+		//pthread_mutex_unlock(&philo->mutex->printf);
 		return ;
 	}
 	pthread_mutex_lock(&philo->mutex->printf);
