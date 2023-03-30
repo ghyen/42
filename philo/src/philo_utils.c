@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/29 19:02:26 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/30 01:11:30 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	clean_deadbody(t_philo *philos)
 	i = 0;
 	while (i < num_philos)
 	{
-		pthread_detach(philos[i].pthread, NULL);
+		pthread_detach(philos[i].pthread);
 		pthread_mutex_destroy(&(philos[i].mutex->forks[i]));
 		i++;
 	}
@@ -40,30 +40,37 @@ void	save_now_time(int *save_time)
 	*save_time = ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000;
 }
 
-//int	check_dead(t_philo *philo)
-//{
+bool	check_dead(t_philo *philo)
+{
+	bool	ret;
 
-//}
+	pthread_mutex_lock(&philo->mutex->dead);
+	if (philo->dead)
+		ret = 1;
+	else
+		ret = 0;
+	pthread_mutex_unlock(&philo->mutex->dead);
+	return (ret);
+}
 
 void	printf_mutex(t_philo *philo, char *str)
 {
 	save_now_time(&philo->env.now_time);
-	if ((philo->env.now_time
-			- philo->env.start_time >= philo->env.time_to_die)
+	if ((philo->env.now_time - philo->env.start_time >= philo->env.time_to_die)
 		|| philo->env.now_time
 		- philo->env.last_eat_time >= philo->env.time_to_die
-		|| philo->env.dead)
+		|| check_dead(philo))
 	{
-		philo->env.dead = 1;
+		philo->dead = 1;
 		pthread_mutex_lock(&philo->mutex->printf);
 		printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
-				philo->id, "is died");
-		//pthread_mutex_unlock(&philo->mutex->printf);
+			philo->id, "is died");
+		pthread_mutex_unlock(&philo->mutex->printf);
 		return ;
 	}
 	pthread_mutex_lock(&philo->mutex->printf);
 	printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
-			philo->id, str);
+		philo->id, str);
 	pthread_mutex_unlock(&philo->mutex->printf);
 }
 

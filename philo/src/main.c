@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/29 19:03:43 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/30 00:43:32 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_philo	*init_start(t_mutex *mutex_info, char **argv)
 		philo[i].right = (i + 1) % num_philos;
 		philo[i].env.num_philos = num_philos;
 		philo[i].eat_count = 0;
-		philo[i].env.dead = 0;
+		philo[i].dead = 0;
 		philo[i].env.time_to_die = ft_atoi(argv[2]);
 		philo[i].env.time_to_eat = ft_atoi(argv[3]);
 		philo[i].env.time_to_sleep = ft_atoi(argv[4]);
