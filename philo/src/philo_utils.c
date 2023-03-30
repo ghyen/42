@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/30 23:02:40 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/30 23:38:13 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,18 @@ void	printf_mutex(t_philo *philo, char *str)
 		if (check_dead(philo))
 			return ;
 		pthread_mutex_lock(&philo->mutex->printf);
-		printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
-			philo->id, "is died");
 		pthread_mutex_lock(&philo->mutex->dead);
 		philo->env->is_end = 1;
 		pthread_mutex_unlock(&philo->mutex->dead);
+		printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
+			philo->id, "is died");
 		pthread_mutex_unlock(&philo->mutex->printf);
 		return ;
 	}
 	pthread_mutex_lock(&philo->mutex->printf);
-	printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
-		philo->id, str);
+	if (!check_dead(philo))
+		printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
+			philo->id, str);
 	pthread_mutex_unlock(&philo->mutex->printf);
 }
 
