@@ -3,33 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/30 01:11:30 by edwin            ###   ########.fr       */
+/*   Updated: 2023/03/30 23:02:40 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	clean_deadbody(t_philo *philos)
+void	clean_deadbody(t_philo **philos)
 {
 	int	i;
-	int	num_philos;
 
-	num_philos = philos[0].env.num_philos;
-	i = 0;
-	while (i < num_philos)
+	i = -1;
+	while (++i < philos[0]->env->num_philos)
 	{
-		pthread_detach(philos[i].pthread);
-		pthread_mutex_destroy(&(philos[i].mutex->forks[i]));
-		i++;
+		pthread_join((*philos)[i].pthread, NULL);
+		pthread_mutex_destroy(&((*philos)[i].mutex->forks[i]));
+		pthread_mutex_destroy(&((*philos)[i].mutex->full[i]));
 	}
-	free(philos[0].mutex->forks);
-	pthread_mutex_destroy(&(philos[0].mutex->printf));
-	pthread_mutex_destroy(&(philos[0].mutex->dead));
-	pthread_mutex_destroy(&(philos[0].mutex->eat_count));
-	free(philos);
+	free((*philos)[0].mutex->forks);
+	pthread_mutex_destroy(&((*philos)[0].mutex->printf));
+	pthread_mutex_destroy(&((*philos)[0].mutex->dead));
 }
 
 void	save_now_time(int *save_time)
@@ -40,12 +36,12 @@ void	save_now_time(int *save_time)
 	*save_time = ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000;
 }
 
-bool	check_dead(t_philo *philo)
+int	check_dead(t_philo *philo)
 {
-	bool	ret;
+	int	ret;
 
 	pthread_mutex_lock(&philo->mutex->dead);
-	if (philo->dead)
+	if (philo->env->is_end)
 		ret = 1;
 	else
 		ret = 0;
@@ -55,21 +51,24 @@ bool	check_dead(t_philo *philo)
 
 void	printf_mutex(t_philo *philo, char *str)
 {
-	save_now_time(&philo->env.now_time);
-	if ((philo->env.now_time - philo->env.start_time >= philo->env.time_to_die)
-		|| philo->env.now_time
-		- philo->env.last_eat_time >= philo->env.time_to_die
-		|| check_dead(philo))
+	if (check_dead(philo))
+		return ;
+	save_now_time(&philo->now_time);
+	if (philo->now_time	- philo->last_eat_time >= philo->env->time_to_die)
 	{
-		philo->dead = 1;
+		if (check_dead(philo))
+			return ;
 		pthread_mutex_lock(&philo->mutex->printf);
-		printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
+		printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
 			philo->id, "is died");
+		pthread_mutex_lock(&philo->mutex->dead);
+		philo->env->is_end = 1;
+		pthread_mutex_unlock(&philo->mutex->dead);
 		pthread_mutex_unlock(&philo->mutex->printf);
 		return ;
 	}
 	pthread_mutex_lock(&philo->mutex->printf);
-	printf("%dms %d %s\n", philo->env.now_time - philo->env.start_time,
+	printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
 		philo->id, str);
 	pthread_mutex_unlock(&philo->mutex->printf);
 }
