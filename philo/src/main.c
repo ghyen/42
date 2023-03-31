@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/30 22:29:30 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 09:14:01 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_philo	*init_start(t_mutex *mutex_info, t_env *env)
 	philo = malloc(sizeof(t_philo) * env->num_philos);
 	pthread_mutex_init(&(mutex_info->printf), NULL);
 	pthread_mutex_init(&(mutex_info->dead), NULL);
+	pthread_mutex_init(&(mutex_info->time), NULL);
 	mutex_info->forks = malloc(sizeof(pthread_mutex_t) * env->num_philos);
 	mutex_info->full = malloc(sizeof(pthread_mutex_t) * env->num_philos);
 	while (++i < env->num_philos)
@@ -37,6 +38,7 @@ static t_philo	*init_start(t_mutex *mutex_info, t_env *env)
 		philo[i].eat_count = 0;
 		philo[i].mutex = mutex_info;
 		philo[i].env = env;
+		philo[i].last_eat_time = 0;
 	}
 	return (philo);
 }

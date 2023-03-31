@@ -6,26 +6,29 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/30 23:32:45 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 12:44:33 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	eat(t_philo *philo)
+int	eat(t_philo *philo)
 {
-	if (philo->id % 2 == 0 && philo->eat_count == 0)
+	if (philo->id % 2 == 1 && philo->eat_count == 0)
 		usleep(1000);
 	pthread_mutex_lock(&philo->mutex->forks[philo->left]);
 	printf_mutex(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->mutex->forks[philo->right]);
 	printf_mutex(philo, "has taken a fork");
 	printf_mutex(philo, "is eating");
+	pthread_mutex_lock(&philo->mutex->time);
+    philo->last_eat_time = save_now_time();
+    pthread_mutex_unlock(&philo->mutex->time);
 	usleep(philo->env->time_to_eat * 1000);
-	save_now_time(&(philo->last_eat_time));
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->mutex->forks[philo->right]);
 	pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
+	return (0);
 }
 
 void	*start_thread(void *tmp)
@@ -33,7 +36,9 @@ void	*start_thread(void *tmp)
 	t_philo	*philo;
 
 	philo = (t_philo *)tmp;
-	save_now_time(&(philo->last_eat_time));
+	pthread_mutex_lock(&philo->mutex->time);
+    philo->last_eat_time = save_now_time();
+    pthread_mutex_unlock(&philo->mutex->time);
 	while (!check_dead(philo))
 	{
 		if (philo->env->num_times_must_eat > 0
@@ -44,7 +49,8 @@ void	*start_thread(void *tmp)
 			pthread_mutex_unlock(&philo->mutex->full[philo->id]);
 			break ;
 		}
-		eat(philo);
+		if (eat(philo) == -1)
+			return (NULL);
 		printf_mutex(philo, "is sleeping");
 		usleep(philo->env->time_to_sleep * 1000);
 		printf_mutex(philo, "is thinking");
@@ -75,20 +81,29 @@ int	is_all_full(t_philo **philos)
 
 int	monitoring(t_philo **philos)
 {
-	if (check_dead(philos[0]) || is_all_full(philos))
-		return (0);
-	return (1);
+	int	ret;
+
+	ret = 1;
+	pthread_mutex_lock(&philos[0]->mutex->dead);
+	if (philos[0]->env->is_end)
+		ret = 0;
+	pthread_mutex_unlock(&philos[0]->mutex->dead);
+	if (check_dead(philos[0]))
+		ret = 0;
+	if (is_all_full(philos))
+		ret = 0;
+	return (ret);
 }
 
 void	create_philo(t_philo **philos)
 {
-	int	i;
+	int i;
 
-	save_now_time(&philos[0]->env->start_time);
+	philos[0]->env->start_time = save_now_time();
 	i = -1;
 	while (++i < (*philos)->env->num_philos)
 		pthread_create(&(*philos)[i].pthread, NULL, start_thread,
-			(void *)&(*philos)[i]);
+				(void *)&(*philos)[i]);
 	while (monitoring(philos))
 		;
 	clean_deadbody(philos);

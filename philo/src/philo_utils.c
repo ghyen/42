@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/30 23:38:13 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 12:35:49 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,52 +26,109 @@ void	clean_deadbody(t_philo **philos)
 	free((*philos)[0].mutex->forks);
 	pthread_mutex_destroy(&((*philos)[0].mutex->printf));
 	pthread_mutex_destroy(&((*philos)[0].mutex->dead));
+	pthread_mutex_destroy(&((*philos)[0].mutex->time));
 }
 
-void	save_now_time(int *save_time)
+int	save_now_time(void)
 {
 	struct timeval	ms_time;
 
 	gettimeofday(&ms_time, NULL);
-	*save_time = ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000;
+	return (ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000);
 }
+
+//int	check_dead(t_philo *philo)
+//{
+//	int			ret;
+//	int			now_time;
+//	long long	diff;
+
+//	pthread_mutex_lock(&philo->mutex->time);
+//	if (philo->last_eat_time == 0)
+//	{
+//		pthread_mutex_unlock(&philo->mutex->time);
+//		return (0);
+//	}
+//	now_time = save_now_time();
+//	diff = now_time - philo->last_eat_time;
+//	pthread_mutex_unlock(&philo->mutex->time);
+//	if (diff >= philo->env->time_to_die)
+//	{
+//		pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
+//		//printf("%dms %d %s\n", now_time - philo->env->start_time, philo->id,
+//		//		"is died");
+//		return (1);
+//	}
+//	pthread_mutex_lock(&philo->mutex->dead);
+//	if (philo->env->is_end)
+//		ret = 1;
+//	else
+//		ret = 0;
+//	pthread_mutex_unlock(&philo->mutex->dead);
+//	return (ret);
+//}
 
 int	check_dead(t_philo *philo)
 {
-	int	ret;
+	int			now_time;
+	long long	diff;
+	int			ret;
 
+	ret = 0;
 	pthread_mutex_lock(&philo->mutex->dead);
-	if (philo->env->is_end)
-		ret = 1;
-	else
-		ret = 0;
+		if(philo->env->is_end == 1)
+			ret = 1;
 	pthread_mutex_unlock(&philo->mutex->dead);
+	if (ret)
+		return (ret);
+	pthread_mutex_lock(&philo->mutex->time);
+	if (philo->last_eat_time)
+	{
+		now_time = save_now_time();
+		diff = now_time - philo->last_eat_time;
+		pthread_mutex_unlock(&philo->mutex->time);
+		if (diff >= philo->env->time_to_die)
+		{
+			pthread_mutex_lock(&philo->mutex->dead);
+			philo->env->is_end = 1;
+			pthread_mutex_unlock(&philo->mutex->dead);
+			pthread_mutex_lock(&philo->mutex->printf);
+			printf("%d %d %s\n", now_time - philo->env->start_time,
+				philo->id, "is died");
+			pthread_mutex_unlock(&philo->mutex->printf);
+			pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
+			ret = 1;
+		}
+	}
 	return (ret);
 }
 
 void	printf_mutex(t_philo *philo, char *str)
 {
+	int	now_time;
+
 	if (check_dead(philo))
-		return ;
-	save_now_time(&philo->now_time);
-	if (philo->now_time	- philo->last_eat_time >= philo->env->time_to_die)
 	{
-		if (check_dead(philo))
-			return ;
-		pthread_mutex_lock(&philo->mutex->printf);
 		pthread_mutex_lock(&philo->mutex->dead);
-		philo->env->is_end = 1;
-		pthread_mutex_unlock(&philo->mutex->dead);
-		printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
+		if (!philo->env->is_end)
+		{
+			philo->env->is_end = 1;
+			now_time = save_now_time();
+			pthread_mutex_lock(&philo->mutex->printf);
+			printf("%d %d %s\n", now_time - philo->env->start_time,
 			philo->id, "is died");
-		pthread_mutex_unlock(&philo->mutex->printf);
-		return ;
+			pthread_mutex_unlock(&philo->mutex->printf);
+		}
+		pthread_mutex_unlock(&philo->mutex->dead);
 	}
-	pthread_mutex_lock(&philo->mutex->printf);
-	if (!check_dead(philo))
-		printf("%dms %d %s\n", philo->now_time - philo->env->start_time,
-			philo->id, str);
-	pthread_mutex_unlock(&philo->mutex->printf);
+	else
+	{
+		pthread_mutex_lock(&philo->mutex->printf);
+		now_time = save_now_time();
+		printf("%d %d %s\n", now_time - philo->env->start_time, philo->id,
+				str);
+		pthread_mutex_unlock(&philo->mutex->printf);
+	}
 }
 
 int	ft_atoi(const char *str)
