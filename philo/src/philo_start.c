@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/31 17:31:48 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 19:10:48 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,42 +79,6 @@ int	is_all_full(t_philo *philos)
 	return (0);
 }
 
-//int	monitoring(t_philo **philos)
-//{
-//	int	ret;
-//	int	i;
-
-//	i = 0;
-//	ret = 1;
-//	pthread_mutex_lock(&philos[0]->mutex->dead);
-//	if (philos[0]->env->is_end)
-//		ret = 0;
-//	pthread_mutex_unlock(&philos[0]->mutex->dead);
-//	while (i < philos[0]->env->num_philos)
-//	{
-//		if (check_dead(philos[i]))
-//			ret = 0;
-//		i++;
-//	}
-//	if (is_all_full(philos))
-//		ret = 0;
-//	return (ret);
-//}
-
-//void	create_philo(t_philo **philos)
-//{
-//	int	i;
-
-//	philos[0]->env->start_time = save_now_time();
-//	i = -1;
-//	while (++i < (*philos)->env->num_philos)
-//		pthread_create(&(*philos)[i].pthread, NULL, start_thread,
-//			(void *)&(*philos)[i]);
-//	while (monitoring(philos))
-//		;
-//	clean_deadbody(philos);
-//}
-
 int	monitoring(t_philo *philos)
 {
 	int	ret;
@@ -148,5 +112,4 @@ void	create_philo(t_philo *philos)
 			&philos[i]);
 	while (monitoring(philos))
 		;
-
 }

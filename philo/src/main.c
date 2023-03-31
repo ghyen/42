@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/31 17:34:43 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 19:06:48 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ void	ft_sleep(int msec)
 	end_time = save_now_time() + msec;
 	while (save_now_time() < end_time)
 		usleep(100);
+}
+
+int	save_now_time(void)
+{
+	struct timeval	ms_time;
+
+	gettimeofday(&ms_time, NULL);
+	return (ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000);
 }
 
 int	print_error(char *error_str)
