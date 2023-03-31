@@ -6,12 +6,12 @@
 #    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 21:21:25 by gkwon             #+#    #+#              #
-#    Updated: 2023/03/31 11:55:26 by gkwon            ###   ########.fr        #
+#    Updated: 2023/03/31 17:35:36 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=undefined,thread
+CFLAGS = -Wall -Werror -Wextra# -fsanitize=undefined,thread
 
 SRCS = 	src/main.c\
 		src/philo_start.c\
@@ -26,7 +26,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -g $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJS)

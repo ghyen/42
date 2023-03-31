@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/31 09:14:01 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 17:34:43 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static t_philo	*init_start(t_mutex *mutex_info, t_env *env)
 	pthread_mutex_init(&(mutex_info->printf), NULL);
 	pthread_mutex_init(&(mutex_info->dead), NULL);
 	pthread_mutex_init(&(mutex_info->time), NULL);
-	mutex_info->forks = malloc(sizeof(pthread_mutex_t) * env->num_philos);
-	mutex_info->full = malloc(sizeof(pthread_mutex_t) * env->num_philos);
 	while (++i < env->num_philos)
 	{
 		pthread_mutex_init(&(mutex_info->forks[i]), NULL);
@@ -43,6 +41,15 @@ static t_philo	*init_start(t_mutex *mutex_info, t_env *env)
 	return (philo);
 }
 
+void	ft_sleep(int msec)
+{
+	int	end_time;
+
+	end_time = save_now_time() + msec;
+	while (save_now_time() < end_time)
+		usleep(100);
+}
+
 int	print_error(char *error_str)
 {
 	printf("%s\n", error_str);
@@ -55,6 +62,7 @@ int	main(int argc, char **argv)
 	t_mutex	mutex_info;
 	t_env	env;
 
+	memset(&env, 0, sizeof(t_env));
 	if (argc != 5 && argc != 6)
 		return (print_error("error argc"));
 	env.num_philos = ft_atoi(argv[1]);
@@ -64,7 +72,10 @@ int	main(int argc, char **argv)
 	env.is_end = 0;
 	if (argc == 6)
 		env.num_times_must_eat = ft_atoi(argv[5]);
+	mutex_info.forks = malloc(sizeof(pthread_mutex_t) * env.num_philos);
+	mutex_info.full = malloc(sizeof(pthread_mutex_t) * env.num_philos);
 	philo = init_start(&mutex_info, &env);
-	create_philo(&philo);
+	create_philo(philo);
+	clean_deadbody(&philo);
 	return (0);
 }

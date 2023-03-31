@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/31 09:42:52 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 17:35:21 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <string.h>
 
 typedef struct s_env
 {
@@ -55,16 +56,86 @@ typedef struct s_philo
 
 /* ===============./src=============== */
 
+void	ft_sleep(int msec);
 int		print_error(char *error_str);
 int		eat(t_philo *philo);
 void	*start_thread(void *tmp);
-int		is_all_full(t_philo **philos);
-int		monitoring(t_philo **philos);
-void	create_philo(t_philo **philos);
+int		is_all_full(t_philo *philos);
+//int	monitoring(t_philo **philos);
+//			if (check_dead(philos[i]));
+//				ret = 0;
+//			i++;
+//		}
+//		if (is_all_full(philos));
+//			ret = 0;
+//		return (ret);
+//}
+
+//void		create_philo(t_philo **philos);
+//		if (is_all_full(philos));
+//			ret = 0;
+//		return (ret);
+//}
+
+//void		create_philo(t_philo **philos);
+//void	create_philo(t_philo **philos);
+//			pthread_create(&(*philos)[i].pthread, NULL, start_thread,
+//				(void *)&(*philos)[i]);
+//		while (monitoring(philos));
+//			;
+//		clean_deadbody(philos);
+//}
+
+int		monitoring(t_philo *philos);
+//		while (monitoring(philos));
+//			;
+//		clean_deadbody(philos);
+//}
+
+/* ===============./src=============== */
+
+void	ft_sleep(int msec);
+int		print_error(char *error_str);
+int		eat(t_philo *philo);
+void	*start_thread(void *tmp);
+int		is_all_full(t_philo *philos);
+//int	monitoring(t_philo **philos);
+//			if (check_dead(philos[i]));
+//				ret = 0;
+//			i++;
+//		}
+//		if (is_all_full(philos));
+//			ret = 0;
+//		return (ret);
+//}
+
+//void		create_philo(t_philo **philos);
+//		if (is_all_full(philos));
+//			ret = 0;
+//		return (ret);
+//}
+
+//void		create_philo(t_philo **philos);
+//void	create_philo(t_philo **philos);
+//			pthread_create(&(*philos)[i].pthread, NULL, start_thread,
+//				(void *)&(*philos)[i]);
+//		while (monitoring(philos));
+//			;
+//		clean_deadbody(philos);
+//}
+
+int		monitoring(t_philo *philos);
+//		while (monitoring(philos));
+//			;
+//		clean_deadbody(philos);
+//}
+
+int		monitoring(t_philo *philos);
+int		monitoring(t_philo *philos);
+void	create_philo(t_philo *philos);
 void	clean_deadbody(t_philo **philos);
 int		save_now_time(void);
 int		check_dead(t_philo *philo);
-//int	check_dead(t_philo *philo);
 void	printf_mutex(t_philo *philo, char *str);
 int		ft_atoi(const char *str);
 

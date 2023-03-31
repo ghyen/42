@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:14:17 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/31 12:35:49 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/03/31 17:40:34 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,6 @@ int	save_now_time(void)
 	return (ms_time.tv_sec * 1000 + ms_time.tv_usec / 1000);
 }
 
-//int	check_dead(t_philo *philo)
-//{
-//	int			ret;
-//	int			now_time;
-//	long long	diff;
-
-//	pthread_mutex_lock(&philo->mutex->time);
-//	if (philo->last_eat_time == 0)
-//	{
-//		pthread_mutex_unlock(&philo->mutex->time);
-//		return (0);
-//	}
-//	now_time = save_now_time();
-//	diff = now_time - philo->last_eat_time;
-//	pthread_mutex_unlock(&philo->mutex->time);
-//	if (diff >= philo->env->time_to_die)
-//	{
-//		pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
-//		//printf("%dms %d %s\n", now_time - philo->env->start_time, philo->id,
-//		//		"is died");
-//		return (1);
-//	}
-//	pthread_mutex_lock(&philo->mutex->dead);
-//	if (philo->env->is_end)
-//		ret = 1;
-//	else
-//		ret = 0;
-//	pthread_mutex_unlock(&philo->mutex->dead);
-//	return (ret);
-//}
-
 int	check_dead(t_philo *philo)
 {
 	int			now_time;
@@ -76,30 +45,31 @@ int	check_dead(t_philo *philo)
 
 	ret = 0;
 	pthread_mutex_lock(&philo->mutex->dead);
-		if(philo->env->is_end == 1)
-			ret = 1;
+	if (philo->env->is_end == 1)
+		ret = 1;
 	pthread_mutex_unlock(&philo->mutex->dead);
 	if (ret)
 		return (ret);
 	pthread_mutex_lock(&philo->mutex->time);
 	if (philo->last_eat_time)
 	{
+		pthread_mutex_unlock(&philo->mutex->time);
 		now_time = save_now_time();
 		diff = now_time - philo->last_eat_time;
-		pthread_mutex_unlock(&philo->mutex->time);
 		if (diff >= philo->env->time_to_die)
 		{
 			pthread_mutex_lock(&philo->mutex->dead);
 			philo->env->is_end = 1;
 			pthread_mutex_unlock(&philo->mutex->dead);
 			pthread_mutex_lock(&philo->mutex->printf);
-			printf("%d %d %s\n", now_time - philo->env->start_time,
-				philo->id, "is died");
+			printf("%d %d %s\n", now_time - philo->env->start_time, philo->id
+				+ 1, "died");
 			pthread_mutex_unlock(&philo->mutex->printf);
 			pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
-			ret = 1;
+			return 1;
 		}
 	}
+	pthread_mutex_unlock(&philo->mutex->time);
 	return (ret);
 }
 
@@ -107,28 +77,19 @@ void	printf_mutex(t_philo *philo, char *str)
 {
 	int	now_time;
 
-	if (check_dead(philo))
+	pthread_mutex_lock(&philo->mutex->printf);
+	now_time = save_now_time();
+	pthread_mutex_lock(&philo->mutex->dead);
+	if (philo->env->is_end == 1)
+		now_time = 1;
+	pthread_mutex_unlock(&philo->mutex->dead);
+	if (now_time == 1)
 	{
-		pthread_mutex_lock(&philo->mutex->dead);
-		if (!philo->env->is_end)
-		{
-			philo->env->is_end = 1;
-			now_time = save_now_time();
-			pthread_mutex_lock(&philo->mutex->printf);
-			printf("%d %d %s\n", now_time - philo->env->start_time,
-			philo->id, "is died");
-			pthread_mutex_unlock(&philo->mutex->printf);
-		}
-		pthread_mutex_unlock(&philo->mutex->dead);
-	}
-	else
-	{
-		pthread_mutex_lock(&philo->mutex->printf);
-		now_time = save_now_time();
-		printf("%d %d %s\n", now_time - philo->env->start_time, philo->id,
-				str);
 		pthread_mutex_unlock(&philo->mutex->printf);
+		return ;
 	}
+	printf("%d %d %s\n", now_time - philo->env->start_time, philo->id + 1, str);
+	pthread_mutex_unlock(&philo->mutex->printf);
 }
 
 int	ft_atoi(const char *str)
