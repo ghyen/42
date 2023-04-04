@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/31 19:06:48 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/04/05 02:15:55 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv)
 	env.time_to_eat = ft_atoi(argv[3]);
 	env.time_to_sleep = ft_atoi(argv[4]);
 	env.is_end = 0;
+	env.num_times_must_eat = -1;
 	if (argc == 6)
 		env.num_times_must_eat = ft_atoi(argv[5]);
 	mutex_info.forks = malloc(sizeof(pthread_mutex_t) * env.num_philos);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
-/*   Updated: 2023/03/31 19:10:48 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/04/05 02:55:31 by edwin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int	eat(t_philo *philo)
 {
 	if (philo->id % 2 == 1 && philo->eat_count == 0)
+		usleep(200);
+	if (philo->id % 2 == 0 && philo->eat_count == 0 && philo->env->num_philos
+		% 2 == 1 && philo->id != 0)
 		usleep(100);
 	pthread_mutex_lock(&philo->mutex->forks[philo->left]);
 	printf_mutex(philo, "has taken a fork");
@@ -41,7 +44,7 @@ void	*start_thread(void *tmp)
 	pthread_mutex_unlock(&philo->mutex->time);
 	while (!check_dead(philo))
 	{
-		if (philo->env->num_times_must_eat > 0
+		if (philo->env->num_times_must_eat > -1
 			&& philo->eat_count == philo->env->num_times_must_eat)
 		{
 			pthread_mutex_lock(&philo->mutex->full[philo->id]);
@@ -75,8 +78,8 @@ int	is_all_full(t_philo *philos)
 			break ;
 	}
 	if (i == philos->env->num_philos)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int	monitoring(t_philo *philos)
@@ -84,20 +87,20 @@ int	monitoring(t_philo *philos)
 	int	ret;
 	int	i;
 
-	i = 0;
+	i = -1;
 	ret = 1;
 	pthread_mutex_lock(&philos[0].mutex->dead);
 	if (philos[0].env->is_end)
 		ret = 0;
 	pthread_mutex_unlock(&philos[0].mutex->dead);
-	while (i < philos[0].env->num_philos)
+	while (++i < philos[0].env->num_philos)
 	{
-		if (check_dead(&philos[i]))
+		if (check_dead(&philos[i]) || is_all_full(philos))
+		{
 			ret = 0;
-		i++;
+			return (ret);
+		}
 	}
-	if (is_all_full(philos))
-		ret = 0;
 	return (ret);
 }
 
@@ -108,8 +111,7 @@ void	create_philo(t_philo *philos)
 	philos[0].env->start_time = save_now_time();
 	i = -1;
 	while (++i < (*philos).env->num_philos)
-		pthread_create(&philos[i].pthread, NULL, start_thread,
-			&philos[i]);
+		pthread_create(&philos[i].pthread, NULL, start_thread, &philos[i]);
 	while (monitoring(philos))
 		;
 }
