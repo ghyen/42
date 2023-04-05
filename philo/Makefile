@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: edwin <edwin@student.42.fr>                +#+  +:+       +#+         #
+#    By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 21:21:25 by gkwon             #+#    #+#              #
-#    Updated: 2023/04/05 02:54:43 by edwin            ###   ########.fr        #
+#    Updated: 2023/04/05 16:09:30 by gkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=undefined,thread
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=thread
 
 SRCS = 	src/main.c\
 		src/philo_start.c\
@@ -26,7 +26,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c -g $< -o $@
 
 clean :
 	rm -f $(OBJS)

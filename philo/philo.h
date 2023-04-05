@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/03/31 19:10:20 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/04/05 15:33:40 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct s_philo
 	int				eat_count;
 	int				id;
 	int				full;
-	int				last_eat_time;
-	int				now_time;
+	long long		last_eat_time;
+	long long		now_time;
 	t_env			*env;
 	t_mutex			*mutex;
 }					t_philo;
