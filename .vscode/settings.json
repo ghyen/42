@@ -2,6 +2,10 @@
 	"files.associations": {
 		"ft_printf.h": "c",
 		"unistd.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"time.h": "c",
+		"minishell.h": "c",
+		"readline.h": "c",
+		"tilde.h": "c"
 	}
 }

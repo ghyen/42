@@ -6,18 +6,16 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:22 by gkwon             #+#    #+#             */
-/*   Updated: 2023/04/05 16:43:23 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/04/07 18:53:42 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-static t_philo	*init_start(t_mutex *mutex_info, t_env *env)
+static t_philo	*init_start(t_mutex *mutex_info, t_env *env, int i)
 {
-	t_philo	*philo;
-	int		i;
+	t_philo		*philo;
 
-	i = -1;
 	philo = malloc(sizeof(t_philo) * env->num_philos);
 	pthread_mutex_init(&(mutex_info->printf), NULL);
 	pthread_mutex_init(&(mutex_info->dead), NULL);
@@ -37,6 +35,7 @@ static t_philo	*init_start(t_mutex *mutex_info, t_env *env)
 		philo[i].mutex = mutex_info;
 		philo[i].env = env;
 		philo[i].last_eat_time = 0;
+		philo[i].full = 0;
 	}
 	return (philo);
 }
@@ -64,8 +63,8 @@ int	is_valid_av(int ac, t_env *env)
 
 	is_valid = 1;
 	env->is_end = 0;
-	if (env->num_philos == -1 || env->time_to_die == -1 || \
-		env->time_to_eat == -1 || env->time_to_sleep == -1)
+	if (env->num_philos < 1 || env->time_to_die < 1 || \
+		env->time_to_eat < 1 || env->time_to_sleep < 1)
 		is_valid = 0;
 	if (ac == 6 && env->num_times_must_eat == -1)
 		is_valid = 0;
@@ -82,13 +81,11 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 	t_mutex	mutex_info;
 	t_env	env;
+	int		i;
 
+	i = -1;
 	if (argc != 5 && argc != 6)
-	{
-		printf("error argc");
-		return (1);
-	}
-	memset(&env, 0, sizeof(t_env));
+		return (printf("error argc"));
 	env.num_philos = ft_atoi(argv[1]);
 	env.time_to_die = ft_atoi(argv[2]);
 	env.time_to_eat = ft_atoi(argv[3]);
@@ -100,7 +97,7 @@ int	main(int argc, char **argv)
 		return (1);
 	mutex_info.forks = malloc(sizeof(pthread_mutex_t) * env.num_philos);
 	mutex_info.full = malloc(sizeof(pthread_mutex_t) * env.num_philos);
-	philo = init_start(&mutex_info, &env);
+	philo = init_start(&mutex_info, &env, i);
 	create_philo(philo);
 	clean_deadbody(&philo);
 	return (0);

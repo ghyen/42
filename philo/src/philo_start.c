@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:11:22 by edwin             #+#    #+#             */
-/*   Updated: 2023/04/05 16:30:49 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/04/07 18:50:14 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,18 @@ int	eat(t_philo *philo)
 {
 	if (philo->id % 2 == 1 && philo->eat_count == 0)
 		usleep(200);
-	if (philo->id % 2 == 0 && philo->eat_count == 0 && philo->env->num_philos
-		% 2 == 1 && philo->id != 0)
-		usleep(100);
 	if (!check_dead(philo))
 	{
 		pthread_mutex_lock(&philo->mutex->forks[philo->left]);
 		printf_mutex(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->mutex->forks[philo->right]);
 		printf_mutex(philo, "has taken a fork");
+		philo->eat_count++;
 		printf_mutex(philo, "is eating");
 		pthread_mutex_lock(&philo->mutex->time);
 		philo->last_eat_time = save_now_time();
 		pthread_mutex_unlock(&philo->mutex->time);
 		ft_sleep(philo->env->time_to_eat);
-		philo->eat_count++;
 		pthread_mutex_unlock(&philo->mutex->forks[philo->right]);
 		pthread_mutex_unlock(&philo->mutex->forks[philo->left]);
 		return (0);
@@ -46,7 +43,7 @@ void	*start_thread(void *tmp)
 	pthread_mutex_lock(&philo->mutex->time);
 	philo->last_eat_time = save_now_time();
 	pthread_mutex_unlock(&philo->mutex->time);
-	while (!check_dead(philo))
+	while (1)
 	{
 		if (philo->env->num_times_must_eat > -1
 			&& philo->eat_count == philo->env->num_times_must_eat)
@@ -65,27 +62,6 @@ void	*start_thread(void *tmp)
 	return (NULL);
 }
 
-int	is_all_full(t_philo *philos)
-{
-	int	i;
-	int	stop;
-
-	stop = 0;
-	i = -1;
-	while (++i < philos[0].env->num_philos)
-	{
-		pthread_mutex_lock(&philos->mutex->full[i]);
-		if (philos[i].full == 0)
-			stop = 1;
-		pthread_mutex_unlock(&philos->mutex->full[i]);
-		if (stop)
-			break ;
-	}
-	if (i == philos->env->num_philos)
-		return (1);
-	return (0);
-}
-
 int	monitoring(t_philo *philos)
 {
 	int	ret;
@@ -95,13 +71,16 @@ int	monitoring(t_philo *philos)
 	ret = 1;
 	pthread_mutex_lock(&philos[0].mutex->dead);
 	if (philos[0].env->is_end)
-		ret = 0;
+	{
+		pthread_mutex_unlock(&philos[0].mutex->dead);
+		return (0);
+	}	
 	pthread_mutex_unlock(&philos[0].mutex->dead);
 	while (++i < philos[0].env->num_philos)
+	{
 		if (check_dead(&philos[i]))
 			return (0);
-	if (is_all_full(philos))
-		return (0);
+	}
 	return (ret);
 }
 
@@ -112,9 +91,7 @@ void	create_philo(t_philo *philos)
 	philos[0].env->start_time = save_now_time();
 	i = -1;
 	while (++i < (*philos).env->num_philos)
-		pthread_create(&philos[i].pthread, NULL, start_thread,
-			&philos[i]);
-	i = 0;
+		pthread_create(&philos[i].pthread, NULL, start_thread, &philos[i]);
 	while (1)
 		if (!monitoring(philos))
 			break ;

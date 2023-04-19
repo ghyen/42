@@ -6,7 +6,7 @@
 /*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:21:31 by gkwon             #+#    #+#             */
-/*   Updated: 2023/04/05 15:33:40 by gkwon            ###   ########.fr       */
+/*   Updated: 2023/04/07 18:33:30 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,17 @@ typedef struct s_philo
 
 /* ===============./src=============== */
 
-void				ft_sleep(int msec);
-int					print_error(char *error_str);
-int					eat(t_philo *philo);
-void				*start_thread(void *tmp);
-int					is_all_full(t_philo *philos);
-int					monitoring(t_philo *philos);
-int					monitoring(t_philo *philos);
-void				create_philo(t_philo *philos);
-void				clean_deadbody(t_philo **philos);
-int					save_now_time(void);
-int					check_dead(t_philo *philo);
-void				printf_mutex(t_philo *philo, char *str);
-int					ft_atoi(const char *str);
+void	ft_sleep(int msec);
+int		save_now_time(void);
+int		is_valid_av(int ac, t_env *env);
+int		eat(t_philo *philo);
+void	*start_thread(void *tmp);
+int		monitoring(t_philo *philos);
+void	create_philo(t_philo *philos);
+void	clean_deadbody(t_philo **philos);
+int		check_dead2(t_philo *philo);
+int		check_dead(t_philo *philo);
+void	printf_mutex(t_philo *philo, char *str);
+int		ft_atoi(const char *str);
 
 #endif
