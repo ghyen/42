@@ -5,25 +5,27 @@
 #                                                     +:+ +:+         +:+      #
 #    By: edwin <edwin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/16 21:21:25 by gkwon             #+#    #+#              #
-#    Updated: 2023/04/19 23:36:56 by edwin            ###   ########.fr        #
+#    Created: 2023/04/19 23:31:55 by edwin             #+#    #+#              #
+#    Updated: 2023/04/19 23:41:49 by edwin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextr -g -fsanitize=undefined,thread
-
+CFLAGS = -Wall -Werror -Wextra
+LDFLAGS=-L/opt/homebrew/opt/readline/lib -lreadline
+CPPFLAGS=-I/opt/homebrew/opt/readline/include
 SRCS = 	src/main.c\
-		src/philo_start.c\
-		src/philo_utils.c
+		src/ft_split.c\
+		src/minishell_utils.c
+		
 OBJS=$(SRCS:.c=.o)
 
-NAME=philo
+NAME=minishell
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
