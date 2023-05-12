@@ -3,83 +3,93 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edwin <edwin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gkwon <gkwon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:00:27 by gkwon             #+#    #+#             */
-/*   Updated: 2023/04/20 03:49:14 by edwin            ###   ########.fr       */
+/*   Updated: 2023/05/11 17:35:05 by gkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	validate_type(char *node, t_token *token)
-{
-	if (node[0] == '-')
-		token->type = OPTION;
-	if (node[0] == '|')
-		token->type = PIPE;
-	if (node[0] == '\'')
-		token->type = OPTION;
-}
-
-t_token	creat_token_list(char **nodes)
+int	is_valid_line_check(char *line)
 {
 	int	i;
-	t_token *tmp;
 
 	i = 0;
-	while (nodes[i])
+	if (*line == '|')
+		return (0);
+	while (line[i])
 	{
-		tmp = malloc(sizeof(t_token));
-		validate_type(nodes[i], tmp);
+		if (ft_strncmp(line + i, "||", ft_strlen(line + i)))
+			return (0);
+		i++;
 	}
+	return (1);
 }
 
-int	tokenize(char *line)
+void	display(t_mini *c)
 {
-	char	**nodes;
-	t_token	*token;
+	t_command	*cmd;
+	char		*line;
 
-	nodes = ft_split(line, ' ');
-	token = creat_token_list(nodes);
-	while (*nodes)
-	{
-		printf("%s\n", *nodes);
-		nodes++;
-	}
-	return (0);
-}
-
-int	display(char **envp)
-{
-	char	*line;
-
-	(void)envp;
 	while (1)
 	{
-		line = readline("bash-3.2$ ");
-		tokenize(line);
-		printf("\n");
-		//add_history();
-		//excute();
+		line = readline("jungkwon$ ");
+		if (!line)
+			break ;
+		if (*line != '\0')
+		{
+			if (!is_valid_line_check(line))
+				continue ;
+			add_history(line);
+			if (pipe_split(&line, &cmd, c))
+				continue ;
+			c->cmd_cnt = c->ncmd;
+			env_change(&cmd, c->env, c->ncmd);
+			bracket_remove(&cmd, c->ncmd);
+			_32split(&cmd, c->ncmd);
+			_3439to7(&cmd, c->ncmd);
+			is_builtin(&cmd, c->ncmd);
+			_jungyeok(cmd, c, c->ncmd - 1);
+			ft_free_command(&cmd, c);
+		}
 	}
 }
 
-int	main(int ac, char **envp)
+void	main_init(int argc)
 {
-	if (ac != 1)
-		return (1);
-	//execve("/bin/bash", NULL, envp);
-	display(envp);
+	struct termios	term;
+
+	if (argc != 1)
+		exit(1);
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	set_signal_handlers();
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_mini			c;
+	struct termios	term;
+
+	(void)av;
+	tcgetattr(STDIN_FILENO, &term);
+	main_init(ac);
+	ft_memset(&c, 0, sizeof(t_mini));
+	c.index = 0;
+	while (env[c.index])
+		c.index++;
+	c.env = ft_calloc(8, c.index + 1);
+	c.index = -1;
+	while (env[++c.index])
+		c.env[c.index] = ft_strdup(env[c.index]);
+	display(&c);
+	c.index = -1;
+	while (c.env[++c.index])
+		free(c.env[c.index]);
+	free(c.env);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	return (0);
 }
