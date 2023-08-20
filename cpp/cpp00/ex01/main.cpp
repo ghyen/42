@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cctype>
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
 
 int main(void){
 	int com;
-	PhoneBook phonebook;
+	int index;
+	PhoneBook phonebook = PhoneBook();
 
 	while (1)
 	{
@@ -14,7 +14,12 @@ int main(void){
 		if (com == 1)
 			phonebook.add_contact();
 		else if (com == 2)
-			phonebook.search_contact();
+		{
+			phonebook.print_contact();
+			std::cout << "enter index" << std::endl;
+			std::cin >> index;
+			phonebook.search_contact(index);
+		}
 		else if (com == 3)
 		{
 			std::cout << "exit" << std::endl;
