@@ -3,9 +3,9 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = 	Contact.cpp\
 		main.cpp\
-		Phonebook.cpp
+		PhoneBook.cpp
 		
-OBJS=$(SRCS:.c=.o)
+OBJS=$(SRCS:.cpp=.o)
 
 NAME=PhoneBook
 

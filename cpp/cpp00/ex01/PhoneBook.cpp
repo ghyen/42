@@ -67,7 +67,7 @@ void PhoneBook::print_contact(){
 	}
 	if (index > 8)
 		index = 8;
-	std::cout << "     index|first name| last name|  nickname" << std::endl;
+	std::cout << "index  |  first name  |  last name  |  nickname" << std::endl;
 	while (i < index)
 	{
 		std::cout << i << "|";
