@@ -6,15 +6,11 @@ void PhoneBook::phonebook(){
 	pointer = 0;
 }
 
-int attri_empty_check(std::string temp_first_name, std::string temp_last_name, std::string temp_nickname, std::string temp_phone_number, std::string temp_darkest_secret)
-{
-	if (temp_first_name.empty() || temp_last_name.empty() || temp_nickname.empty() || temp_phone_number.empty() || temp_darkest_secret.empty())
-	{
-		std::cout << "wrong input" << std::endl;
-		return 1;
-	}
-	else
-		return 0;
+std::string truncate(const std::string& str, int width) {
+    if (str.length() > width) {
+        return str.substr(0, width).append(".");
+    }
+    return str;
 }
 
 void PhoneBook::add_contact(){
@@ -35,8 +31,6 @@ void PhoneBook::add_contact(){
 	std::cin >> temp_phone_number;
 	std::cout << "enter darkest secret" << std::endl;
 	std::cin >> temp_darkest_secret;
-	if(attri_empty_check(temp_first_name, temp_last_name, temp_nickname, temp_phone_number, temp_darkest_secret))
-		return;
 	contacts[pointer].set_first_name(temp_first_name);
 	contacts[pointer].set_last_name(temp_last_name);
 	contacts[pointer].set_nickname(temp_nickname);
@@ -67,13 +61,13 @@ void PhoneBook::print_contact(){
 	}
 	if (index > 8)
 		index = 8;
-	std::cout << "index  |  first name  |  last name  |  nickname" << std::endl;
+	std::cout << "   index  |first name| last name|  nickname" << std::endl;
 	while (i < index)
 	{
-		std::cout << i << "|";
-		std::cout << std::setw(10) << std::right << contacts[i].get_first_name() << "|";
-		std::cout << std::setw(10) << std::right << contacts[i].get_last_name() << "|";
-		std::cout << std::setw(10) << std::right << contacts[i].get_nickname() << std::endl;
+		std::cout << std::setw(10) << std::right << i << "|";
+		std::cout << std::setw(10) << std::right << truncate(contacts[i].get_first_name(), 9) << "|";
+		std::cout << std::setw(10) << std::right << truncate(contacts[i].get_last_name(), 9) << "|";
+		std::cout << std::setw(10) << std::right << truncate(contacts[i].get_nickname(), 9) << std::endl;
 		i++;
 	}
 }
