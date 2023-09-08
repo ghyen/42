@@ -11,6 +11,13 @@ int main(void){
 	{
 		std::cout << "enter command\nadd : 1\nsearch : 2\nexit : 3" << std::endl;
 		std::cin >> com;
+		if (std::cin.eof())
+			break;
+		if (com == 0)
+		{
+			std::cout << "wrong command" << std::endl;
+			break;
+		}
 		if (com == 1)
 			phonebook.add_contact();
 		else if (com == 2)

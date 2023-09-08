@@ -21,16 +21,17 @@ void PhoneBook::add_contact(){
 	std::string temp_phone_number;
 	std::string temp_darkest_secret;
 
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "enter first name" << std::endl;
-	std::cin >> temp_first_name;
+	std::getline(std::cin, temp_first_name);
 	std::cout << "enter last name" << std::endl;
-	std::cin >> temp_last_name;
+	std::getline(std::cin, temp_last_name);
 	std::cout << "enter nickname" << std::endl;
-	std::cin >> temp_nickname;
+	std::getline(std::cin, temp_nickname);
 	std::cout << "enter phone number" << std::endl;
-	std::cin >> temp_phone_number;
+	std::getline(std::cin, temp_phone_number);
 	std::cout << "enter darkest secret" << std::endl;
-	std::cin >> temp_darkest_secret;
+	std::getline(std::cin, temp_darkest_secret);
 	contacts[pointer].set_first_name(temp_first_name);
 	contacts[pointer].set_last_name(temp_last_name);
 	contacts[pointer].set_nickname(temp_nickname);
@@ -59,8 +60,6 @@ void PhoneBook::print_contact(){
 		std::cout << "no contacts" << std::endl;
 		return;
 	}
-	if (index > 8)
-		index = 8;
 	std::cout << "   index  |first name| last name|  nickname" << std::endl;
 	while (i < index)
 	{
