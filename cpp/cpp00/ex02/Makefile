@@ -6,7 +6,7 @@ SRCS = 	Account.cpp\
 		
 OBJS=$(SRCS:.cpp=.o)
 
-NAME=PhoneBook
+NAME=Account
 
 all : $(NAME)
 

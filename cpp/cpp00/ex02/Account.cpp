@@ -91,7 +91,7 @@ int		Account::checkAmount( void ) const
 void	Account::displayStatus( void ) const
 {
     Account::_displayTimestamp();
-    std::cout << "index:" << Account::_accountIndex << ";amount:" << Account::_amount << ";deposit:" << Account::_nbDeposits << ";withdrawals:" << Account::_nbWithdrawals << std::endl;
+    std::cout << "index:" << Account::_accountIndex << ";amount:" << Account::_amount << ";deposits:" << Account::_nbDeposits << ";withdrawals:" << Account::_nbWithdrawals << std::endl;
 }
 
 void	Account::_displayTimestamp( void )
