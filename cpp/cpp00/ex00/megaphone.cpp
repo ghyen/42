@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cctype>
 #include <cstring>
+#include <cstdio>
 
 int main(int argc, char **argv){
 	if(argc == 1)

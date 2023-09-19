@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 #include <iomanip>
+#include <limits>
 
 void PhoneBook::phonebook(){
 	index = 0;
@@ -31,6 +32,7 @@ void PhoneBook::add_contact(){
 	std::string temp_phone_number;
 	std::string temp_darkest_secret;
 
+	//std::cin.ignore(std::numeric_limits<std::streamsize>std::max(), '\n');
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "enter first name" << std::endl;
 	std::getline(std::cin, temp_first_name);
