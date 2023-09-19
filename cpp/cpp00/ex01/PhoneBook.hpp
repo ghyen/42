@@ -5,7 +5,7 @@ private:
     //멤버변수
     Contact contacts[8];
     int index;
-    int pointer;
+    int cnt;
 
 public:
     //메소드
