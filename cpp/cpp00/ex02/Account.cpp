@@ -95,15 +95,14 @@ void	Account::displayStatus( void ) const
 
 void	Account::_displayTimestamp( void )
 {
-    // std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
-    // std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+    std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+    std::tm* local_time = std::localtime(&now_time);
 
-    // std::tm* local_time = std::localtime(&now_time);
-    
-    // char buffer[20];
-    // std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", local_time);
-    // std::cout << std::string("[") + buffer + "] ";
-    std::cout << "[19920104_091532] ";
+    char buffer[20];
+    std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", local_time);
+    std::cout << std::string("[") + buffer + "] ";
+    //std::cout << "[19920104_091532] ";
 }
 
 Account::Account( void )
