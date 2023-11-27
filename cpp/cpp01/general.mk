@@ -1,4 +1,4 @@
-CC = c++ -Wall -Werror -Wextra# -fsanitize=address
+CC = c++ -Wall -Werror -Wextra -fsanitize=address
 CFLAGS = -std=c++98
 OBJS=$(SRCS:.cpp=.o)
 

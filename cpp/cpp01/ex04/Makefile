@@ -1,7 +1,4 @@
-SRCS=	Zombie.cpp\
-		newZombie.cpp\
-		randomChump.cpp\
-		main.cpp
-NAME=	Zombie
+SRCS=	main.cpp
+NAME=	sed_is_for_loser
 
 -include ../general.mk

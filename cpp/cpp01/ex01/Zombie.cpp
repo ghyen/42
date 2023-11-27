@@ -1,5 +1,7 @@
 #include "Zombie.hpp"
 
+Zombie::Zombie() : name("") {}
+
 Zombie::Zombie( const std::string _name ) : name(_name)
 {
     std::cout << "zombie " + Zombie::getName() + " is initialized\n";
@@ -18,4 +20,9 @@ void Zombie::announce( void )
 std::string Zombie::getName( void ) const
 {
     return (this->name);
+}
+
+void Zombie::setName(const std::string _name )
+{
+    this->name = _name;
 }

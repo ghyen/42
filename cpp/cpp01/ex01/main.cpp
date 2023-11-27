@@ -4,10 +4,12 @@
 
 int main( void )
 {
-    Zombie *zombie = newZombie("newZombie");
-    zombie->announce();
-    randomChump("randomZombie");
-    delete zombie;
+    int num = 10;
+    std::string name = "gkwon";
+    Zombie *group = zombieHorde(num, name);
+    for (int i = 0; i < num; i++)
+        group[i].announce();
 
+    delete[] group;
     return (0);
 }

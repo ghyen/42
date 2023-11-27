@@ -1,7 +1,8 @@
-SRCS=	Zombie.cpp\
-		newZombie.cpp\
-		randomChump.cpp\
+SRCS=	Weapon.cpp\
+		HumanA.cpp\
+		HumanB.cpp\
 		main.cpp
-NAME=	Zombie
+
+NAME=	UnnecessaryViolence
 
 -include ../general.mk

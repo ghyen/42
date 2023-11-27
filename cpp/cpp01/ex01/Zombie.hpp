@@ -8,13 +8,16 @@ private:
     std::string name;
 
 public:
-    std::string getName( void ) const;
-    Zombie(const std::string _name );
+    std::string getName(void) const;
+    void setName(const std::string _name);
+    Zombie();
+    Zombie(const std::string _name);
     ~Zombie( void );
     void announce( void );
 };
 
 Zombie *newZombie(std::string _name);
-void randomChump(std::string _name);
+Zombie *newZombie(void);
+Zombie *zombieHorde(int N, std::string name);
 
 #endif

@@ -1,13 +1,27 @@
 #include <iostream>
-#include <cctype>
-#include "Zombie.hpp"
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 int main( void )
 {
-    Zombie *zombie = newZombie("newZombie");
-    zombie->announce();
-    randomChump("randomZombie");
-    delete zombie;
+    {
+        Weapon club = Weapon("crude spiked club");
+        
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("some other type of club");
+        bob.attack();
+    }
+    {
+        Weapon club = Weapon("crude spiked club");
 
-    return (0);
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("some other type of club");
+        jim.attack();
+    }
+
+    return 0;
 }
