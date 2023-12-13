@@ -1,5 +1,5 @@
 SRCS=	main.cpp\
 		Harl.cpp
-NAME=	Harl
+NAME=	harlFilter
 
 -include ../general.mk

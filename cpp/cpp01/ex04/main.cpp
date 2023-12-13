@@ -36,6 +36,7 @@ int main( int argc, char *argv[] )
     size_t idx = 0;
     std::string searchStr = argv[2];
     std::string replaceStr = argv[3];
+
     while (istr.find(searchStr, idx) != std::string::npos)
     {
         size_t pos = istr.find(searchStr, idx);
@@ -49,4 +50,6 @@ int main( int argc, char *argv[] )
     fin.close();
     fout.clear();
     return (0);
+    
 }
+
