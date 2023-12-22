@@ -1,7 +1,5 @@
-SRCS=	Zombie.cpp\
-		newZombie.cpp\
-		main.cpp\
-		zombieHorde.cpp
-NAME=	zombieHorde
+SRCS=	Fixed.cpp\
+		main.cpp
+NAME=	Fixed
 
 -include ../general.mk
