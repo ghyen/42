@@ -1,7 +1,5 @@
-SRCS=	Zombie.cpp\
-		newZombie.cpp\
-		randomChump.cpp\
+SRCS=	Fixed.cpp\
 		main.cpp
-NAME=	Zombie
+NAME=	Fixed
 
 -include ../general.mk
