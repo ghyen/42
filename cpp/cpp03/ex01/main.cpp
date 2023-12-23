@@ -1,15 +1,15 @@
 #include <iostream>
 #include <cctype>
-#include "Zombie.hpp"
+#include "ClapTrap.hpp"
 
 int main( void )
 {
-    int num = 10;
-    std::string name = "gkwon";
-    Zombie *group = zombieHorde(num, name);
-    for (int i = 0; i < num; i++)
-        group[i].announce();
-
-    delete[] group;
+    ClapTrap gkwon = ClapTrap("gkwon");
+    gkwon.attack("evaluater");
+    gkwon.setAttackDamage(2);
+    gkwon.attack("evaluater");
+    std::cout << "HP is " << gkwon.getHitPoints() << std::endl;
+    gkwon.takeDamage(5);
+        std::cout << "HP is " << gkwon.getHitPoints() << std::endl;
     return (0);
 }

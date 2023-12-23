@@ -1,7 +1,5 @@
-SRCS=	Zombie.cpp\
-		newZombie.cpp\
-		main.cpp\
-		zombieHorde.cpp
-NAME=	zombieHorde
+SRCS=	ClapTrap.cpp\
+		main.cpp
+NAME=	ClapTrap
 
 -include ../general.mk
