@@ -8,7 +8,7 @@ private:
 
 public:
     void guardGate();
-    void attack();
+    void attack(const std::string& target);
     
     ScavTrap();
     ScavTrap(const ScavTrap &ScavTrap);

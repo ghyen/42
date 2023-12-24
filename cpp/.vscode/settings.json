@@ -63,6 +63,13 @@
     "algorithm": "cpp",
     "__verbose_abort": "cpp",
     "charconv": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "__functional_base": "cpp",
+    "bit": "cpp",
+    "deque": "cpp",
+    "functional": "cpp",
+    "iterator": "cpp",
+    "stack": "cpp",
+    "utility": "cpp"
   }
 }

@@ -1,5 +1,6 @@
 SRCS=	ClapTrap.cpp\
+		ScavTrap.cpp\
 		main.cpp
-NAME=	ClapTrap
+NAME=	ScavTrap
 
 -include ../general.mk

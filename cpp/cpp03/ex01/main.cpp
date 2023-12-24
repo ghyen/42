@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cctype>
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main( void )
 {
-    ClapTrap gkwon = ClapTrap("gkwon");
+    ScavTrap gkwon = ScavTrap("gkwon");
     gkwon.attack("evaluater");
     gkwon.setAttackDamage(2);
     gkwon.attack("evaluater");
