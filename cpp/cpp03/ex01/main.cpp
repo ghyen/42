@@ -4,7 +4,6 @@
 int main( void )
 {
     ScavTrap gkwon = ScavTrap("gkwon");
-    ScavTrap gkwon = ScavTrap("gkwon");
     std::cout << "HP is " << gkwon.getHitPoints() << std::endl;
     std::cout << "Energy points is " << gkwon.getEnergyPoints() << std::endl;
     std::cout << "Attack damage is " << gkwon.getAttackDamage() << std::endl;

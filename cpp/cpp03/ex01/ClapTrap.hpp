@@ -25,5 +25,5 @@ public:
     ClapTrap(const std::string _name);
     ClapTrap(const std::string _name, const unsigned int hitPoints, const unsigned int energyPoints, const unsigned int attackDamage);
     ClapTrap &operator=(const ClapTrap& clapTrap);
-    ~ClapTrap( void );
+    virtual ~ClapTrap( void );
 };

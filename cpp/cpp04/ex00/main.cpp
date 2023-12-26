@@ -1,13 +1,16 @@
 #include <iostream>
-#include <cctype>
-#include "Zombie.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
-int main( void )
+int main()
 {
-    Zombie *zombie = newZombie("newZombie");
-    zombie->announce();
-    randomChump("randomZombie");
-    delete zombie;
-
-    return (0);
+    const Animal* meta = new Animal();
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
+    std::cout << j->getType() << " " << std::endl;
+    std::cout << i->getType() << " " << std::endl;
+    i->makeSound(); //will output the cat sound!
+    j->makeSound();
+    meta->makeSound();
+    return 0;
 }

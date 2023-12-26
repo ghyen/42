@@ -1,7 +1,7 @@
-SRCS=	Zombie.cpp\
-		newZombie.cpp\
-		randomChump.cpp\
+SRCS=	Dog.cpp\
+		Cat.cpp\
+		Animal.cpp\
 		main.cpp
-NAME=	Zombie
+NAME=	Animals
 
 -include ../general.mk

@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-void highFivesGuys(void)
+void FragTrap::highFivesGuys(void)
 {
 	std::cout << "hey, let's highfive dude" << std::endl;
 }
