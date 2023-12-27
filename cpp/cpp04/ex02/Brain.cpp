@@ -2,14 +2,14 @@
 
 std::string Brain::getIdeas(int idx)
 {
-	if (idx < 100 && idx > 0)
+	if (idx < 100 && idx >= 0)
 		return ideas[idx];
 	return "";
 }
 
 void Brain::setIdeas(int idx, std::string str)
 {
-	if (idx < 100 && idx > 0)
+	if (idx < 100 && idx >= 0)
 		ideas[idx] = str;
 }
 

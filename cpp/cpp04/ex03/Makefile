@@ -1,8 +1,8 @@
-SRCS=	Weapon.cpp\
-		HumanA.cpp\
-		HumanB.cpp\
+SRCS=	Dog.cpp\
+		Cat.cpp\
+		Animal.cpp\
+		Brain.cpp\
 		main.cpp
-
-NAME=	UnnecessaryViolence
+NAME=	Animals
 
 -include ../general.mk

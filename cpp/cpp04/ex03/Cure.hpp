@@ -8,6 +8,7 @@
 class Dog : public Animal {
 private:
     Brain *brain;
+
 public:
     void makeSound(void) const;
     std::string getBrain(unsigned int idx);

@@ -1,27 +1,15 @@
 #include <iostream>
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
-int main( void )
+int main()
 {
-    {
-        Weapon club = Weapon("crude spiked club");
-        
-        HumanA bob("Bob", club);
-        bob.attack();
-        club.setType("some other type of club");
-        bob.attack();
-    }
-    {
-        Weapon club = Weapon("crude spiked club");
-
-        HumanB jim("Jim");
-        jim.setWeapon(club);
-        jim.attack();
-        club.setType("some other type of club");
-        jim.attack();
-    }
+    Dog *dog1 = new Dog();
+    dog1->setBrain(0, "first idea");
+    Dog *dog2 = new Dog(*dog1);
+    dog2->setBrain(0, "second idea");
+    std::cout << dog1->getBrain(0) << std::endl;
+    std::cout << dog2->getBrain(0) << std::endl;
 
     return 0;
 }
