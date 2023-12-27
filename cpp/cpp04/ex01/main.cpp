@@ -1,15 +1,17 @@
 #include <iostream>
-#include <cctype>
-#include "Zombie.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
-int main( void )
+int main()
 {
-    int num = 10;
-    std::string name = "gkwon";
-    Zombie *group = zombieHorde(num, name);
-    for (int i = 0; i < num; i++)
-        group[i].announce();
+    Animal* j = new Dog();
+    Animal* i = new Cat();
 
-    delete[] group;
-    return (0);
+    std::cout << j->getType() << std::endl;
+    std::cout << j->setBrain(0, "hi") << std::endl;
+    
+    delete j;
+    delete i;
+    
+    return 0;
 }
