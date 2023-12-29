@@ -1,45 +1,30 @@
-#include "Cat.hpp"
+#include "Ice.hpp"
 
-std::string Cat::getBrain(unsigned int idx)
+Ice::Ice() : AMateria()
 {
-	return brain->getIdeas(idx);
+	this->type = "Ice";
+	std::cout << "Ice default constructor called" << std::endl;
 }
 
-void Cat::setBrain(unsigned int idx, std::string str)
-{
-	brain->setIdeas(idx, str);
-}
-
-Cat::Cat() : Animal()
-{
-	brain = new Brain();
-	this->type = "Cat";
-	std::cout << "Cat default constructor called" << std::endl;
-}
-
-Cat::Cat(const Cat& _ref)
+Ice::Ice(const Ice& _ref)
 {
 	this->type = _ref.type;
-	brain = new Brain(*_ref.brain);
-	std::cout << "Cat copy constructor called" << std::endl;
+	std::cout << "Ice copy constructor called" << std::endl;
 }
 
-Cat::~Cat()
+Ice::~Ice()
 {
-	delete brain;
-	std::cout << "Cat " << " has destroyed" << std::endl;
+	std::cout << "Ice " << " has destroyed" << std::endl;
 }
 
-Cat& Cat::operator=(const Cat& ref)
+Ice& Ice::operator=(const Ice& ref)
 {
-	std::cout << "Cat assignment operator called" << std::endl;
-	delete brain;
-	brain = new Brain(*ref.brain);
+	std::cout << "Ice assignment operator called" << std::endl;
 	type = ref.type;
 	return *this;
 }
 
-void Cat::makeSound(void) const
+void Ice::use(ICharacter& target)
 {
-	std::cout << "냐옹" << std::endl;
+	std::cout << "* shoots an ice bolt at "<< target.getName() << " *" << std::endl;
 }

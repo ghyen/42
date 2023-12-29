@@ -1,45 +1,30 @@
-#include "Dog.hpp"
+#include "Cure.hpp"
 
-std::string Dog::getBrain(unsigned int idx)
+Cure::Cure() : AMateria()
 {
-	return brain->getIdeas(idx);
+	this->type = "Cure";
+	std::cout << "Cure default constructor called" << std::endl;
 }
 
-void Dog::setBrain(unsigned int idx, std::string str)
-{
-	brain->setIdeas(idx, str);
-}
-
-Dog::Dog() : Animal()
-{
-	brain = new Brain();
-	this->type = "Dog";
-	std::cout << "Dog default constructor called" << std::endl;
-}
-
-Dog::Dog(const Dog& _ref)
+Cure::Cure(const Cure& _ref)
 {
 	this->type = _ref.type;
-	brain = new Brain(*_ref.brain);
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << "Cure copy constructor called" << std::endl;
 }
 
-Dog::~Dog()
+Cure::~Cure()
 {
-	delete brain;
-	std::cout << "Dog " << " has destroyed" << std::endl;
+	std::cout << "Cure " << " has destroyed" << std::endl;
 }
 
-Dog& Dog::operator=(const Dog& ref)
+Cure& Cure::operator=(const Cure& ref)
 {
-	std::cout << "Dog assignment operator called" << std::endl;
-	delete brain;
-	brain = new Brain(*ref.brain);
+	std::cout << "Cure assignment operator called" << std::endl;
 	type = ref.type;
 	return *this;
 }
 
-void Dog::makeSound(void) const
+void Cure::use(ICharacter& target)
 {
-	std::cout << "멍멍" << std::endl;
+	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
 }

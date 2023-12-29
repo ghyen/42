@@ -1,23 +1,16 @@
-# ifndef DOG_HPP
-# define DOG_HPP
+# pragma once
 
-#include "Animal.hpp"
-#include "Brain.hpp"
-#include <iostream>
+#include "Amateria.hpp"
+#include "ICharacter.hpp"
 
-class Dog : public Animal {
+class Cure : public AMateria {
 private:
-    Brain *brain;
 
 public:
-    void makeSound(void) const;
-    std::string getBrain(unsigned int idx);
-    void setBrain(unsigned int idx, std::string str);
+    virtual void use(ICharacter& target);
 
-    Dog();
-    Dog(const Dog &Dog);
-    Dog &operator=(const Dog& Dog);
-    ~Dog( void );
+    Cure();
+    Cure(const Cure &Cure);
+    Cure &operator=(const Cure& Cure);
+    ~Cure( void );
 };
-
-#endif

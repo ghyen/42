@@ -13,5 +13,6 @@ int main( void )
     std::cout << "HP is " << gkwon.getHitPoints() << std::endl;
     a = gkwon;
     std::cout << "HP is " << a.getHitPoints() << std::endl;
+    a.highFivesGuys();
     return (0);
 }

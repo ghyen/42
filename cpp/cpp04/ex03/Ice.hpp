@@ -1,22 +1,16 @@
-# ifndef CAT_HPP
-# define CAT_HPP
+# pragma once
 
-#include "Animal.hpp"
-#include "Brain.hpp"
-#include <iostream>
+#include "Amateria.hpp"
+#include "ICharacter.hpp"
 
-class Cat : public Animal {
+class Ice : public AMateria {
 private:
-    Brain *brain;
+
 public:
-    void makeSound(void) const;
-    std::string getBrain(unsigned int idx);
-    void setBrain(unsigned int idx, std::string str);
+    virtual void use(ICharacter& target);
 
-    Cat();
-    Cat(const Cat &Cat);
-    Cat &operator=(const Cat& Cat);
-    ~Cat( void );
+    Ice();
+    Ice(const Ice &Ice);
+    Ice &operator=(const Ice& Ice);
+    ~Ice( void );
 };
-
-#endif

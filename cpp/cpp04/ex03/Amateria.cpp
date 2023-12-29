@@ -1,29 +1,34 @@
-#include "Animal.hpp"
+#include "Amateria.hpp"
 
-std::string Animal::getType( void ) const
+std::string const Amateria::&getType( void ) const
 {
     return type;
 }
 
-Animal::Animal() : type("default")
+AMateria::AMateria(std::string const &type)
 {
-	std::cout << "Animal default constructor called" << std::endl;
+	this.type = type;
 }
 
-Animal::Animal(const Animal& _ref)
+Amateria::Amateria() : type("default")
+{
+	std::cout << "Amateria default constructor called" << std::endl;
+}
+
+Amateria::Amateria(const Amateria& _ref)
 {
     type = _ref.type;
-	std::cout << "Animal copy constructor called" << std::endl;
+	std::cout << "Amateria copy constructor called" << std::endl;
 }
 
-Animal::~Animal()
+Amateria::~Amateria()
 {
-	std::cout << "Animal " << " has destroyed" << std::endl;
+	std::cout << "Amateria " << " has destroyed" << std::endl;
 }
 
-Animal& Animal::operator=(const Animal& ref)
+Amateria& Amateria::operator=(const Amateria& ref)
 {
-	std::cout << "Animal assignment operator called" << std::endl;
+	std::cout << "Amateria assignment operator called" << std::endl;
 	type = ref.type;
 	return *this;
 }

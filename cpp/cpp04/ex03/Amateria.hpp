@@ -1,21 +1,19 @@
-# ifndef AMATERIA_HPP
-# define AMATERIA_HPP
-
+#pragma once
 #include <iostream>
+#include "ICharacter.hpp"
 
-class Amateria {
+class AMateria {
 protected:
+    std::string type;
 
 public:
     std::string const &getType( void ) const;
     virtual AMateria* clone() const = 0;
     virtual void use(ICharacter& target);
 
-    Amateria(std::string const & type);
-    Amateria();
-    Amateria(const Amateria &Amateria);
-    Amateria &operator=(const Amateria& Amateria);
-    virtual ~Amateria( void );
+    AMateria(std::string const & type);
+    AMateria();
+    AMateria(const AMateria &AMateria);
+    AMateria &operator=(const AMateria& AMateria);
+    virtual ~AMateria( void );
 };
-
-#endif
