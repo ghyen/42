@@ -1,9 +1,10 @@
 #pragma once
-
 #include "IMateriaSource.hpp"
 
 class MateriaSource : public IMateriaSource {
 private:
+    static const int mSize = 4;
+	AMateria* mSlot[mSize];
 public:
     MateriaSource();
     MateriaSource(const MateriaSource&MateriaSource);

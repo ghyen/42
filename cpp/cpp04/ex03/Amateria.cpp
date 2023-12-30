@@ -1,34 +1,38 @@
-#include "Amateria.hpp"
+#include "AMateria.hpp"
 
-std::string const Amateria::&getType( void ) const
+std::string const &AMateria::getType( void ) const
 {
     return type;
 }
 
+void AMateria::use(ICharacter& target)
+{
+	std::cout << "* uses " << type << " to " << target.getName() << " *" << std::endl;
+}
+
 AMateria::AMateria(std::string const &type)
 {
-	this.type = type;
+	this->type = type;
 }
 
-Amateria::Amateria() : type("default")
+AMateria::AMateria() : type("default")
 {
-	std::cout << "Amateria default constructor called" << std::endl;
+	std::cout << "AMateria default constructor called" << std::endl;
 }
 
-Amateria::Amateria(const Amateria& _ref)
+AMateria::AMateria(const AMateria& _ref) : type(_ref.type)
 {
-    type = _ref.type;
-	std::cout << "Amateria copy constructor called" << std::endl;
+	std::cout << "AMateria copy constructor called" << std::endl;
 }
 
-Amateria::~Amateria()
+AMateria::~AMateria()
 {
-	std::cout << "Amateria " << " has destroyed" << std::endl;
+	std::cout << "AMateria " << " has destroyed" << std::endl;
 }
 
-Amateria& Amateria::operator=(const Amateria& ref)
+AMateria& AMateria::operator=(const AMateria& ref)
 {
-	std::cout << "Amateria assignment operator called" << std::endl;
+	std::cout << "AMateria assignment operator called" << std::endl;
 	type = ref.type;
 	return *this;
 }

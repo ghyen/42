@@ -1,9 +1,6 @@
 # pragma once
-
-#include "Amateria.hpp"
-#include "ICharacter.hpp"
-
-class Floor : public AMateria {
+#include <iostream>
+class Floor {
 private:
     static void *trashBin[100];
 public:
