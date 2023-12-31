@@ -27,8 +27,3 @@ Animal& Animal::operator=(const Animal& ref)
 	type = ref.type;
 	return *this;
 }
-
-void Animal::makeSound(void) const
-{
-    std::cout << "?" << std::endl;
-}

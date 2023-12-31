@@ -42,4 +42,4 @@ public:
     ~Fixed( void );
 };
 
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed); 
