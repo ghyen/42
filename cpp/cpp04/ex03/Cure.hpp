@@ -1,13 +1,14 @@
 # pragma once
 
-#include "Amateria.hpp"
+#include "AMateria.hpp"
 #include "ICharacter.hpp"
 
 class Cure : public AMateria {
 private:
 
 public:
-    virtual void use(ICharacter& target);
+    void use(ICharacter& target);
+    AMateria* clone() const;
 
     Cure();
     Cure(const Cure &Cure);

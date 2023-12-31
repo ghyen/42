@@ -9,7 +9,10 @@ void Character::equip(AMateria* m)
 {
 	for (int i = 0; i < 4; i++)
 		if (inventory[i] == NULL)
+		{
 			inventory[i] = m;
+			break;
+		}
 }
 
 void Character::unequip(int idx)
@@ -21,7 +24,7 @@ void Character::unequip(int idx)
 			std::cout << "there's no item" << std::endl;
 			return ;
 		}
-		floor.takeTrash(&inventory[idx]);
+		floor.takeTrash(inventory[idx]);
 		inventory[idx] = NULL;
 		return ;
 	}
@@ -40,21 +43,21 @@ void Character::use(int idx, ICharacter& target)
 
 Character::Character() : name("")
 {
-	std::cout << "Character default constructor called" << std::endl;
+	//std::cout << "Character default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		inventory[i] = NULL;
 }
 
-Character::Character(std::string &_name) : name(_name)
+Character::Character(const std::string &_name) : name(_name)
 {
-	std::cout << "Character name constructor called" << std::endl;
+	//std::cout << "Character name constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		inventory[i] = NULL;
 }
 
 Character::Character(const Character& _ref) : name(_ref.name)
 {
-	std::cout << "Character copy constructor called" << std::endl;
+	//std::cout << "Character copy constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		inventory[i] = NULL;
 }
@@ -65,14 +68,13 @@ Character::~Character()
 	{
 		if (inventory[i] != NULL)
 			delete inventory[i];
-	}
-		
-	std::cout << "Character " << " has destroyed" << std::endl;
+	}	
+	//std::cout << "Character " << " has destroyed" << std::endl;
 }
 
 Character& Character::operator=(const Character& ref)
 {
-	std::cout << "Character assignment operator called" << std::endl;
+	//std::cout << "Character assignment operator called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		if (inventory[i])

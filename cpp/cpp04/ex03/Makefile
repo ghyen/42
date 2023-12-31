@@ -1,8 +1,10 @@
-SRCS=	Dog.cpp\
-		Cat.cpp\
-		Animal.cpp\
-		Brain.cpp\
+SRCS=	Ice.cpp\
+		Cure.cpp\
+		Character.cpp\
+		AMateria.cpp\
+		MateriaSource.cpp\
+		Floor.cpp\
 		main.cpp
-NAME=	Animals
+NAME=	wizard
 
 -include ../general.mk

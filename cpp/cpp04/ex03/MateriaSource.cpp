@@ -1,24 +1,30 @@
 #include "MateriaSource.hpp"
 
-void learnMateria(AMateria*)
-{
-	
-}
-
-AMateria* createMateria(std::string const & type)
+void MateriaSource::learnMateria(AMateria* m)
 {
 	for (int i = 0; i < 4; i++)
-		if (mSlot[i] != NULL && mSlot[i].getType == type)
+	{
+		if (mSlot[i] == NULL)
 		{
-			return mSlot[i]->clone();
+			mSlot[i] = m;
+			break;
 		}
+	}
+}
+
+AMateria* MateriaSource::createMateria(std::string const & type)
+{
+	for (int i = 0; i < 4; i++)
+		if (mSlot[i] != NULL && mSlot[i]->getType() == type)
+			return mSlot[i]->clone();	
+	return 0;
 }
 
 MateriaSource::MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 		mSlot[i] = NULL;
-	std::cout << "MateriaSource default constructor called" << std::endl;
+	//std::cout << "MateriaSource default constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& _ref)
@@ -32,14 +38,14 @@ MateriaSource::MateriaSource(const MateriaSource& _ref)
 		else
 			mSlot[i] = NULL;
 	}
-	std::cout << "MateriaSource copy constructor called" << std::endl;
+	//std::cout << "MateriaSource copy constructor called" << std::endl;
 }
 
 MateriaSource::~MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 		delete mSlot[i];
-	std::cout << "MateriaSource " << " has destroyed" << std::endl;
+	//std::cout << "MateriaSource " << " has destroyed" << std::endl;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& ref)
@@ -53,6 +59,6 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& ref)
 		else
 			mSlot[i] = NULL;
 	}
-	std::cout << "MateriaSource assignment operator called" << std::endl;
+	//std::cout << "MateriaSource assignment operator called" << std::endl;
 	return *this;
 }

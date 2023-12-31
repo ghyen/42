@@ -1,10 +1,12 @@
 # pragma once
 #include <iostream>
+#include "AMateria.hpp"
+
 class Floor {
 private:
-    static void *trashBin[100];
+    AMateria *trashBin[100];
 public:
-    void takeTrash(void *trash);
+    void takeTrash(AMateria *trash);
 
     Floor();
     Floor(const Floor &Floor);
