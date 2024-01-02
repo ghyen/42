@@ -2,8 +2,10 @@
 #include <iostream>
 #include <exception>
 
+class Form;
+
 class Bureaucrat {
-private:
+protected:
     const std::string name;
     int grade;
 
@@ -12,6 +14,7 @@ public:
     int getGrade( void ) const;
     void increseGrade();
     void decreseGrade();
+    void signForm(Form &form);
 
     Bureaucrat();
     Bureaucrat(std::string name, int grade);

@@ -7,10 +7,10 @@ int	main()
 		Bureaucrat	b("b", 1);
 
 
-		a.decreseGrade();
+		//a.decreseGrade();
 		a.increseGrade();
 		std::cout << a << std::endl;
-		b.increseGrade();
+		//b.increseGrade();
 		b.decreseGrade();
 		std::cout << b << std::endl;
 	}
