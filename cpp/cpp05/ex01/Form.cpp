@@ -70,6 +70,6 @@ const char *Form::alreadySignedException::what() const throw()
 
 std::ostream &operator<<(std::ostream &os, const Form &ref)
 {
-	os << ref.getName() << ", form grade " << ref.getGrade() << "and signed is " << ref.getSigned() << std::endl;
+	os << ref.getName() << ", form grade " << ref.getGrade() << "and signed is " << ref.getSigned();
 	return os;
 }

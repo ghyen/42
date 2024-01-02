@@ -1,18 +1,16 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main()
 {
 	try {
-		Bureaucrat	a("a", 150);
-		Bureaucrat	b("b", 1);
+		Bureaucrat	a("a", 1);
+		Bureaucrat	b = a;
+		Form f("f", 1);
 
-
-		//a.decreseGrade();
-		a.increseGrade();
-		std::cout << a << std::endl;
-		//b.increseGrade();
-		b.decreseGrade();
-		std::cout << b << std::endl;
+		std::cout << f << std::endl;
+		a.signForm(f);
+		std::cout << f << std::endl;
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;

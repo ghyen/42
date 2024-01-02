@@ -4,8 +4,8 @@
 class Form {
 private:
     const std::string name;
-    bool sign;
     const int grade;
+    bool sign;
 
 public:
     std::string getName( void ) const;
