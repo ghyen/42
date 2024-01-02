@@ -5,14 +5,21 @@ std::string Bureaucrat::getName( void ) const
     return name;
 }
 
-Bureaucrat::Bureaucrat() : name("default")
+int Bureaucrat::getGrade( void ) const
 {
-	std::cout << "Bureaucrat default constructor called" << std::endl;
+	return grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& _ref)
+Bureaucrat::Bureaucrat() : name(""), grade(150){}
+
+Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name), grade(_grade){}
+
+Bureaucrat::Bureaucrat(const Bureaucrat& _ref) : name(_ref.name), grade(_ref.grade)
 {
-    type = _ref.type;
+	if (grade < 1)
+		throw GradeTooHighException();
+	if (grade > 150)
+		throw GradeTooLowException();
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
 
@@ -23,12 +30,42 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ref)
 {
-	std::cout << "Bureaucrat assignment operator called" << std::endl;
-	type = ref.type;
+	std::string(ref.name);
+	throw CanNotCopyException();
 	return *this;
 }
 
-void &operator<<(std::ostream &out, const Bureaucrat &ref)
+const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	std::cout << ref->getName() << ",  bureaucrat grade " << ref->getGrade() << "." << std::endl;
+	return "Grade is too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Grade is too low";
+}
+
+const char *Bureaucrat::CanNotCopyException::what() const throw()
+{
+	return "Can not copy";
+}
+
+void Bureaucrat::increseGrade()
+{
+	if (grade == 1)
+		throw GradeTooHighException();
+	grade--;
+}
+
+void Bureaucrat::decreseGrade()
+{
+	if (grade == 150)
+		throw GradeTooLowException();
+	grade++;
+}
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &ref)
+{
+	os << ref.getName() << ", bureaucrat grade " << ref.getGrade();
+	return os;
 }

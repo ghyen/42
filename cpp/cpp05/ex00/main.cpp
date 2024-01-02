@@ -3,15 +3,15 @@
 int	main()
 {
 	try {
-		Bureaucrat	a(150, "a");
-		Bureaucrat	b(1, "b");
+		Bureaucrat	a("a", 150);
+		Bureaucrat	b("b", 1);
 
 
-		// a.downGrade();
-		a.upGrade();
+		a.decreseGrade();
+		a.increseGrade();
 		std::cout << a << std::endl;
-		// b.upGrade();
-		b.downGrade();
+		b.increseGrade();
+		b.decreseGrade();
 		std::cout << b << std::endl;
 	}
 	catch (std::exception &e) {

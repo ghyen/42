@@ -1,10 +1,5 @@
-SRCS=	Dog.cpp\
-		Cat.cpp\
-		Animal.cpp\
-		WrongAnimal.cpp\
-		WrongCat.cpp\
-		WrongDog.cpp\
+SRCS=	Bureaucrat.cpp\
 		main.cpp
-NAME=	Animals
+NAME=	Bureaucrat
 
 -include ../general.mk
