@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 class Form form;
 
@@ -77,4 +77,9 @@ void Bureaucrat::signForm(Form &form)
 	} catch (const std::exception &e) {
 		std::cout << getName() << " couldn’t sign " << form.getGrade() << " because " << e.what() << ".\n";
 	}
+}
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+	form->excute();
 }

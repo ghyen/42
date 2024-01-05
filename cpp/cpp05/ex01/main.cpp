@@ -4,12 +4,13 @@
 int	main()
 {
 	try {
-		Bureaucrat	a("a", 1);
+		Bureaucrat	a("a", 2);
 		Bureaucrat	b = a;
 		Form f("f", 1);
 
 		std::cout << f << std::endl;
 		a.signForm(f);
+		//a.signForm(f);
 		std::cout << f << std::endl;
 	}
 	catch (std::exception &e) {

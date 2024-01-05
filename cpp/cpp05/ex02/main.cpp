@@ -1,15 +1,19 @@
-#include <iostream>
-#include "Dog.hpp"
-#include "Cat.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-int main()
+int	main()
 {
-    Dog *dog1 = new Dog();
-    dog1->setBrain(0, "first idea");
-    Dog *dog2 = new Dog(*dog1);
-    dog2->setBrain(0, "second idea");
-    std::cout << dog1->getBrain(0) << std::endl;
-    std::cout << dog2->getBrain(0) << std::endl;
+	try {
+		Bureaucrat	a("a", 2);
+		Bureaucrat	b = a;
+		Form f("f", 1);
 
-    return 0;
+		std::cout << f << std::endl;
+		a.signForm(f);
+		//a.signForm(f);
+		std::cout << f << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }
