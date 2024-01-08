@@ -1,8 +1,7 @@
 #pragma once
+#include "AForm.hpp"
 #include <iostream>
 #include <exception>
-
-class AForm;
 
 class Bureaucrat {
 protected:

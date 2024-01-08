@@ -1,6 +1,7 @@
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
-std::string AForm::getName( void ) const
+const std::string AForm::getName( void ) const
 {
     return name;
 }
@@ -27,26 +28,12 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 	sign = true;
 }
 
-AForm::AForm() : name(""), grade(150), sign(false){}
+AForm::AForm() : name("default"), grade(150), sign(false), signStandard(150), execStandard(150) {}
 
-AForm::AForm(std::string _name, int _grade) : name(_name), grade(_grade), sign(false){}
-
-AForm::AForm(const AForm& _ref) : name(_ref.name), grade(_ref.grade), sign(_ref.sign)
-{
-	if (grade < 1)
-		throw GradeTooHighException();
-	if (grade > 150)
-		throw GradeTooLowException();
-}
+AForm::AForm(std::string _name, int _grade, const int _signStandard, const int _execStandard) 
+: name(_name), grade(_grade), sign(false), signStandard(_signStandard), execStandard(_execStandard){}
 
 AForm::~AForm(){}
-
-AForm& AForm::operator=(const AForm& ref)
-{
-	std::string(ref.name);
-	throw CanNotCopyException();
-	return *this;
-}
 
 const char* AForm::GradeTooHighException::what() const throw()
 {
@@ -66,6 +53,11 @@ const char *AForm::CanNotCopyException::what() const throw()
 const char *AForm::alreadySignedException::what() const throw()
 {
 	return "already signed";
+}
+
+const char *AForm::NotSignedException::what() const throw()
+{
+	return "you have to sign first";
 }
 
 std::ostream &operator<<(std::ostream &os, const AForm &ref)

@@ -13,7 +13,7 @@ int Bureaucrat::getGrade( void ) const
 	return grade;
 }
 
-Bureaucrat::Bureaucrat() : name(""), grade(150){}
+Bureaucrat::Bureaucrat() : name(""), grade(150) {}
 
 Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name), grade(_grade){}
 

@@ -1,75 +1,20 @@
-#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
 
-std::string Form::getName( void ) const
+void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
-    return name;
+	if (!getSigned())
+  		throw AForm::NotSignedException();
+  	if (executor.getGrade() > execStandard)
+  		throw AForm::GradeTooLowException();
+	std::cout << executor.getName() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
-int Form::getGrade( void ) const
+PresidentialPardonForm::PresidentialPardonForm() : AForm("", 150, 25, 5) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string name) : AForm(name, 150, 25, 5) {}
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ref) : AForm(ref.getName(), ref.getGrade(), 25, 5) {}
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm& ref)
 {
-	return grade;
-}
-
-bool Form::getSigned( void ) const
-{
-	if (sign)
-		return true;
-	else
-		return false;
-}
-
-void Form::beSigned(const Bureaucrat &bureaucrat)
-{
-	if (sign)
-		throw alreadySignedException();
-	if (bureaucrat.getGrade() > getGrade())
-		throw GradeTooLowException();
-	sign = true;
-}
-
-Form::Form() : name(""), grade(150), sign(false){}
-
-Form::Form(std::string _name, int _grade) : name(_name), grade(_grade), sign(false){}
-
-Form::Form(const Form& _ref) : name(_ref.name), grade(_ref.grade), sign(_ref.sign)
-{
-	if (grade < 1)
-		throw GradeTooHighException();
-	if (grade > 150)
-		throw GradeTooLowException();
-}
-
-Form::~Form(){}
-
-Form& Form::operator=(const Form& ref)
-{
-	std::string(ref.name);
 	throw CanNotCopyException();
 	return *this;
 }
-
-const char* Form::GradeTooHighException::what() const throw()
-{
-	return "Grade is too high";
-}
-
-const char *Form::GradeTooLowException::what() const throw()
-{
-	return "Grade is too low";
-}
-
-const char *Form::CanNotCopyException::what() const throw()
-{
-	return "Can not copy";
-}
-
-const char *Form::alreadySignedException::what() const throw()
-{
-	return "already signed";
-}
-
-std::ostream &operator<<(std::ostream &os, const Form &ref)
-{
-	os << ref.getName() << ", form grade " << ref.getGrade() << "and signed is " << ref.getSigned();
-	return os;
-}
+PresidentialPardonForm::~PresidentialPardonForm( void ) {}

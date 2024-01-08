@@ -1,75 +1,28 @@
-#include "Form.hpp"
+#include "RobotomyRequestForm.hpp"
 
-std::string Form::getName( void ) const
+void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
-    return name;
-}
-
-int Form::getGrade( void ) const
-{
-	return grade;
-}
-
-bool Form::getSigned( void ) const
-{
-	if (sign)
-		return true;
+	if (!getSigned())
+  		throw AForm::NotSignedException();
+  	if (executor.getGrade() > execStandard)
+  		throw AForm::GradeTooLowException();
+	std::cout << "drilling~~" << std::endl;
+	srand(time(NULL));
+	if (rand() % 10 < 5)
+		std::cout << executor.getName() << ": successfully robotomized" << std::endl;
 	else
-		return false;
+		std::cout << executor.getName() << ": robotomize failed" << std::endl;
 }
 
-void Form::beSigned(const Bureaucrat &bureaucrat)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("", 150, 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm(name, 150, 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ref) : AForm(ref.getName(), ref.getGrade(), 72, 45) {}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm& ref)
 {
-	if (sign)
-		throw alreadySignedException();
-	if (bureaucrat.getGrade() > getGrade())
-		throw GradeTooLowException();
-	sign = true;
-}
-
-Form::Form() : name(""), grade(150), sign(false){}
-
-Form::Form(std::string _name, int _grade) : name(_name), grade(_grade), sign(false){}
-
-Form::Form(const Form& _ref) : name(_ref.name), grade(_ref.grade), sign(_ref.sign)
-{
-	if (grade < 1)
-		throw GradeTooHighException();
-	if (grade > 150)
-		throw GradeTooLowException();
-}
-
-Form::~Form(){}
-
-Form& Form::operator=(const Form& ref)
-{
-	std::string(ref.name);
+	ref.getGrade();
 	throw CanNotCopyException();
 	return *this;
 }
 
-const char* Form::GradeTooHighException::what() const throw()
-{
-	return "Grade is too high";
-}
-
-const char *Form::GradeTooLowException::what() const throw()
-{
-	return "Grade is too low";
-}
-
-const char *Form::CanNotCopyException::what() const throw()
-{
-	return "Can not copy";
-}
-
-const char *Form::alreadySignedException::what() const throw()
-{
-	return "already signed";
-}
-
-std::ostream &operator<<(std::ostream &os, const Form &ref)
-{
-	os << ref.getName() << ", form grade " << ref.getGrade() << "and signed is " << ref.getSigned();
-	return os;
-}
+RobotomyRequestForm::~RobotomyRequestForm( void ) {}

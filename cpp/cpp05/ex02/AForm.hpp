@@ -1,23 +1,29 @@
 #pragma once
-#include "Bureaucrat.hpp"
+#include <string>
+
+class Bureaucrat;
 
 class AForm {
-private:
+protected:
     const std::string name;
     const int grade;
     bool sign;
+    const int signStandard;
+    const int execStandard;
+
+private:
+    AForm &operator=(const AForm& AForm);
+    AForm(const AForm &AForm);
 
 public:
-    std::string getName( void ) const;
+    const std::string getName( void ) const;
     int getGrade( void ) const;
     bool getSigned( void ) const;
     void beSigned(const Bureaucrat &bureaucrat);
-    virtual void excute(Bureaucrat const &executor) = 0;
+    virtual void execute(Bureaucrat const &executor) const = 0;
 
     AForm();
-    AForm(std::string name, int grade);
-    AForm(const AForm &AForm);
-    AForm &operator=(const AForm& AForm);
+    AForm(std::string name, int grade, const int signStandard, const int execStandard);
     virtual ~AForm( void );
 
     class GradeTooHighException : public std::exception
@@ -42,6 +48,10 @@ public:
     {
         public:
             const char* what() const throw();
+    };
+    class NotSignedException : public std::exception
+    {
+        const char* what() const throw();
     };
 };
 

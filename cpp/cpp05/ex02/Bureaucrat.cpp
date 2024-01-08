@@ -1,7 +1,4 @@
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
-
-class Form form;
 
 std::string Bureaucrat::getName( void ) const
 {
@@ -69,7 +66,7 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &ref)
 	return os;
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
 	try {
 		form.beSigned(*this);
@@ -79,7 +76,7 @@ void Bureaucrat::signForm(Form &form)
 	}
 }
 
-void Bureaucrat::executeForm(AForm const & form)
+void Bureaucrat::executeForm(AForm const &form)
 {
-	form->excute();
+	form.execute(*this);
 }

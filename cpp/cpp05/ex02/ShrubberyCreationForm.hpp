@@ -5,14 +5,18 @@
 
 class ShrubberyCreatiohnForm : public AForm {
 private:
-    const int signStandard = 145;
-    const int execStandard = 137;
     
 public:
-    void execute(Bureaucrat const & executor);
+    void execute(Bureaucrat const & executor) const;
 
 	ShrubberyCreatiohnForm();
     ShrubberyCreatiohnForm(std::string name);
-    ShrubberyCreatiohnForm &operator=(const ShrubberyCreatiohnForm& SCForm);
-	void ~AForm( void );
+    ShrubberyCreatiohnForm(const ShrubberyCreatiohnForm &ref);
+    ShrubberyCreatiohnForm &operator=(const ShrubberyCreatiohnForm& ref);
+	~ShrubberyCreatiohnForm( void );
+
+    class FileOpenException : public std::exception
+    {
+        const char* what() const throw();
+    };
 };

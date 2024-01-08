@@ -1,14 +1,15 @@
 #include "ShrubberyCreationForm.hpp"
 
-void ShrubberyCreatiohnForm::execute(Bureaucrat const &executor)
+void ShrubberyCreatiohnForm::execute(Bureaucrat const &executor) const
 {
-	std::string fileName = getName().append("_shrubbery");
+  if (!getSigned())
+  	throw AForm::NotSignedException();
+  if (executor.getGrade() > execStandard)
+  	throw AForm::GradeTooLowException();
+	std::string fileName = executor.getName().append("_shrubbery");
 	std::ofstream fs(fileName);
     if(!fs)
-    {
-        std::cerr<<"Cannot open the output file."<<std::endl;
-        return ;
-    }
+      throw CanNotCopyException();
 
     fs<<R"(
                                                .
@@ -42,13 +43,19 @@ void ShrubberyCreatiohnForm::execute(Bureaucrat const &executor)
     fs.close();
 }
 
-ShrubberyCreatiohnForm::ShrubberyCreatiohnForm() : AForm("", 150) {}
-ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(std::string name) : AForm(name, 150) {}
-ShrubberyCreatiohnForm::ShrubberyCreatiohnForm &operator=(const ShrubberyCreatiohnForm& SCForm)
+ShrubberyCreatiohnForm::ShrubberyCreatiohnForm() : AForm("", 150, 145, 137) {}
+ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(std::string name) : AForm(name, 150, 145, 137) {}
+ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(const ShrubberyCreatiohnForm &ref)
 {
 
 }
-void ShrubberyCreatiohnForm::~AForm( void )
+
+ShrubberyCreatiohnForm &ShrubberyCreatiohnForm::operator=(const ShrubberyCreatiohnForm& ref)
 {
 
+}
+ShrubberyCreatiohnForm::~ShrubberyCreatiohnForm( void ) {}
+const char *ShrubberyCreatiohnForm::CanNotCopyException::what() const throw()
+{
+  return "ERROR : Can not open file";
 }

@@ -1,17 +1,15 @@
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int	main()
 {
 	try {
 		Bureaucrat	a("a", 2);
-		Bureaucrat	b = a;
-		Form f("f", 1);
-
-		std::cout << f << std::endl;
-		a.signForm(f);
-		//a.signForm(f);
-		std::cout << f << std::endl;
+		RobotomyRequestForm rForm;
+		PresidentialPardonForm *pForm = new PresidentialPardonForm();
+		a.signForm(*pForm);
+		a.executeForm(*pForm);
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
