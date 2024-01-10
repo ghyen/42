@@ -32,7 +32,7 @@ public:
         const char* what() const throw();
     };
 
-    class CanNotCopyException : public std::exception
+    class CanNotCopyBException : public std::exception
     {
         const char* what() const throw();
     };

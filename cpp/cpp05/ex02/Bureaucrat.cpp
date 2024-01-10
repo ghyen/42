@@ -27,7 +27,7 @@ Bureaucrat::~Bureaucrat(){}
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ref)
 {
 	std::string(ref.name);
-	throw CanNotCopyException();
+	throw CanNotCopyBException();
 	return *this;
 }
 
@@ -41,7 +41,7 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 	return "Grade is too low";
 }
 
-const char *Bureaucrat::CanNotCopyException::what() const throw()
+const char *Bureaucrat::CanNotCopyBException::what() const throw()
 {
 	return "Can not copy";
 }
@@ -72,7 +72,7 @@ void Bureaucrat::signForm(AForm &form)
 		form.beSigned(*this);
 		std::cout << getName() << " signed " << form.getName() << std::endl;
 	} catch (const std::exception &e) {
-		std::cout << getName() << " couldn’t sign " << form.getGrade() << " because " << e.what() << ".\n";
+		std::cout << getName() << " couldn’t sign " << "because " << e.what() << ".\n";
 	}
 }
 

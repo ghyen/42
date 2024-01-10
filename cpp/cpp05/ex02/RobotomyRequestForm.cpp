@@ -14,15 +14,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		std::cout << executor.getName() << ": robotomize failed" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("", 150, 72, 45) {}
-RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm(name, 150, 72, 45) {}
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ref) : AForm(ref.getName(), ref.getGrade(), 72, 45) {}
-
-RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm& ref)
-{
-	ref.getGrade();
-	throw CanNotCopyException();
-	return *this;
-}
-
+RobotomyRequestForm::RobotomyRequestForm() : AForm("", 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm(name, 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ref) : AForm(ref.getName(), 72, 45) {}
 RobotomyRequestForm::~RobotomyRequestForm( void ) {}

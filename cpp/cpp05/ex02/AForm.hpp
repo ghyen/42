@@ -6,7 +6,6 @@ class Bureaucrat;
 class AForm {
 protected:
     const std::string name;
-    const int grade;
     bool sign;
     const int signStandard;
     const int execStandard;
@@ -17,13 +16,14 @@ private:
 
 public:
     const std::string getName( void ) const;
-    int getGrade( void ) const;
+    int getsignStandard( void ) const;
+    int getexecStandard( void ) const;
     bool getSigned( void ) const;
     void beSigned(const Bureaucrat &bureaucrat);
     virtual void execute(Bureaucrat const &executor) const = 0;
 
     AForm();
-    AForm(std::string name, int grade, const int signStandard, const int execStandard);
+    AForm(std::string name, const int signStandard, const int execStandard);
     virtual ~AForm( void );
 
     class GradeTooHighException : public std::exception

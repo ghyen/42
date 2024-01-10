@@ -11,51 +11,44 @@ void ShrubberyCreatiohnForm::execute(Bureaucrat const &executor) const
     if(!fs)
       throw CanNotCopyException();
 
-    fs<<R"(
-                                               .
-                                   .         ;  
-      .              .              ;%     ;;   
-        ,           ,                :;%  %;   
-         :         ;                   :;%;'     .,   
-,.        %;     %;            ;        %;'    ,;
-  ;       ;%;  %%;        ,     %;    ;%;    ,%'
-   %;       %;%;      ,  ;       %;  ;%;   ,%;' 
-    ;%;      %;        ;%;        % ;%;  ,%;'
-     `%;.     ;%;     %;'         `;%%;.%;'
-      `:;%.    ;%%. %@;        %; ;@%;%'
-         `:%;.  :;bd%;          %;@%;'
-           `@%:.  :;%.         ;@@%;'   
-             `@%.  `;@%.      ;@@%;         
-               `@%%. `@%%    ;@@%;        
-                 ;@%. :@%%  %@@%;       
-                   %@bd%%%bd%%:;     
-                     #@%%%%%:;;
-                     %@@%%%::;
-                     %@@@%(o);  . '         
-                     %@@@o%;:(.,'         
-                 `.. %@@@o%::;         
-                    `)@@@o%::;         
-                     %@@(o)::;        
-                    .%@@@@%::;         
-                    ;%@@@@%::;.          
-                   ;%@@@@%%:;;;. 
-               ...;%@@@@@%%:;;;;,.. )";
+    fs<< "(\n"
+            "                                               .\n"
+            "                                   .         ;  \n"
+            "      .              .              ;%     ;;   \n"
+            "        ,           ,                :;%  %;   \n"
+            "         :         ;                   :;%;'     .,   \n"
+            ",.        %;     %;            ;        %;'    ,;\n"
+            "  ;       ;%;  %%;        ,     %;    ;%;    ,%'\n"
+            "   %;       %;%;      ,  ;       %;  ;%;   ,%;' \n"
+            "    ;%;      %;        ;%;        % ;%;  ,%;'\n"
+            "     `%;.     ;%;     %;'         `;%%;.%;'\n"
+            "      `:;%.    ;%%. %@;        %; ;@%;%'\n"
+            "         `:%;.  :;bd%;          %;@%;'\n"
+            "           `@%:.  :;%.         ;@@%;'   \n"
+            "             `@%.  `;@%.      ;@@%;         \n"
+            "               `@%%. `@%%    ;@@%;        \n"
+            "                 ;@%. :@%%  %@@%;       \n"
+            "                   %@bd%%%bd%%:;     \n"
+            "                     #@%%%%%:;;\n"
+            "                     %@@%%%::;\n"
+            "                     %@@@%(o);  . '         \n"
+            "                     %@@@o%;:(.,'         \n"
+            "                 `.. %@@@o%::;         \n"
+            "                    `)@@@o%::;         \n"
+            "                     %@@(o)::;        \n"
+            "                    .%@@@@%::;         \n"
+            "                    ;%@@@@%::;.          \n"
+            "                   ;%@@@@%%:;;;. \n"
+            "               ...;%@@@@@%%:;;;;,..\n"
+            ")\n";
     fs.close();
 }
 
-ShrubberyCreatiohnForm::ShrubberyCreatiohnForm() : AForm("", 150, 145, 137) {}
-ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(std::string name) : AForm(name, 150, 145, 137) {}
-ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(const ShrubberyCreatiohnForm &ref)
-{
-
-}
-
-ShrubberyCreatiohnForm &ShrubberyCreatiohnForm::operator=(const ShrubberyCreatiohnForm& ref)
-{
-
-}
+ShrubberyCreatiohnForm::ShrubberyCreatiohnForm() : AForm("", 145, 137) {}
+ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(std::string name) : AForm(name, 145, 137) {}
+ShrubberyCreatiohnForm::ShrubberyCreatiohnForm(const ShrubberyCreatiohnForm &ref) : AForm(ref.getName(), 145, 137) {}
 ShrubberyCreatiohnForm::~ShrubberyCreatiohnForm( void ) {}
-const char *ShrubberyCreatiohnForm::CanNotCopyException::what() const throw()
+const char *ShrubberyCreatiohnForm::FileOpenException::what() const throw()
 {
   return "ERROR : Can not open file";
 }

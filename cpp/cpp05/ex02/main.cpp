@@ -5,9 +5,9 @@
 int	main()
 {
 	try {
-		Bureaucrat	a("a", 2);
+		Bureaucrat	a("a", 150);
 		RobotomyRequestForm rForm;
-		PresidentialPardonForm *pForm = new PresidentialPardonForm();
+		PresidentialPardonForm *pForm = new PresidentialPardonForm("p");
 		a.signForm(*pForm);
 		a.executeForm(*pForm);
 	}

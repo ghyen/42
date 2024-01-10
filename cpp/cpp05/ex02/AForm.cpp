@@ -6,9 +6,14 @@ const std::string AForm::getName( void ) const
     return name;
 }
 
-int AForm::getGrade( void ) const
+int AForm::getsignStandard( void ) const
 {
-	return grade;
+	return signStandard;
+}
+
+int AForm::getexecStandard( void ) const
+{
+	return execStandard;
 }
 
 bool AForm::getSigned( void ) const
@@ -23,15 +28,15 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (sign)
 		throw alreadySignedException();
-	if (bureaucrat.getGrade() > getGrade())
+	if (bureaucrat.getGrade() > getsignStandard())
 		throw GradeTooLowException();
 	sign = true;
 }
 
-AForm::AForm() : name("default"), grade(150), sign(false), signStandard(150), execStandard(150) {}
+AForm::AForm() : name("default"), sign(false), signStandard(150), execStandard(150) {}
 
-AForm::AForm(std::string _name, int _grade, const int _signStandard, const int _execStandard) 
-: name(_name), grade(_grade), sign(false), signStandard(_signStandard), execStandard(_execStandard){}
+AForm::AForm(std::string _name, const int _signStandard, const int _execStandard) 
+: name(_name), sign(false), signStandard(_signStandard), execStandard(_execStandard){}
 
 AForm::~AForm(){}
 
@@ -62,6 +67,6 @@ const char *AForm::NotSignedException::what() const throw()
 
 std::ostream &operator<<(std::ostream &os, const AForm &ref)
 {
-	os << ref.getName() << ", form grade " << ref.getGrade() << "and signed is " << ref.getSigned();
+	os << ref.getName() << ", form sign standard " << ref.getsignStandard() << "and signed is " << ref.getSigned();
 	return os;
 }

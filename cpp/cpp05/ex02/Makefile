@@ -1,7 +1,7 @@
 SRCS=	Bureaucrat.cpp\
 		AForm.cpp\
 		RobotomyRequestForm.cpp\
-		PresientialPardonForm.cpp\
+		PresidentialPardonForm.cpp\
 		ShrubberyCreationForm.cpp\
 		main.cpp
 NAME=	Form

@@ -5,11 +5,11 @@
 
 class RobotomyRequestForm : public AForm {
 private:
-    
+    RobotomyRequestForm(const RobotomyRequestForm &ref);
 public:
     void execute(Bureaucrat const & executor) const;
+    
 	RobotomyRequestForm();
-    RobotomyRequestForm(const RobotomyRequestForm &ref);
     RobotomyRequestForm(std::string name);
     RobotomyRequestForm &operator=(const RobotomyRequestForm& ref);
 	~RobotomyRequestForm( void );
