@@ -1,25 +1,22 @@
-#include "MateriaSource.hpp"
-#include "Ice.hpp"
-#include "Cure.hpp"
-#include "Character.hpp"
+#include "Intern.hpp"
 
-int main()
+// void a()
+// {
+// 	system("leaks Form");
+// }
+
+int	main()
 {
-    IMateriaSource* src = new MateriaSource();
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
-    ICharacter* me = new Character("me");
-    AMateria* tmp;
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
-    ICharacter* bob = new Character("bob");
-    me->use(0, *bob);
-    me->use(1, *bob);
-    
-    delete bob;
-    delete me;
-    delete src;
-    return 0;
+	// atexit(a);
+	try {
+		Bureaucrat	a("a", 26);
+		Intern gkwon;
+		AForm *tmp = gkwon.makeForm("robotomy reques", "Bender");
+		std::cout << *tmp << std::endl;
+		a.signForm(*tmp);
+		a.executeForm(*tmp);
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }

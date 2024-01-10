@@ -1,10 +1,10 @@
-SRCS=	Ice.cpp\
-		Cure.cpp\
-		Character.cpp\
-		AMateria.cpp\
-		MateriaSource.cpp\
-		Floor.cpp\
+SRCS=	Bureaucrat.cpp\
+		AForm.cpp\
+		RobotomyRequestForm.cpp\
+		PresidentialPardonForm.cpp\
+		ShrubberyCreationForm.cpp\
+		Intern.cpp\
 		main.cpp
-NAME=	wizard
+NAME=	Form
 
 -include ../general.mk
