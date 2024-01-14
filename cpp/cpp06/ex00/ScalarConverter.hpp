@@ -2,6 +2,10 @@
 #include <iostream>
 #include <exception>
 #include <sstream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <iomanip>
 
 class ScalarConverter {
 private:

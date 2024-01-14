@@ -1,5 +1,5 @@
-SRCS=	Bureaucrat.cpp\
+SRCS=	ScalarConverter.cpp\
 		main.cpp
-NAME=	Bureaucrat
+NAME=	ScalarConverter
 
 -include ../general.mk
