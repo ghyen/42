@@ -1,6 +1,5 @@
-SRCS=	Bureaucrat.cpp\
-		Form.cpp\
+SRCS=	Serializer.cpp\
 		main.cpp
-NAME=	Form
+NAME=	Serializer
 
 -include ../general.mk

@@ -1,10 +1,5 @@
-SRCS=	Bureaucrat.cpp\
-		AForm.cpp\
-		RobotomyRequestForm.cpp\
-		PresidentialPardonForm.cpp\
-		ShrubberyCreationForm.cpp\
-		Intern.cpp\
+SRCS=	Serializer.cpp\
 		main.cpp
-NAME=	Form
+NAME=	Serializer
 
 -include ../general.mk
