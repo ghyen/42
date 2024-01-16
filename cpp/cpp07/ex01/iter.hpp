@@ -13,5 +13,5 @@ void iter(T1 *add, size_t len, T2 f)
 template <typename T>
 void print(T a)
 {
-	std::cout << a << ' ';
+	std::cout << a << std::endl;
 }

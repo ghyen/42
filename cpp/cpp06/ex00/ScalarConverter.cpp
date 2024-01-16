@@ -55,15 +55,18 @@ void ScalarConverter::convert(std::string data)
 {
     double tmp;
 
-    if (data.length() == 1 && std::isprint(data[0]))
+    std::cout << std::fixed << std::setprecision(1);
+    if (data.length() == 1 && !std::isdigit(data[0]))
 		tmp = static_cast<double>(data[0]);
 	else
-		tmp = std::strtod(data.c_str(), NULL);
-
+        tmp = std::strtod(data.c_str(), NULL);
+    if (data.length() >= 2)
+        if ((!tmp && data[data.length() - 2] != '0' && "0.f" != data) || ".f" == data)
+            return ;
     std::string::size_type idx = data.find('.');
-    if (idx == std::string::npos || idx == data.length() - 1)
-        std::cout << std::fixed << std::setprecision(1);
-    else
+    if (data.find_last_of('.') != idx)
+        return ;
+    if (idx != std::string::npos && idx != data.length() - 1)
     {
         idx = data.length() - idx - 1;
         if (data[data.length()- 1] == 'f')

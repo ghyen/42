@@ -71,6 +71,7 @@
     "iterator": "cpp",
     "stack": "cpp",
     "utility": "cpp",
-    "__functional_03": "cpp"
+    "__functional_03": "cpp",
+    "*.tpp": "cpp"
   }
 }

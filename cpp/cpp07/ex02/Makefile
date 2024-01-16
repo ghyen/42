@@ -1,5 +1,4 @@
-SRCS=	Base.cpp\
-		main.cpp
-NAME=	Base
+SRCS=	main.cpp
+NAME=	Array
 
 -include ../general.mk
