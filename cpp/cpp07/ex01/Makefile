@@ -1,5 +1,4 @@
-SRCS=	Serializer.cpp\
-		main.cpp
-NAME=	Serializer
+SRCS=	main.cpp
+NAME=	Iter
 
 -include ../general.mk

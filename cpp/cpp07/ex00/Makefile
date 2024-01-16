@@ -1,4 +1,4 @@
 SRCS=	main.cpp
-NAME=	ScalarConverter
+NAME=	whatever
 
 -include ../general.mk
