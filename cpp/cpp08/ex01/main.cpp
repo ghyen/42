@@ -1,23 +1,27 @@
-#include "iter.hpp"
+#include "Span.hpp"
 
 int	main()
 {
-	char char_arr[] = {'h', 'i', '4', '2', '!'};
-
-	std::cout << "Char: ";
-	iter(char_arr, sizeof(char_arr) / sizeof(char), print<char>);
-	std::cout << '\n';
-
-	int	int_arr[] = {1, 2, 3, 4, 5};
-
-	std::cout << "Int: ";
-	iter(int_arr, sizeof(int_arr) / sizeof(int), print<int>);
-	std::cout << '\n';
-
-	float float_arr[] = {1.0, 2.0, 3.0, 4.0, 5.0};
-
-	std::cout << "Float: ";
-	iter(float_arr, sizeof(float_arr) / sizeof(float), print<float>);
-	std::cout << '\n';
+	try {
+		//Span sp = Span(4);
+		
+		//sp.addNumber(6);
+		//sp.addNumber(3);
+		//sp.addNumber(17);
+		//sp.addNumber(9);
+		//sp.addNumber(11);
+		//sp.printElement();
+		
+		//std::cout << sp.shortestSpan() << std::endl;
+		//std::cout << sp.longestSpan() << std::endl;
+		long _num = 100000;
+		Span sp = Span(_num);
+		sp.addMany(_num);
+		sp.printElement();
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << "out of range" << std::endl;
+	}
 	return 0;
 }

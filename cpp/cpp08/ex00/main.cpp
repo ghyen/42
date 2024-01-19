@@ -12,12 +12,8 @@ int	main(void)
 	std::deque<int>::iterator it = easyfind(a, 4);
 
 	if (it == a.end())
-	{
 		std::cout << "not found" << std::endl;
-	}
 	else
-	{
 		std::cout << "index is " << it - a.begin() << std::endl;
-	}
 	return 0;
 }
