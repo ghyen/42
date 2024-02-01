@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	input.push_back(value);
   }
   printArray(input);
+  PmergeMe::solve(input);
   
   return 0;
 }

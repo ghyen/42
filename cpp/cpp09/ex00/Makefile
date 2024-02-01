@@ -1,4 +1,5 @@
-SRCS=	main.cpp
-NAME=	easyfind
+SRCS=	main.cpp\
+		BitcoinExchange.cpp
+NAME=	btc
 
 -include ../general.mk

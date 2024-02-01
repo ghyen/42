@@ -1,19 +1,10 @@
-#include "easyfind.hpp"
-#include <iostream>
-#include <deque>
+#include "BitcoinExchange.hpp"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	std::deque<int> a;
-
-	for (int i = 0; i < 10; i++)
-		a.push_back(i);
-	
-	std::deque<int>::iterator it = easyfind(a, 4);
-
-	if (it == a.end())
-		std::cout << "not found" << std::endl;
-	else
-		std::cout << "index is " << it - a.begin() << std::endl;
-	return 0;
+	if (argc == 1) {
+		std::cerr << "Error: could not open file." << std::endl;
+		return 1;
+	}
+	BitcoinExchange btc(argv[1]);
 }
