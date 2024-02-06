@@ -18,31 +18,71 @@ void BitcoinExchange::calAndPrint()
 {
     std::ifstream file(inputFilePath);
     std::string line;
+    std::list<std::string> parsedData;
     if (!file.is_open())
         throw CanNotOpenFile();
 
     while (std::getline(file, line))
     {
-        if (!isValidLine(line))
+        if (line == "date | value")
+            continue;
+        parsedData = parsingData(line);
+        if (!isValidData(parsedData))
             continue;
         double rate;
-        std::string date;
-        size_t cut = line.find(" | ");
-        if (cut == SIZE_T_MAX)
-        {
-            date = "bad input";
-            rate = 0;
-        }
-        else
-        {
-            line.replace(cut, 3, ",");
-            date = line.substr(0, line.find(','));
-            std::stringstream(line.substr(line.find(',') + 1)) >> rate;
-            std::cout.precision(7);
-            csvData.insert(std::make_pair(date, rate));
-        }
+        std::string date = line.substr(0, 10);
+        findTargetDate(date);
+        // size_t cut = line.find(" | ");
+        // line.replace(cut, 3, ",");
+        // date = line.substr(0, line.find(','));
+        // std::stringstream(line.substr(line.find(',') + 1)) >> rate;
+        // std::cout.precision(7);
+        // csvData.insert(std::make_pair(date, rate));
     }
 	file.close();
+}
+
+std::string BitcoinExchange::findTargetDate(std::string date) const
+{
+
+}
+
+bool BitcoinExchange::isValidData(std::list<std::string> input) const
+{
+    std::list<std::string>::iterator it;
+    int idx = 0;
+    
+    for (it = input.begin(); it != input.end(); ++it, ++idx) {
+        std::istringstream iss(*it);
+        float result;
+        iss >> result;
+
+        if (idx == 0) {
+            if (result < 0 || result > 3000) {
+                std::cout << "Error: bad input => " << *it << std::endl;
+                return false;
+            }
+        } else if (idx == 1) {
+            if (result <= 0 || result > 12) {
+                std::cout << "Error: bad input => " << *it << std::endl;
+                return false;
+            }
+        } else if (idx == 2) {
+            if (result <= 0 || result > 31) {
+                std::cout << "Error: bad input => " << *it << std::endl;
+                return false;
+            }
+        } else if (idx == 3) {
+            if (result < 0) {
+                std::cout << "Error: not a positive number." << std::endl;
+                return false;
+            } else if (result > 1000) {
+                std::cout << "Error: too large a number." << std::endl;
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 BitcoinExchange::BitcoinExchange(char *input) : inputFilePath(std::string(input))
@@ -52,33 +92,21 @@ BitcoinExchange::BitcoinExchange(char *input) : inputFilePath(std::string(input)
     printFiles();
 }
 
-bool BitcoinExchange::isValidLine(std::string line) const
+std::list<std::string> BitcoinExchange::parsingData(std::string line) const
 {
-    std::list<int> date;
-    for (int i = 0; i < 3; i++)
-    {
-        std::cout << line << std::endl;
-        size_t delIdx = line.find('-');
-        if (delIdx == SIZE_T_MAX)
-        {
-            delIdx = line.find(' ');
-            if (delIdx == SIZE_T_MAX)
-            {
-                std::cout<<"ERROR: bad input"<<std::endl;
-                return false;
-            }
-        }
-        std::istringstream iss(line.substr(0, delIdx));
-        int result;
-        iss >> result;
-        date.push_back(result);
-        line += delIdx;
+    std::list<std::string> ret;
+
+    ret.push_back(line.substr(0, 4));
+    ret.push_back(line.substr(5, 2));
+    ret.push_back(line.substr(8, 2));
+    size_t lastSpacePos = line.find_last_of(' ');
+    ret.push_back(line.substr(lastSpacePos + 1));
+
+    std::list<std::string>::iterator it;
+    for (it = ret.begin(); it != ret.end(); ++it) {
+        std::cout << "Key: " << *it << std::endl;
     }
-    std::list<int>::iterator it;
-    for (it = date.begin(); it != date.end(); ++it) {
-        std::cout << "Value: " << *it << std::endl;
-    }
-    return true;
+    return ret;
 }
 
 void BitcoinExchange::setFile()

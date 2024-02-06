@@ -14,7 +14,9 @@ private:
     std::string inputFilePath;
     std::map<std::string, double> csvData;
     
-    bool isValidLine(std::string line) const;
+    std::list<std::string> parsingData(std::string line) const;
+    bool isValidData(std::list<std::string> input) const;
+    std::string findTargetDate(std::string date) const;
     void setFile();
     void calAndPrint();
     void printFiles();

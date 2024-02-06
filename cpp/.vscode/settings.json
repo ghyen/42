@@ -72,6 +72,11 @@
     "stack": "cpp",
     "utility": "cpp",
     "__functional_03": "cpp",
-    "*.tpp": "cpp"
+    "*.tpp": "cpp",
+    "list": "cpp",
+    "queue": "cpp",
+    "__tree": "cpp",
+    "set": "cpp",
+    "map": "cpp"
   }
 }
