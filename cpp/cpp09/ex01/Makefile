@@ -1,5 +1,5 @@
 SRCS=	main.cpp\
-		Span.cpp
-NAME=	Span
+		RPN.cpp
+NAME=	RPN
 
 -include ../general.mk

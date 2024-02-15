@@ -13,13 +13,13 @@ class BitcoinExchange {
 private:
     std::string inputFilePath;
     std::map<std::string, double> csvData;
+    std::map<std::string, double> inputData;
     
-    std::list<std::string> parsingData(std::string line) const;
-    bool isValidData(std::list<std::string> input) const;
-    std::string findTargetDate(std::string date) const;
+    std::list<std::string> parsingData(const std::string& line) const;
+    bool isValidData(std::list<std::string>& input) const;
+    double findTargetValue(const std::string& date);
     void setFile();
     void calAndPrint();
-    void printFiles();
     BitcoinExchange();
     BitcoinExchange(const BitcoinExchange &BitcoinExchange);
     BitcoinExchange &operator=(const BitcoinExchange& BitcoinExchange);

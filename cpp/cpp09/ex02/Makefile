@@ -1,4 +1,5 @@
-SRCS=	main.cpp
-NAME=	Array
+SRCS=	main.cpp\
+		PmergeMe.cpp
+NAME=	PmergeMe
 
 -include ../general.mk

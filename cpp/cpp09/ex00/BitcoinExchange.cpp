@@ -3,22 +3,12 @@
 BitcoinExchange::BitcoinExchange() {}
 BitcoinExchange::~BitcoinExchange() {}
 
-void BitcoinExchange::printFiles()
-{
-    //std::map<std::string, double>::iterator it;
-    // for (it = inputData.begin(); it != inputData.end(); ++it) {
-    //     std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-    // }
-    // for (it = csvData.begin(); it != csvData.end(); ++it) {
-    //     std::cout <<", Value: " << it->second << std::endl;
-    // }
-}
-
 void BitcoinExchange::calAndPrint()
 {
     std::ifstream file(inputFilePath);
     std::string line;
     std::list<std::string> parsedData;
+    
     if (!file.is_open())
         throw CanNotOpenFile();
 
@@ -30,24 +20,37 @@ void BitcoinExchange::calAndPrint()
         if (!isValidData(parsedData))
             continue;
         double rate;
+        size_t lastSpacePos = line.find_last_of(' ');
+        std::stringstream(line.substr(lastSpacePos + 1)) >> rate;
         std::string date = line.substr(0, 10);
-        findTargetDate(date);
-        // size_t cut = line.find(" | ");
-        // line.replace(cut, 3, ",");
-        // date = line.substr(0, line.find(','));
-        // std::stringstream(line.substr(line.find(',') + 1)) >> rate;
-        // std::cout.precision(7);
-        // csvData.insert(std::make_pair(date, rate));
+        std::cout << date << " => " << rate << " = " << findTargetValue(date) * rate << std::endl;
     }
 	file.close();
 }
 
-std::string BitcoinExchange::findTargetDate(std::string date) const
+double BitcoinExchange::findTargetValue(const std::string& date)
 {
-
+    std::map<std::string, double>::iterator it = csvData.find(date);
+    if (it != csvData.end()) {
+        return it->second;
+    } else {
+        std::map<std::string, double>::reverse_iterator last = csvData.rbegin();
+        if (last->first < date)
+            return last->second;
+        it = csvData.lower_bound(date);
+        return std::prev(it)->second;
+    }
 }
 
-bool BitcoinExchange::isValidData(std::list<std::string> input) const
+bool static isLeapYear(int year) {
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool BitcoinExchange::isValidData(std::list<std::string>& input) const
 {
     std::list<std::string>::iterator it;
     int idx = 0;
@@ -58,7 +61,7 @@ bool BitcoinExchange::isValidData(std::list<std::string> input) const
         iss >> result;
 
         if (idx == 0) {
-            if (result < 0 || result > 3000) {
+            if (result < 2009 || result > 3000) {
                 std::cout << "Error: bad input => " << *it << std::endl;
                 return false;
             }
@@ -68,6 +71,14 @@ bool BitcoinExchange::isValidData(std::list<std::string> input) const
                 return false;
             }
         } else if (idx == 2) {
+            if (result == 29) {
+                int year;
+                std::istringstream tmp (*std::prev(it, 2));
+                tmp >> year;
+                if (!isLeapYear(year))
+                std::cout << "Error: not leap year => " << *it << std::endl;
+                return false;
+            }
             if (result <= 0 || result > 31) {
                 std::cout << "Error: bad input => " << *it << std::endl;
                 return false;
@@ -89,10 +100,9 @@ BitcoinExchange::BitcoinExchange(char *input) : inputFilePath(std::string(input)
 {
     setFile();
     calAndPrint();
-    printFiles();
 }
 
-std::list<std::string> BitcoinExchange::parsingData(std::string line) const
+std::list<std::string> BitcoinExchange::parsingData(const std::string& line) const
 {
     std::list<std::string> ret;
 
@@ -101,11 +111,6 @@ std::list<std::string> BitcoinExchange::parsingData(std::string line) const
     ret.push_back(line.substr(8, 2));
     size_t lastSpacePos = line.find_last_of(' ');
     ret.push_back(line.substr(lastSpacePos + 1));
-
-    std::list<std::string>::iterator it;
-    for (it = ret.begin(); it != ret.end(); ++it) {
-        std::cout << "Key: " << *it << std::endl;
-    }
     return ret;
 }
 

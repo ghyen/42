@@ -1,21 +1,21 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include <stack>
 #include <exception>
+#include <sstream>
 
-class Span {
+class RPN {
 private:
-    std::vector<int> myVector;
-    unsigned int maxN;
-    Span();
+    std::stack<std::string> stk;
+    RPN &operator=(const RPN& RPN);
+    void cal(char &op);
 public:
+    RPN();
+    ~RPN( void );
     void printElement();
     void addMany(unsigned int n);
     void addNumber(int num);
     int shortestSpan();
     int longestSpan();
-    Span(unsigned int n);
-    Span(const Span &Span);
-    Span &operator=(const Span& Span);
-    ~Span( void );
+    RPN(char *input);
 };
