@@ -1,5 +1,6 @@
-SRCS=	main.cpp\
-		PmergeMe.cpp
+SRCS=	PmergeMe.cpp\
+		main.cpp
+		
 NAME=	PmergeMe
 
 -include ../general.mk

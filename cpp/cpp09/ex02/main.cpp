@@ -2,12 +2,12 @@
 #include <sstream>
 #include <string>
 
-static void printArray(std::vector<int> &ref)
-{
-	std::cout << "length: " << ref.size() << std::endl;
-	for (unsigned int i = 0; i < ref.size(); i++)
-        std::cout << "[" << i << "]: " << ref[i] << std::endl;
-}
+// static void printArray(std::vector<int> &ref)
+// {
+// 	std::cout << "length: " << ref.size() << std::endl;
+// 	for (unsigned int i = 0; i < ref.size(); i++)
+//         std::cout << "[" << i << "]: " << ref[i] << std::endl;
+// }
 
 int main(int argc, char **argv)
 {
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         ss >> value;
         input.push_back(value);
     }
-    printArray(input);
+    //printArray(input);
     PmergeMe obj;
     obj.solve(input);
   
