@@ -8,9 +8,9 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/<executable file>",
-            "args": [],
-            "cwd": "${workspaceFolder}"
+            "program": "/Users/edwin/Documents/42/cpp/cpp09/ex02/PmergeMe",
+            "args": ["3", "5", "9", "7", "4"],
+            "cwd": "/Users/edwin/Documents/42/cpp/cpp09/ex02"
         }
     ]
 }

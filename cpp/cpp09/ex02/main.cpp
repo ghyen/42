@@ -21,8 +21,7 @@ int main(int argc, char **argv)
         input.push_back(value);
     }
     //printArray(input);
-    PmergeMe obj;
-    obj.solve(input);
+    PmergeMe obj(input);
   
     return 0;
 }
