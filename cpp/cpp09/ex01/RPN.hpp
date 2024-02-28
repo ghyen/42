@@ -3,6 +3,7 @@
 #include <stack>
 #include <exception>
 #include <sstream>
+#include <cstdlib>
 
 class RPN {
 private:

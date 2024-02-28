@@ -4,6 +4,8 @@
 #include <stack>
 #include <algorithm>
 #include <sstream>
+#include <cstdlib>
+#include <vector>
 
 template <typename T>
 std::string to_string(const T& c)
