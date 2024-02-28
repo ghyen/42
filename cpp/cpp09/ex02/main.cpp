@@ -2,13 +2,6 @@
 #include <sstream>
 #include <string>
 
-// static void printArray(std::vector<int> &ref)
-// {
-// 	std::cout << "length: " << ref.size() << std::endl;
-// 	for (unsigned int i = 0; i < ref.size(); i++)
-//         std::cout << "[" << i << "]: " << ref[i] << std::endl;
-// }
-
 int main(int argc, char **argv)
 {
   std::vector<int> input;
@@ -18,10 +11,13 @@ int main(int argc, char **argv)
         std::stringstream ss(argv[i]);
         int value;
         ss >> value;
+        if (value < 0)
+        {
+            std::cout << "Error" << std::endl;
+            return 1;
+        }
         input.push_back(value);
     }
-    //printArray(input);
     PmergeMe obj(input);
-  
     return 0;
 }

@@ -40,7 +40,12 @@ void RPN::cal (char &op)
 RPN::RPN(char *input)
 {
     while (*input)
-    {     
+    {    
+        if (*input == '.')
+        {
+            std::cout << "Error" << std::endl;
+            std::exit(1);
+        } 
         if (*input == ' ')
         {
             input++;
