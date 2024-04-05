@@ -11,6 +11,14 @@ BidirectionalIterator my_prev(BidirectionalIterator iter, typename std::iterator
     return iter;
 }
 
+template <typename BidirectionalIterator>
+BidirectionalIterator my_prev(BidirectionalIterator iter, typename std::iterator_traits<BidirectionalIterator>::difference_type n = 1) {
+    while (n-- > 0) {
+        --iter;
+    }
+    return iter;
+}
+
 void BitcoinExchange::calAndPrint()
 {
     std::ifstream file(inputFilePath, 0);

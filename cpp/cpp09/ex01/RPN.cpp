@@ -3,7 +3,7 @@
 void p_error(std::string content)
 {
     std::cerr << content << std::endl;
-    exit(1);
+    std::exit(1);
 }
 
 int static stringToInt(std::string &str) {
