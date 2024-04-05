@@ -3,9 +3,17 @@
 BitcoinExchange::BitcoinExchange() {}
 BitcoinExchange::~BitcoinExchange() {}
 
+template <typename BidirectionalIterator>
+BidirectionalIterator my_prev(BidirectionalIterator iter, typename std::iterator_traits<BidirectionalIterator>::difference_type n = 1) {
+    while (n-- > 0) {
+        --iter;
+    }
+    return iter;
+}
+
 void BitcoinExchange::calAndPrint()
 {
-    std::ifstream file(inputFilePath);
+    std::ifstream file(inputFilePath, 0);
     std::string line;
     std::list<std::string> parsedData;
     
@@ -38,7 +46,7 @@ double BitcoinExchange::findTargetValue(const std::string& date)
         if (last->first < date)
             return last->second;
         it = csvData.lower_bound(date);
-        return std::prev(it)->second;
+        return my_prev(it)->second;
     }
 }
 
@@ -73,7 +81,7 @@ bool BitcoinExchange::isValidData(std::list<std::string>& input) const
         } else if (idx == 2) {
             if (result == 29) {
                 int year;
-                std::istringstream tmp (*std::prev(it, 2));
+                std::istringstream tmp (*my_prev(it, 2));
                 tmp >> year;
                 if (!isLeapYear(year))
                 std::cout << "Error: not leap year => " << *it << std::endl;
