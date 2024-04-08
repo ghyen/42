@@ -1,8 +1,18 @@
-FROM debian:buster
+FROM	debian:11
 
-WORKDIR /etc/mysql
+WORKDIR /app
 
-COPY ./tools/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN		apt-get update -y && \
+		apt-get upgrade -y && \
+		apt-get install -y mariadb-server sudo
+
+COPY	./tool/init.sh .
+COPY	./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+EXPOSE 3306
+
+RUN chmod +x ./init.sh
+RUN chmod +x /etc/mysql/mariadb.conf.d/50-server.cnf
+#CMD ["tail", "-f"]
+ENTRYPOINT ["./init.sh"]
 CMD ["mysqld"]

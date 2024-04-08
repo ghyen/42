@@ -5,15 +5,16 @@ all:
 	@mkdir -p $(VOLUME)
 	@mkdir -p $(VOLUME)/mariadb
 	@mkdir -p $(VOLUME)/wordpress
-	docker-compose -f $(COMPOSE) up -d --build
+	docker-compose -f $(COMPOSE) up --build
 
 clean:
 	docker-compose -f $(COMPOSE) down
 
 
 fclean:
-	docker-compose -f $(COMPOSE) down --rmi all
-	docker volume rm $$(docker volume ls -f dangling=true -q)
+	docker-compose -f $(COMPOSE) down --volumes --rmi all
+	docker system prune -f -a
+	#docker volume rm $$(docker volume ls -q) -f
 	@rm -rf ./gkwon
 
 re:
