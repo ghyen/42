@@ -1,12 +1,7 @@
-FROM debian:11
-
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
-	nginx \
-	openssl \
-	vim
+FROM debian:buster
 
 COPY ./tools/entrypoint.sh /entrypoint.sh
-COPY ./conf/nginx.conf /etc/nginx	
+COPY ./conf/default /var/www/html/default
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]

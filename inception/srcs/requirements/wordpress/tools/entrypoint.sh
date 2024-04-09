@@ -4,7 +4,7 @@ echo start setting wordpress
 apt-get -y update &&
 apt-get -y upgrade &&
 apt-get -y install \
-php7.4 \
+php7.3 \
 php-fpm \
 php-cli \
 wget \
@@ -12,11 +12,12 @@ curl \
 php-mysql \
 php-mbstring \
 php-xml \
+sendmail \
 vim
 
-service php7.4-fpm start;
+service php7.3-fpm start;
 apt-get -y install mariadb-client
-sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 0.0.0.0:9000/g' /etc/php/7.4/fpm/pool.d/www.conf
+sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 0.0.0.0:9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
 if [ ! -f /var/www/html/wp-config.php ]; then
   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -29,6 +30,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
   wp user create "$USER_NAME" "$USER_EMAIL" --role=subscriber --user_pass="$USER_PWD" --allow-root --path=/var/www/html/
 fi
 
-service php7.4-fpm stop;
+service php7.3-fpm stop;
 echo finish setting wordpress
 exec "$@"
