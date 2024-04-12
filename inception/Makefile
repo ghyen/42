@@ -7,6 +7,9 @@ all:
 	@mkdir -p $(VOLUME)/wordpress
 	docker-compose -f $(COMPOSE) up -d --build
 
+logs:
+	docker-compose -f $(COMPOSE) logs
+
 clean:
 	docker-compose -f $(COMPOSE) down
 

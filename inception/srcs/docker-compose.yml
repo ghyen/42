@@ -24,7 +24,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./gkwon/data/mariadb:/var/lib/mysql
+      - mariadb-volume:/var/lib/mysql
     build: ./requirements/mariadb
     networks:
       inception:
@@ -42,7 +42,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./gkwon/data/wordpress:/var/www/html
+      - wordpress-volume:/var/www/html
     build: ./requirements/wordpress
     expose:
       - "9000"
@@ -60,7 +60,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./gkwon/data/wordpress:/var/www/html
+      - wordpress-volume:/var/www/html
     build: ./requirements/nginx
     ports:
       - "443:443"
