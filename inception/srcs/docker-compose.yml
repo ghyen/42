@@ -1,79 +1,64 @@
 version: '3'
 
-volumes: # ./requirements->/home/gkwon로 바꿔야 함
-  mariadb-volume:
-    name: mariadb-volume
-    driver: local
-    driver_opts:
-      type: none
-      device: ./gkwon/data/mariadb
-      o: bind
+volumes:
+    db-v:
+        driver: local
+        driver_opts:
+            device: /home/gkwon/Desktop/inception/srcs/gkwon/data/mariadb
+            type: 'none'
+            o: 'bind'
 
-  wordpress-volume:
-    name: wordpress-volume
-    driver: local
-    driver_opts:
-      type: none
-      device: ./gkwon/data/wordpress
-      o: bind
+    www-v:
+        driver: local
+        driver_opts:
+            device: /home/gkwon/Desktop/inception/srcs/gkwon/data/wordpress
+            type: 'none'
+            o: 'bind'
 
 services:
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    env_file:
-      - .env
-    volumes:
-      - mariadb-volume:/var/lib/mysql
-    build: ./requirements/mariadb
-    networks:
-      inception:
-        ipv4_address: 172.31.0.10
-    expose:
-      - "3306"
-    tty: true
-    restart: always
+    mariadb:
+        init: true
+        container_name: mariadb
+        env_file: .env
+        build: ./requirements/mariadb
+        restart: always
+        networks:
+            - intra
+        volumes:
+            - db-v:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
-  wordpress:
-    image: wordpress
-    container_name: wordpress
-    depends_on:
-      - mariadb
-    env_file:
-      - .env
-    volumes:
-      - wordpress-volume:/var/www/html
-    build: ./requirements/wordpress
-    expose:
-      - "9000"
-    networks:
-      inception:
-        ipv4_address: 172.31.0.11
-    tty: true
-    restart: always
+    wordpress:
+        container_name: wordpress
+        env_file: .env
+        build: ./requirements/wordpress
+        restart: always
+        volumes:
+            - www-v:/var/www
+        networks:
+            - intra
+        depends_on:
+            mariadb:
+                condition: service_healthy
 
-  nginx:
-    image: nginx
-    container_name: nginx
-    depends_on:
-      - wordpress
-    env_file:
-      - .env
-    volumes:
-      - wordpress-volume:/var/www/html
-    build: ./requirements/nginx
-    ports:
-      - "443:443"
-    networks:
-      inception:
-        ipv4_address: 172.31.0.12
-    tty: true
-    restart: always
-
+    nginx:
+        container_name: nginx
+        env_file: .env
+        build: ./requirements/nginx
+        restart: always
+        ports:
+            - '443:443'
+        volumes:
+            - www-v:/var/www
+        networks:
+            - intra
+        depends_on:
+            - wordpress
+            
 networks:
-  inception:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.31.0.0/16
+    intra:
+        driver: bridge

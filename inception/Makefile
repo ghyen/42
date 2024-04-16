@@ -1,26 +1,33 @@
-VOLUME = ./gkwon/data
+VOLUME = ./srcs/gkwon
 COMPOSE = ./srcs/docker-compose.yml
 
-all: 
-	@mkdir -p $(VOLUME)
-	@mkdir -p $(VOLUME)/mariadb
-	@mkdir -p $(VOLUME)/wordpress
-	docker-compose -f $(COMPOSE) up -d --build
+all:
+	@mkdir -p $(VOLUME)/data/mariadb
+	@mkdir -p $(VOLUME)/data/wordpress
+	docker-compose -f $(COMPOSE) up --build -d
 
 logs:
 	docker-compose -f $(COMPOSE) logs
 
-clean:
+
+.PHONY:	up
+up:
+	docker-compose -f $(COMPOSE) up
+
+.PHONY:	down
+down:
 	docker-compose -f $(COMPOSE) down
 
+.PHONY: clean
+clean: down
+	docker system prune -f --all # Remove all unused images not just dangling ones
 
-fclean:
+.PHONY: fclean
+fclean: clean
+	@rm -rf $(VOLUME)
 	docker-compose -f $(COMPOSE) down --rmi all
 	docker volume rm $$(docker volume ls -f dangling=true -q)
-	@rm -rf ./gkwon
 
-re:
-	@make fclean
-	make all
-
+.PHONY: re
+re: fclean all
 .PHONY: all re clean fclean
