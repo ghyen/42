@@ -4,13 +4,13 @@ ft_set = {"Hello", "tutu!"}
 ft_dict = {"Hello": "titi!"}
 
 ft_list[1] = "World!"
-ft_tuple = (ft_tuple[0], "Seoul!")
+ft_tuple = (ft_tuple[0], "Korea!")
 ft_set.remove("tutu!")
 ft_set.add("Seoul!")
 ft_dict["Hello"] = "42Seoul!"
 
 print(ft_list)
 print(ft_tuple)
-print(sorted(ft_set))
+print(ft_set)
 print(ft_dict)
 
